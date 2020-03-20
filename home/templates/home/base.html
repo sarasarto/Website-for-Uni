@@ -46,11 +46,12 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
-                 <li class="nav-item ml-4">
-                    <a href="{% url 'home:login' %}">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Login
-                    </a>
-                </li>
+                    <li class="nav-item ml-4">
+                        <a href="{% url 'home:login' %}">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login
+                        </a>
+                        <a href="{% url 'register' %}">Registration</a>
+                    </li>
 
             </ul>
 
@@ -58,6 +59,14 @@
 
     </div>
 </nav>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
 
 {% block body %}
 {% endblock %}

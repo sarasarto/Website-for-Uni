@@ -6,6 +6,13 @@ from django.urls import reverse_lazy
 from .models import Docente, Progetto
 
 
+def index(request):
+    context = {
+        'projects': Progetto.objects.all()
+    }
+    return render(request, 'home/index.html', context)
+
+
 class IndexView(generic.ListView):
     template_name = 'home/index.html'
     context_object_name = 'all_projects'
