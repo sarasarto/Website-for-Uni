@@ -11,7 +11,4 @@ urlpatterns = [
     # /home/
     url(r'^$', views.IndexView.as_view(), name='index'),
 
-    # /home/login
-
-    url(r'logout/$', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
 ]

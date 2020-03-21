@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/registration/login.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tesi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tesi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/registration/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584648975514</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- dopo login torna a homepage&#10;- sposato file login.html in registration">
+      <created>1584797888981</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1584797888981</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -108,13 +110,14 @@
     <MESSAGE value="ci  provo 2" />
     <MESSAGE value="-creato velocemente pagina iniziale&#10;-aggiunto in database due docenti e qualche progetto&#10;-il bottone login funziona e ridirige a /login &#10;-fatta molto velocemente pagina login" />
     <MESSAGE value="- resa più carino il log in" />
-    <option name="LAST_COMMIT_MESSAGE" value="- resa più carino il log in" />
+    <MESSAGE value="- dopo login torna a homepage&#10;- sposato file login.html in registration" />
+    <option name="LAST_COMMIT_MESSAGE" value="- dopo login torna a homepage&#10;- sposato file login.html in registration" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1584648974893">
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1584797886084">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1584648974893" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1584797886084" />
     <state x="933" y="167" key="FileChooserDialogImpl" timestamp="1584634748224">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -127,10 +130,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584270216635" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1584648982189">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1584797913087">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1584648982189" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1584797913087" />
     <state x="848" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1584796294832">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
