@@ -4,7 +4,7 @@ from django.urls import reverse
 class Docente(models.Model):
     nome = models.CharField(max_length=500)
     cognome = models.CharField(max_length=500)
-    matricola = models.CharField(max_length=10)
+    #matricola = models.CharField(max_length=10)
     mail = models.CharField(max_length=1000)
 
     def __str__(self):
