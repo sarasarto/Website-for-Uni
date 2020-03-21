@@ -46,13 +46,20 @@
             </form>
 
             <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li class="nav-item ml-4">
+                        <a href="{% url 'logout' %}">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout
+                        </a>
+                    </li>
+                {% else %}
                     <li class="nav-item ml-4">
                         <a href="{% url 'login' %}">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login
                         </a>
                         <a href="{% url 'register' %}">Registration</a>
                     </li>
-
+                {% endif %}
             </ul>
 
         </div>
