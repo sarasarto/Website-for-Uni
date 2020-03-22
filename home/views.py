@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
-from .models import Docente, Progetto
+from users.models import Progetto
 
 
 def index(request):
