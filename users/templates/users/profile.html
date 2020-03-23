@@ -1,5 +1,8 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
-    <h1>{{ user.username }}</h1>
+    <div class="content-section">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+    </div>
 {% endblock %}
