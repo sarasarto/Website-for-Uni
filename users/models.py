@@ -9,6 +9,7 @@ class Docente(models.Model):
     cognome = models.CharField(max_length=500)
     matricola = models.CharField(max_length=10)
     mail = models.CharField(max_length=1000)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.nome + ' ' + self.cognome
@@ -19,6 +20,7 @@ class Studente(models.Model):
     cognome = models.CharField(max_length=500)
     matricola = models.CharField(max_length=10)
     mail = models.CharField(max_length=1000)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.cognome + ' ' + ' ' + self.nome + ' ' + self.matricola
