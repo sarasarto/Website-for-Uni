@@ -4,6 +4,7 @@ from django.db import models
 from django.urls import reverse
 
 class Docente(models.Model):
+
     nome = models.CharField(max_length=500)
     cognome = models.CharField(max_length=500)
     matricola = models.CharField(max_length=10)
