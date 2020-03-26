@@ -2,11 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
-from users.models import Studente, Docente
+from users.models import Studente, Docente, Profile
 from .forms import UserRegisterForm
+from django.contrib.auth.models import User
 
-
-# Create your views here.
 
 def register(request):
     if request.method == 'POST':
@@ -25,6 +24,7 @@ def register(request):
             sd.cognome = div[1]
             sd.matricola = matricola
             sd.mail = form.cleaned_data.get('email')
+
             sd.save()
             form.save()
             messages.success(request, f'Account created for {username}!')
@@ -37,4 +37,16 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    all_docenti = Docente.objects.all()
+    all_studenti = Studente.objects.all()
+
+    cont = True
+    for doc in all_docenti:
+        if doc.mail == request.user.email:
+            cont = False
+            return render(request, 'users/profile_doc.html')
+
+    if cont:
+        for stud in all_studenti:
+            if stud.mail == request.user.email:
+                return render(request, 'users/profile_stud.html')

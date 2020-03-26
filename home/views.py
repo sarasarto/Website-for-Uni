@@ -3,12 +3,13 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
-from users.models import Progetto
+from users.models import Progetto, Studente, Docente
 
 
 def index(request):
     context = {
-        'projects': Progetto.objects.all()
+        'projects': Progetto.objects.all(),
+
     }
     return render(request, 'home/index.html', context)
 
