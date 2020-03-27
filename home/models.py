@@ -18,7 +18,7 @@ class Tesi(models.Model):
         return str(self.argomento)
 
     def get_absolute_url(self):
-      return reverse('/', kwargs={'pk': self.pk})
+        return reverse('post-detail', kwargs={'pk': self.pk})
 
 
 

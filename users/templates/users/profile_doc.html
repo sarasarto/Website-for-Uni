@@ -1,15 +1,40 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
-<div class="content-section">
-    <h1>Sei docente</h1>
-    <h2 class="account-heading">{{ user.username }}</h2>
-    <p class="text-secondary">{{ user.email }}</p>
-    <!-- dettagli -->
-    <a href="#" class="btn btn-info btn-xs" role="button"> Crea Tesi</a>
 
+<div class="container-fluid" id="tourpackages-carousel">
+    <div class="row">
+
+        <div class="col-sm-9">
+            <h1>Sei docente</h1>
+            <h2 class="account-heading">{{ user.username }}</h2>
+            <p class="text-secondary">{{ user.email }}</p>
+        </div>
+    </div>
+    <a href="{% url 'tesi-create' %}" class="btn btn-info btn-xs" role="button"> Crea Tesi</a>
     <a href="#" class="btn btn-info btn-xs" role="button"> Crea Attività progettuale</a>
 
 
+    <!-- dettagli -->
+    {% for tesi in all_tesi %}
+
+
+    <div class="caption">
+        <div class="row">
+            <h5>Argomento : {{ tesi.argomento }} </h5>
+            <h7>Relatore : {{ tesi.relatore }}</h7>
+            <h7>tirocinio : {{ tesi.triocinio_interno }}</h7>
+
+            <div class="col-sm-9">
+                <!-- dettagli -->
+                <a href="{% url 'post-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View Details</a>
+            </div>
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+</div>
 </div>
 {% endblock %}

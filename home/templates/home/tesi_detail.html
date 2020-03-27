@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h3> Argomento  </h3>
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="content-section">
+    <h1>DETTAGLI</h1>
+    <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
+    <p class="text-secondary"> proposto da: {{ object.relatore }}</p>
 
-</body>
-</html>
+</div>
+{% endblock %}
+
+
+

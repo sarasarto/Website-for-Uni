@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView
 from users.models import Studente, Docente, Profile
 from .forms import UserRegisterForm
 from django.contrib.auth.models import User
+from home.models import Tesi,Attivita_progettuale
 
 
 def register(request):
@@ -39,11 +40,17 @@ def register(request):
 def profile(request):
     all_docenti = Docente.objects.all()
     all_studenti = Studente.objects.all()
+    all_tesi = Tesi.objects.all()
+
+    context = {
+        'all_tesi': all_tesi,
+
+    }
 
     for doc in all_docenti:
         if doc.mail == request.user.email:
-            return render(request, 'users/profile_doc.html')
+             return render(request, 'users/profile_doc.html', context)
 
     for stud in all_studenti:
         if stud.mail == request.user.email:
-            return render(request, 'users/profile_stud.html')
+            return render(request, 'users/profile_stud.html', context)
