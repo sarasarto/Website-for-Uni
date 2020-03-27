@@ -1,0 +1,6 @@
+users/migrations
+home/migrations
+db.sqlite3
+users/__pycache__
+home/__pycache__
+tesi/__pycache__
