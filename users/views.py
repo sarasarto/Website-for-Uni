@@ -40,13 +40,10 @@ def profile(request):
     all_docenti = Docente.objects.all()
     all_studenti = Studente.objects.all()
 
-    cont = True
     for doc in all_docenti:
         if doc.mail == request.user.email:
-            cont = False
             return render(request, 'users/profile_doc.html')
 
-    if cont:
-        for stud in all_studenti:
-            if stud.mail == request.user.email:
-                return render(request, 'users/profile_stud.html')
+    for stud in all_studenti:
+        if stud.mail == request.user.email:
+            return render(request, 'users/profile_stud.html')

@@ -7,13 +7,14 @@
             {% for progetto in all_projects %}
             <div class="col-sm-4">
                 <div class="caption">
-                    <h1>Progetto : {{ progetto.titolo }}</h1>
-                    <h1>Docente : {{ progetto.docente }}</h1>
-                    <h1>tipo  : {{ progetto.tipo }}</h1>
-
+                    <h1>Argomento : {{ progetto.argomento }}</h1>
+                    {% if progetto.relatore %}
+                    <h1>Relatore : {{ progetto.relatore }}</h1>
+                    <h1>tirocinio  : {{ progetto.triocinio_interno }}</h1>
+                    {% endif %}
 
                     <!-- dettagli -->
-                    <a href="#" class="btn btn-info btn-xs" role="button"> View Details</a>
+                    <a href="{% url 'post-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View Details</a>
 
                     <form action="#" method="post" style="display: inline;">
                         {% csrf_token %}

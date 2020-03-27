@@ -19,12 +19,17 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
+from home.views import TesiCreateView, PostDetailView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
+    path('<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+
+    path('profile/new', TesiCreateView.as_view(), name='tesi-create'),
+
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', include('home.urls')),
