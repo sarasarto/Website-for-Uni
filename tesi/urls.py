@@ -19,7 +19,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
-from home.views import TesiCreateView, PostDetailView
+from home.views import TesiCreateView, PostDetailView, tesi_richiesta
 
 
 urlpatterns = [
@@ -29,7 +29,7 @@ urlpatterns = [
     path('<int:pk>/', PostDetailView.as_view(), name='post-detail'),
 
     path('profile/new', TesiCreateView.as_view(), name='tesi-create'),
-
+    path('profile/richiesta', tesi_richiesta, name='tesi-richiesta'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', include('home.urls')),
