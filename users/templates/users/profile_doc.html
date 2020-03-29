@@ -12,29 +12,69 @@
         </div>
     </div>
     <a href="{% url 'tesi-create' %}" class="btn btn-info btn-xs" role="button"> Crea Tesi</a>
-    <a href="#" class="btn btn-info btn-xs" role="button"> Crea Attività progettuale</a>
+    <a href="{% url 'attivita-create' %}" class="btn btn-info btn-xs" role="button"> Crea Attività progettuale</a>
 
 
     <!-- dettagli -->
+    <h3>Tutte le tesi create </h3>
     {% for tesi in all_tesi %}
-
 
     <div class="caption">
         <div class="row">
-            <h5>Argomento : {{ tesi.argomento }} </h5>
-            <h7>Relatore : {{ tesi.relatore }}</h7>
-            <h7>tirocinio : {{ tesi.triocinio_interno }}</h7>
+            <div class="col-sm-15">
+                <h5>Argomento : {{ tesi.argomento }} </h5>
 
-            <div class="col-sm-9">
+                <h5>Autore : {{ tesi.author }}</h5>
+
+
                 <!-- dettagli -->
-                <a href="{% url 'post-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View Details</a>
+                <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
+                    Details</a>
+
+                <a href="{% url 'tesi-delete' tesi.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
+                <a href="{% url 'tesi-update' tesi.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
+
+
             </div>
+
+
         </div>
 
         {% endfor %}
 
 
     </div>
+
+    <h3>Tutte le attivita create </h3>
+    {% for att in all_attivita %}
+
+    <div class="caption">
+        <div class="row">
+            <div class="col-sm-15">
+                <h5>Argomento : {{ att.argomento }} </h5>
+
+                <h5>Autore : {{ att.author }}</h5>
+
+
+                <!-- dettagli -->
+                <a href="{% url 'attivita-detail' att.id %}" class="btn btn-info btn-xs" role="button"> View
+                    Details</a>
+
+                <a href="{% url 'attivita-delete' att.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
+                <a href="{% url 'attivita-update' att.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
+
+
+            </div>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
 </div>
 </div>
 {% endblock %}

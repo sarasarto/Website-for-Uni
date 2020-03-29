@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Tesi(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     relatore = models.ForeignKey(Docente, on_delete=models.CASCADE)
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
@@ -19,11 +20,11 @@ class Tesi(models.Model):
         return str(self.argomento)
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'pk': self.pk})
-
+        return reverse('tesi-detail', kwargs={'pk': self.pk})
 
 
 class Attivita_progettuale(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     tutor = models.ForeignKey(Docente, on_delete=models.CASCADE)
     argomento = models.CharField(max_length=500)
     data_inizio = models.DateTimeField()
@@ -32,6 +33,9 @@ class Attivita_progettuale(models.Model):
 
     def __str__(self):
         return self.tutor + ' ' + self.argomento
+
+    def get_absolute_url(self):
+        return reverse('attivita-detail', kwargs={'pk': self.pk})
 
 
 class Richiesta_tesi(models.Model):
@@ -60,4 +64,3 @@ class Richiesta_prova_finale(models.Model):
 
     def __str__(self):
         return self.autore + ' ' + self.argomento
-

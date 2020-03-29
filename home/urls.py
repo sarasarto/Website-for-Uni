@@ -9,6 +9,6 @@ app_name = 'home'
 
 urlpatterns = [
     # /home/
-    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.home, name='index'),
 
 ]

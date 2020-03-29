@@ -8,14 +8,22 @@
         <div class="col-sm-4">
             <div class="caption">
                 <h3>Argomento : {{ progetto.argomento }}</h3>
+
                 {% if progetto.relatore %}
                 <h3>Relatore : {{ progetto.relatore }}</h3>
                 <h3>tirocinio : {{ progetto.triocinio_interno }}</h3>
-                {% endif %}
+                <!-- dettagli -->
+                <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                    Details</a>
+
+                {% else %}
+                <h3>Tutor : {{ progetto.tutor }}</h3>
 
                 <!-- dettagli -->
-                <a href="{% url 'post-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
                     Details</a>
+                {% endif %}
+
 
 
             </div>

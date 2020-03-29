@@ -19,16 +19,38 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 from users import views as user_views
-from home.views import TesiCreateView, PostDetailView, tesi_richiesta
+from home.views import (
+    TesiCreateView,
+    AttivitaCreateView,
+    TesiDetailView,
+    AttivitaDetailView,
+    TesiUpdateView,
+    AttivitaUpdateView,
+    TesiDeleteView,
+    AttivitaDeleteView,
+    tesi_richiesta,
 
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
-    path('<int:pk>/', PostDetailView.as_view(), name='post-detail'),
 
-    path('profile/new', TesiCreateView.as_view(), name='tesi-create'),
+    # per la tesi
+    path('profile/new_tesi', TesiCreateView.as_view(), name='tesi-create'),
+    path('<int:pk>/detail_tesi', TesiDetailView.as_view(), name='tesi-detail'),
+    path('<int:pk>/update_tesi', TesiUpdateView.as_view(), name='tesi-update'),
+    path('<int:pk>/delete_tesi', TesiDeleteView.as_view(), name='tesi-delete'),
+
+
+    # per l'attivita
+    path('profile/new_attivita', AttivitaCreateView.as_view(), name='attivita-create'),
+    path('<int:pk>/detail_att', AttivitaDetailView.as_view(), name='attivita-detail'),
+    path('<int:pk>/update_att', AttivitaUpdateView.as_view(), name='attivita-update'),
+    path('<int:pk>/delete_att', AttivitaDeleteView.as_view(), name='attivita-delete'),
+
+
     path('profile/richiesta', tesi_richiesta, name='tesi-richiesta'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),

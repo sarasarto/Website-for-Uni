@@ -6,7 +6,7 @@ from users.models import Studente, Docente, Profile
 from .forms import UserRegisterForm
 from django.contrib.auth.models import User
 from home.models import Tesi,Attivita_progettuale
-
+from itertools import chain
 
 def register(request):
     if request.method == 'POST':
@@ -40,11 +40,14 @@ def register(request):
 def profile(request):
     all_docenti = Docente.objects.all()
     all_studenti = Studente.objects.all()
-    all_tesi = Tesi.objects.all()
 
+    all_tesi = Tesi.objects.filter(author=request.user)
+    all_attivita = Attivita_progettuale.objects.filter(author=request.user)
+    tot = list(chain(all_tesi, all_attivita))
     context = {
         'all_tesi': all_tesi,
-
+        'all_attivita': all_attivita,
+        'tot': tot,
     }
 
     for doc in all_docenti:

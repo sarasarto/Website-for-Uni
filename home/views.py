@@ -2,17 +2,34 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import generic
-from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from users.models import Progetto, Studente, Docente
 from .models import Tesi, Attivita_progettuale
 from itertools import chain
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestForm
+from django.views.generic.edit import (
+    CreateView,
+    UpdateView,
+    DeleteView,
+    FormView
+)
 
 
-class IndexView(ListView):
+def home(request):
+    all_tesi = Tesi.objects.all()
+    all_attivita = Attivita_progettuale.objects.all()
+    tot = list(chain(all_tesi, all_attivita))
+    context = {
+        'all_tesi': all_tesi,
+        'all_attivita': all_attivita,
+        'all_projects': tot
+    }
+    return render(request, 'home/index.html', context)
+
+
+"""class IndexView(ListView):
     template_name = 'home/index.html'
     context_object_name = 'all_projects'
 
@@ -22,14 +39,15 @@ class IndexView(ListView):
         tesi = Tesi.objects.all()
         a_p = Attivita_progettuale.objects.all()
         tot = list(chain(tesi, a_p))
-        return tot
+        return tot"""
 
 
-class PostDetailView(LoginRequiredMixin, DetailView):
+# TESI
+class TesiDetailView(LoginRequiredMixin, DetailView):
     model = Tesi
 
 
-class TesiCreateView(CreateView):
+class TesiCreateView(LoginRequiredMixin, CreateView):
     model = Tesi
     fields = ['relatore', 'argomento', 'tirocinio_interno', 'tirocinio_azienda', 'data_inizio', 'data_fine', 'tag']
 
@@ -38,6 +56,79 @@ class TesiCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class TesiUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Tesi
+    fields = ['relatore', 'argomento', 'tirocinio_interno', 'tirocinio_azienda', 'data_inizio', 'data_fine', 'tag']
+
+    # questo per dire che chi update
+    # la tesi è il docente loggato
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    # UserPassesTestMixin serve per controllare che solo
+    # chi ha creato il post possa fare update
+    def test_func(self):
+        tesi = self.get_object()
+        if self.request.user == tesi.author:
+            return True
+        return False
+
+
+class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Tesi
+    success_url = '/profile'
+
+    def test_func(self):
+        tesi = self.get_object()
+        if self.request.user == tesi.author:
+            return True
+        return False
+
+
+# ATTIVITA
+
+class AttivitaDetailView(LoginRequiredMixin, DetailView):
+    model = Attivita_progettuale
+
+
+class AttivitaCreateView(LoginRequiredMixin, CreateView):
+    model = Attivita_progettuale
+    fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class AttivitaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Attivita_progettuale
+    fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    # UserPassesTestMixin serve per controllare che solo
+    # chi ha creato il post possa fare update
+    def test_func(self):
+        attivita = self.get_object()
+        if self.request.user == attivita.author:
+            return True
+        return False
+
+
+class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Attivita_progettuale
+    success_url = '/profile'
+
+    def test_func(self):
+        tesi = self.get_object()
+        if self.request.user == tesi.author:
+            return True
+        return False
 
 
 def tesi_richiesta(request):
