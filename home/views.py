@@ -42,6 +42,23 @@ def home(request):
         return tot"""
 
 
+def show_tesi(request):
+    all_tesi = Tesi.objects.all()
+    context = {
+        'all_tesi': all_tesi,
+
+    }
+    return render(request, 'home/tesi_index.html', context)
+
+def show_attivita(request):
+    all_att = Attivita_progettuale.objects.all()
+    context = {
+        'all_att': all_att,
+
+    }
+    return render(request, 'home/attivita_index.html', context)
+
+
 # TESI
 class TesiDetailView(LoginRequiredMixin, DetailView):
     model = Tesi
@@ -148,3 +165,4 @@ def tesi_richiesta(request):
     else:
         form = RequestForm()
     return render(request, 'home/tesi_request.html', {'form': form})
+

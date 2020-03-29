@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+from home import views
 from users import views as user_views
 from home.views import (
     TesiCreateView,
@@ -36,6 +37,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
+    path('tesi/', views.show_tesi, name='tesi'),
+    path('attivita/', views.show_attivita, name='attivita'),
 
     # per la tesi
     path('profile/new_tesi', TesiCreateView.as_view(), name='tesi-create'),
