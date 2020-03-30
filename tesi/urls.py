@@ -30,6 +30,7 @@ from home.views import (
     TesiDeleteView,
     AttivitaDeleteView,
     tesi_richiesta,
+    provafin_richiesta,
 
 )
 
@@ -54,7 +55,11 @@ urlpatterns = [
     path('<int:pk>/delete_att', AttivitaDeleteView.as_view(), name='attivita-delete'),
 
 
-    path('profile/richiesta', tesi_richiesta, name='tesi-richiesta'),
+    #richiesta tesi e prova finale
+    path('profile/richiesta_tesi', tesi_richiesta, name='tesi-richiesta'),
+    path('profile/richiesta_prova', provafin_richiesta, name='provafin-richiesta'),
+
+
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', include('home.urls')),

@@ -63,4 +63,4 @@ class Richiesta_prova_finale(models.Model):
     tag = models.IntegerField()
 
     def __str__(self):
-        return self.autore + ' ' + self.argomento
+        return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento

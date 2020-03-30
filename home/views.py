@@ -8,7 +8,7 @@ from users.models import Progetto, Studente, Docente
 from .models import Tesi, Attivita_progettuale
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import RequestForm
+from .forms import RequestTesiForm, RequestProvaFinaleForm
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
@@ -148,9 +148,11 @@ class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+# RICHIESTA TESI
+
 def tesi_richiesta(request):
     if request.method == "POST":
-        form = RequestForm(request.POST)
+        form = RequestTesiForm(request.POST)
         if form.is_valid():
             autore = form.cleaned_data.get('autore')
             nome = autore.nome + '.' + autore.cognome
@@ -163,6 +165,27 @@ def tesi_richiesta(request):
             messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
             return redirect('profile')
     else:
-        form = RequestForm()
+        form = RequestTesiForm()
     return render(request, 'home/tesi_request.html', {'form': form})
+
+# RICHIESTA PROVA FINALE
+
+def provafin_richiesta(request):
+    if request.method == "POST":
+        form = RequestProvaFinaleForm(request.POST)
+        if form.is_valid():
+            autore = form.cleaned_data.get('autore')
+            nome = autore.nome + '.' + autore.cognome
+            if request.user.username != nome:
+                messages.error(request, f'Autore deve essere lo studente {request.user.username}!')
+                return redirect('provafin-richiesta')
+            # req = form.save(commit=False)
+            # req.autore = request.user
+            form.save()
+            messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
+            return redirect('profile')
+    else:
+        form = RequestProvaFinaleForm()
+    return render(request, 'home/prova_finale_request.html', {'form': form})
+
 
