@@ -50,12 +50,12 @@ def profile(request):
         'tot': tot,
     }
 
+    all_richiesta_tesi = all_richiesta_pfinale = {}
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
-            stud = s
-    all_richiesta_tesi = Richiesta_tesi.objects.filter(autore=stud)
-    all_richiesta_pfinale = Richiesta_prova_finale.objects.filter(autore=stud)
+            all_richiesta_tesi = Richiesta_tesi.objects.filter(autore=s)
+            all_richiesta_pfinale = Richiesta_prova_finale.objects.filter(autore=s)
     context_richieste = {
         'all_richiesta_tesi' : all_richiesta_tesi,
         'all_richiesta_pfinale' : all_richiesta_pfinale,
