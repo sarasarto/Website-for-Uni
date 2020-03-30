@@ -40,6 +40,9 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('tesi/', views.show_tesi, name='tesi'),
     path('attivita/', views.show_attivita, name='attivita'),
+    path('tesi_archiviata/', views.show_tesi_archiviate, name='t_archiviata'),
+    path('att_archiviata/', views.show_att_archiviate, name='att_archiviata'),
+
 
     # per la tesi
     path('profile/new_tesi', TesiCreateView.as_view(), name='tesi-create'),
