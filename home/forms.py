@@ -25,3 +25,15 @@ class RequestProvaFinaleForm(forms.ModelForm):
         fields = "__all__"
 
 
+class PrecompiledTesiRequestForm(forms.ModelForm):
+
+    class Meta:
+        model = Richiesta_tesi
+        fields = ['autore']
+
+
+class PrecompiledAttivitaRequestForm(forms.ModelForm):
+
+    class Meta:
+        model = Richiesta_prova_finale
+        fields = ['autore']

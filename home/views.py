@@ -2,13 +2,13 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import generic
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy
 from users.models import Progetto, Studente, Docente
-from .models import Tesi, Attivita_progettuale
+from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import RequestTesiForm, RequestProvaFinaleForm
+from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
@@ -168,6 +168,32 @@ def tesi_richiesta(request):
         form = RequestTesiForm()
     return render(request, 'home/tesi_request.html', {'form': form})
 
+class RequestTesiDetailView(FormView, DetailView):
+    model = Tesi
+    template_name = "home/precompiled_tesi_request.html"
+    form_class = PrecompiledTesiRequestForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        tesi = self.get_object()
+        req = Richiesta_tesi()
+        req.relatore = tesi.relatore
+        req.correlatore = tesi.correlatore
+        req.argomento = tesi.argomento
+        req.tirocinio_interno = tesi.tirocinio_interno
+        req.tirocinio_azienda = tesi.tirocinio_azienda
+        req.data_inizio = tesi.data_inizio
+        req.data_fine = tesi.data_fine
+        req.tag = tesi.tag
+
+        req.autore = form.cleaned_data.get('autore')
+        req.save()
+        return super().form_valid(form)
+
+
+
+
+
 # RICHIESTA PROVA FINALE
 
 def provafin_richiesta(request):
@@ -189,3 +215,21 @@ def provafin_richiesta(request):
     return render(request, 'home/prova_finale_request.html', {'form': form})
 
 
+class RequestAttivitaDetailView(FormView, DetailView):
+    model = Attivita_progettuale
+    template_name = "home/precompiled_attivita_request.html"
+    form_class = PrecompiledAttivitaRequestForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        att = self.get_object()
+        req = Richiesta_prova_finale()
+        req.tutor = att.tutor
+        req.argomento = att.argomento
+        req.data_inizio = att.data_inizio
+        req.data_fine = att.data_fine
+        req.tag = att.tag
+
+        req.autore = form.cleaned_data.get('autore')
+        req.save()
+        return super().form_valid(form)

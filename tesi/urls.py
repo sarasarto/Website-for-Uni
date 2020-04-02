@@ -31,6 +31,8 @@ from home.views import (
     AttivitaDeleteView,
     tesi_richiesta,
     provafin_richiesta,
+    RequestTesiDetailView,
+    RequestAttivitaDetailView,
 
 )
 
@@ -58,6 +60,8 @@ urlpatterns = [
     #richiesta tesi e prova finale
     path('profile/richiesta_tesi', tesi_richiesta, name='tesi-richiesta'),
     path('profile/richiesta_prova', provafin_richiesta, name='provafin-richiesta'),
+    path('<int:pk>/detail_tesi/tesi_request/', RequestTesiDetailView.as_view(), name='tesi-request-precompiled'),
+    path('<int:pk>/detail_att/attivita_request/', RequestAttivitaDetailView.as_view(), name='attivita-request-precompiled'),
 
 
     path('login/', LoginView.as_view(), name='login'),
