@@ -6,6 +6,8 @@ from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy
 from users.models import Progetto, Studente, Docente
 from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale
+from users.models import Studente, Docente
+from .models import Tesi, Attivita_progettuale,TesiArchiviata,Attivita_progettuale_Archiviata
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm
@@ -49,6 +51,27 @@ def show_tesi(request):
 
     }
     return render(request, 'home/tesi_index.html', context)
+
+
+def show_tesi_archiviate(request):
+    all_tesi = TesiArchiviata.objects.filter(author=request.user)
+
+    context = {
+        'all_tesi': all_tesi,
+
+    }
+    return render(request, 'home/archivio_tesi.html', context)
+
+
+def show_att_archiviate(request):
+    all_att = Attivita_progettuale_Archiviata.objects.filter(author=request.user)
+
+    context = {
+        'all_att': all_att,
+
+    }
+    return render(request, 'home/archivio_attivita.html', context)
+
 
 def show_attivita(request):
     all_att = Attivita_progettuale.objects.all()
@@ -104,6 +127,25 @@ class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+
+        # modo stupido di farlo - ma funziona
+        ta = TesiArchiviata()
+        ta.author = self.object.author
+        ta.relatore  = self.object.relatore
+        ta.argomento = self.object.argomento
+        ta.correlatore = self.object.correlatore
+        ta.data_fine = self.object.data_fine
+        ta.data_inizio = self.object.data_inizio
+        ta.tirocinio_azienda = self.object.tirocinio_azienda
+        ta.tirocinio_interno = self.object.tirocinio_interno
+        ta.tag = self.object.tirocinio_interno
+        ta.save()
+        self.object.delete()
+        return redirect('profile')
+
 
 # ATTIVITA
 
@@ -146,6 +188,24 @@ class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == tesi.author:
             return True
         return False
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+
+        # modo stupido di farlo - ma funziona
+        ta = Attivita_progettuale_Archiviata()
+        ta.author = self.object.author
+        ta.tutor  = self.object.tutor
+        ta.argomento = self.object.argomento
+
+        ta.data_fine = self.object.data_fine
+        ta.data_inizio = self.object.data_inizio
+        ta.tag = self.object.tag
+        ta.save()
+        self.object.delete()
+        return redirect('profile')
+
 
 
 # RICHIESTA TESI

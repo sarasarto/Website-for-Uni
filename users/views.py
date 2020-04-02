@@ -47,7 +47,7 @@ def profile(request):
     context = {
         'all_tesi': all_tesi,
         'all_attivita': all_attivita,
-        'tot': tot,
+        # 'tot': tot,
     }
 
     all_richiesta_tesi = all_richiesta_pfinale = {}

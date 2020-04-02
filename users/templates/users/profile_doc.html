@@ -2,30 +2,47 @@
 {% load crispy_forms_tags %}
 {% block body %}
 
+
 <div class="container-fluid" id="tourpackages-carousel">
+
     <div class="row">
 
-        <div class="col-sm-9">
-            <h1>Sei docente</h1>
+        <div class="col">
+            <h2>Sei docente</h2>
             <h2 class="account-heading">{{ user.username }}</h2>
             <p class="text-secondary">{{ user.email }}</p>
         </div>
+        <div class="col">
+            <div class="content-section">
+                <h3>Sidebar</h3>
+
+                <ul class="list-group">
+                    <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">Tesi Archiviate</a>
+                    <a href="{% url 'att_archiviata' %}" class="list-group-item list-group-item-light">Attivita
+                        progettuali archiviate</a>
+                    <a href="{% url 'tesi-create' %}" class="list-group-item list-group-item-light" role="button"> Crea
+                        Tesi</a>
+                    <a href="{% url 'attivita-create' %}" class="list-group-item list-group-item-light"> Crea Attività
+                        progettuale</a>
+                </ul>
+                </p>
+            </div>
+        </div>
     </div>
-    <a href="{% url 'tesi-create' %}" class="btn btn-info btn-xs" role="button"> Crea Tesi</a>
-    <a href="{% url 'attivita-create' %}" class="btn btn-info btn-xs" role="button"> Crea Attività progettuale</a>
 
 
-    <!-- dettagli -->
-    <h3>Tutte le tesi create </h3>
+</div>
+
+<div class="container-fluid">
+
+    <h1>Tutte le tesi create </h1>
     {% for tesi in all_tesi %}
 
     <div class="caption">
-        <div class="row">
+        <div class="row-2">
             <div class="col-sm-15">
                 <h5>Argomento : {{ tesi.argomento }} </h5>
-
                 <h5>Autore : {{ tesi.author }}</h5>
-
 
                 <!-- dettagli -->
                 <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
@@ -33,28 +50,24 @@
 
                 <a href="{% url 'tesi-delete' tesi.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
                 <a href="{% url 'tesi-update' tesi.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
-
-
             </div>
-
-
         </div>
 
         {% endfor %}
-
-
     </div>
+</div>
 
-    <h3>Tutte le attivita create </h3>
+
+<div class="container-fluid">
+    <h1>Tutte le attivita create </h1>
+
     {% for att in all_attivita %}
 
     <div class="caption">
-        <div class="row">
+        <div class="row-2">
             <div class="col-sm-15">
                 <h5>Argomento : {{ att.argomento }} </h5>
-
                 <h5>Autore : {{ att.author }}</h5>
-
 
                 <!-- dettagli -->
                 <a href="{% url 'attivita-detail' att.id %}" class="btn btn-info btn-xs" role="button"> View
@@ -62,19 +75,12 @@
 
                 <a href="{% url 'attivita-delete' att.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
                 <a href="{% url 'attivita-update' att.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
-
-
             </div>
-
-
         </div>
 
         {% endfor %}
-
-
     </div>
+</div>
 
 
-</div>
-</div>
 {% endblock %}

@@ -16,69 +16,78 @@
 
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
+<header class="site-header">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                  <a class="navbar-brand mr-4" href="{% url 'home:index' %}">Dipartimento di Ingegneria "Enzo Ferrari"</a>
 
-        <!--Header Enzo Ferrari-->
-        <div class="navbar-header">
+        <div class="container">
+
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-
             </button>
-            <a class="navbar-brand" href="{% url 'home:index' %}"> Dipartimento di Ingegneria "Enzo Ferrari" </a>
+
+
+            <div class="collapse navbar-collapse">
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                    </button>
+
+                    <a class="nav-item nav-link" href="{%url 'home:index'  %}">Home</a>
+
+
+                <!--bottoni-->
+                <div class="collapse navbar-collapse">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                    </button>
+                    <a class="nav-item nav-link" href="{% url 'tesi' %}">Tesi </a>
+
+                    <a class="nav-item nav-link" href="{% url 'attivita' %}">
+                        Attività Progettuali
+                    </a>
+
+                </div>
+
+                <div class="navbar-nav">
+
+                    {% if user.is_authenticated %}
+                    <a class="nav-item ml-4" href="{% url 'logout' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout </a>
+
+                    <a class="nav-item ml-4" href="{% url 'profile' %}"> Profile </a>
+
+
+                    {% else %}
+                    <a class="nav-item ml-4" href="{% url 'login' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login </a>
+
+                    <a href="{% url 'register' %}">Registration</a>
+
+                    {% endif %}
+                </div>
+            </div>
         </div>
 
         <!--Items-->
-        <div class="collapse navbar-collapse" id="topNavBar">
 
-            <!--bottoni-->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ml-4">
-                    <a href="{% url 'tesi' %}">
-                        Tesi
-                    </a>
-                </li>
-                <li class="nav-item ml-4">
-                    <a href="{% url 'attivita' %}">
-                        Attività Progettuali
-                    </a>
-                </li>
-            </ul>
+        <!--Search
+        <form class="navbar-form navbar-left" role="search" method="get" action="#">
+            <div class="form-check-inline">
+                <input type="text" class="form-control" name="q" value="">
+                +
+            </div>
+            <button type="submit" class="btn btn-sm "> Search</button>
+        </form>
+        -->
 
-            <!--Search-->
-            <form class="navbar-form navbar-left" role="search" method="get" action="#">
-                <div class="form-check-inline">
-                    <input type="text" class="form-control" name="q" value="">
-                    +
-                </div>
-                <button type="submit" class="btn btn-sm "> Search</button>
-            </form>
+        <!--bottone logout e profile se si è loggati-->
 
-            <!--bottone logout e profile se si è loggati-->
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                <li class="nav-item ml-4">
-                    <a href="{% url 'logout' %}">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout
-                    </a>
-                    <a href="{% url 'profile' %}"> Profile </a>
-                </li>
-
-                {% else %}
-                <li class="nav-item ml-4">
-                    <a href="{% url 'login' %}">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login
-                    </a>
-                    <a href="{% url 'register' %}">Registration</a>
-                </li>
-                {% endif %}
-            </ul>
-
-        </div>
-
-    </div>
-</nav>
+    </nav>
+</header>
 
 {% if messages %}
 {% for message in messages %}
