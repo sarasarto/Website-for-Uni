@@ -41,15 +41,6 @@ def profile(request):
     all_docenti = Docente.objects.all()
     all_studenti = Studente.objects.all()
 
-    all_tesi = Tesi.objects.filter(author=request.user)
-    all_attivita = Attivita_progettuale.objects.filter(author=request.user)
-    tot = list(chain(all_tesi, all_attivita))
-    context = {
-        'all_tesi': all_tesi,
-        'all_attivita': all_attivita,
-        # 'tot': tot,
-    }
-
     all_richiesta_tesi = all_richiesta_pfinale = {}
     nome = request.user.username.split('.')
     for s in all_studenti:
@@ -62,6 +53,14 @@ def profile(request):
     }
 
     for doc in all_docenti:
+        all_tesi = Tesi.objects.filter(author=request.user)
+        all_attivita = Attivita_progettuale.objects.filter(author=request.user)
+        tot = list(chain(all_tesi, all_attivita))
+        context = {
+            'all_tesi': all_tesi,
+            'all_attivita': all_attivita,
+            # 'tot': tot,
+        }
         if doc.mail == request.user.email:
              return render(request, 'users/profile_doc.html', context)
 
