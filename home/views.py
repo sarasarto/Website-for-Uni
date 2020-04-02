@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy
-from users.models import Profile, Studente, Docente
+from users.models import Studente, Docente
 from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale
 from users.models import Studente, Docente
 from .models import Tesi, Attivita_progettuale,TesiArchiviata,Attivita_progettuale_Archiviata

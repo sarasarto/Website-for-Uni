@@ -124,3 +124,5 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = 'login'
+# ti chiede login ogni volta che chiudi browser
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

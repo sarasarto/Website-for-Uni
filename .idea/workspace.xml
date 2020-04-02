@@ -4,15 +4,8 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="aggiunti bottoni tesi e attivita">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/attivita_progettuale_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/attivita_progettuale_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tesi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tesi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585494843997</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="-aggiunto modello e pagine per archivio tesi e modelli&#10;-aggiunta tabella nel profilo docente">
+      <created>1585600159072</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1585600159072</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -186,25 +186,26 @@
     <MESSAGE value="- fatto crea tesi &#10;- mostra i dettagli dei progetti se clicchi su View&#10;- cambiato nel modello tesi il tirocinio" />
     <MESSAGE value="- modificato models tesi e attivita &#10;-aggiunta tutte le funzionalità di crea , update e delete per attivita" />
     <MESSAGE value="aggiunti bottoni tesi e attivita" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunti bottoni tesi e attivita" />
+    <MESSAGE value="-aggiunto modello e pagine per archivio tesi e modelli&#10;-aggiunta tabella nel profilo docente" />
+    <option name="LAST_COMMIT_MESSAGE" value="-aggiunto modello e pagine per archivio tesi e modelli&#10;-aggiunta tabella nel profilo docente" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2" timestamp="1585495033482">
+    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2" timestamp="1585600158228">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1585495033482" />
+    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1585600158228" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="354" height="442" key="Diff.GoToChangePopup/0.0.1536.824@0.0.1536.824" timestamp="1584811505188" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1585311823015">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1585831565057">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1585311823015" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1585831565057" />
     <state x="933" y="167" key="FileChooserDialogImpl" timestamp="1585167950575">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -217,22 +218,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584270216635" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1585495045374">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1585600168904">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585495045374" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585600168904" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584811331973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811331973" />
-    <state x="848" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1585582602770">
+    <state x="848" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1585834256006">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="848" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585582602770" />
-    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585588213295">
+    <state x="848" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585834256006" />
+    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585831464860">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1585588213295" />
+    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1585831464860" />
     <state x="533" y="204" key="git4idea.merge.GitMergeDialog" timestamp="1584811311175">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
