@@ -12,7 +12,7 @@ class Docente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.nome + ' ' + self.cognome
+        return self.nome + '.' + self.cognome
 
 
 class Studente(models.Model):
@@ -23,7 +23,7 @@ class Studente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.cognome + ' ' + ' ' + self.nome + ' ' + self.matricola
+        return self.nome + '.' + self.cognome
 
 
 class Profile(models.Model):

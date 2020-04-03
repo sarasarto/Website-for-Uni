@@ -74,7 +74,7 @@ class Attivita_progettuale_Archiviata(models.Model):
 
 
 class Richiesta_tesi(models.Model):
-    autore = models.ForeignKey(Studente, on_delete=models.CASCADE)
+    autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
     relatore = models.CharField(max_length=100)
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
@@ -90,7 +90,7 @@ class Richiesta_tesi(models.Model):
 
 
 class Richiesta_prova_finale(models.Model):
-    autore = models.ForeignKey(Studente, on_delete=models.CASCADE)
+    autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
     tutor = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
     data_inizio = models.DateTimeField()

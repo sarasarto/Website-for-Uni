@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from users.models import Studente, Docente
 from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale
 from users.models import Studente, Docente
-from .models import Tesi, Attivita_progettuale,TesiArchiviata,Attivita_progettuale_Archiviata
+from .models import Tesi, Attivita_progettuale, TesiArchiviata, Attivita_progettuale_Archiviata
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm
@@ -17,6 +17,8 @@ from django.views.generic.edit import (
     DeleteView,
     FormView
 )
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def home(request):
@@ -134,7 +136,7 @@ class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         # modo stupido di farlo - ma funziona
         ta = TesiArchiviata()
         ta.author = self.object.author
-        ta.relatore  = self.object.relatore
+        ta.relatore = self.object.relatore
         ta.argomento = self.object.argomento
         ta.correlatore = self.object.correlatore
         ta.data_fine = self.object.data_fine
@@ -196,7 +198,7 @@ class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         # modo stupido di farlo - ma funziona
         ta = Attivita_progettuale_Archiviata()
         ta.author = self.object.author
-        ta.tutor  = self.object.tutor
+        ta.tutor = self.object.tutor
         ta.argomento = self.object.argomento
 
         ta.data_fine = self.object.data_fine
@@ -205,7 +207,6 @@ class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         ta.save()
         self.object.delete()
         return redirect('profile')
-
 
 
 # RICHIESTA TESI
@@ -227,6 +228,15 @@ def tesi_richiesta(request):
     else:
         form = RequestTesiForm()
     return render(request, 'home/tesi_request.html', {'form': form})
+
+
+def email(request):
+    subject = 'Thank you for registering to our site'
+    message = ' it  means a world to us '
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['sara.sarto.21@gmail.com', ]
+    return redirect('/')
+
 
 class RequestTesiDetailView(FormView, DetailView):
     model = Tesi
@@ -252,10 +262,8 @@ class RequestTesiDetailView(FormView, DetailView):
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
             return redirect('tesi-request-precompiled', pk=self.get_object().id)
         req.save()
+        send_mail('provaTesi', 'stiamo provando', settings.EMAIL_HOST_USER, [self.request.user.email], fail_silently=False)
         return super().form_valid(form)
-
-
-
 
 
 # RICHIESTA PROVA FINALE

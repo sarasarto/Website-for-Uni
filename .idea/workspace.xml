@@ -4,9 +4,11 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="aggiunti bottoni tesi e attivita">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tesi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_stud.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_stud.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
