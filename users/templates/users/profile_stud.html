@@ -20,7 +20,7 @@
             <div class="col-sm-15">
                 <h5>Relatore: {{ richieste.relatore }} </h5>
                 <h5>Argomento: {{ richieste.argomento }}</h5>
-                <a href="#" class="btn btn-info btn-xs" role="button">Invia</a>
+                <a href="{% url 'richiesta-tesi-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
             </div>
         </div>
     {% endfor %}
@@ -32,7 +32,7 @@
             <div class="col-sm-15">
                 <h5>Tutor: {{ richieste.tutor }} </h5>
                 <h5>Argomento: {{ richieste.argomento }}</h5>
-                <a href="" class="btn btn-info btn-xs" role="button">Invia</a>
+                <a href="{% url 'richiesta-prova-finale-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
 
             </div>
         </div>

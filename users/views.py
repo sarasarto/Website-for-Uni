@@ -7,6 +7,8 @@ from .forms import UserRegisterForm
 from django.contrib.auth.models import User
 from home.models import Tesi,Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale
 from itertools import chain
+from django.core.mail import send_mail
+from django.conf import settings
 
 def register(request):
     if request.method == 'POST':

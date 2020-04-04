@@ -230,14 +230,6 @@ def tesi_richiesta(request):
     return render(request, 'home/tesi_request.html', {'form': form})
 
 
-def email(request):
-    subject = 'Thank you for registering to our site'
-    message = ' it  means a world to us '
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['sara.sarto.21@gmail.com', ]
-    return redirect('/')
-
-
 class RequestTesiDetailView(FormView, DetailView):
     model = Tesi
     template_name = "home/precompiled_tesi_request.html"
@@ -262,8 +254,22 @@ class RequestTesiDetailView(FormView, DetailView):
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
             return redirect('tesi-request-precompiled', pk=self.get_object().id)
         req.save()
-        send_mail('provaTesi', 'stiamo provando', settings.EMAIL_HOST_USER, [self.request.user.email], fail_silently=False)
         return super().form_valid(form)
+
+
+class RTDetailView(DetailView):
+    model = Richiesta_tesi
+
+    def get(self, request, pk):
+        rel = self.get_object().relatore
+        #print(rel)
+        doc = rel.split()
+        doc_mail = doc[1]
+        print(doc_mail)
+        if request.GET.get('Send') == 'Send':
+            send_mail('provaTesi', 'stiamo provando', settings.EMAIL_HOST_USER, [doc_mail], fail_silently=False)
+            messages.success(request, f'La mail è stata inviata correttamente al seguente indirizzo {doc_mail}!')
+        return super().get(request, pk)
 
 
 # RICHIESTA PROVA FINALE
@@ -309,3 +315,19 @@ class RequestAttivitaDetailView(FormView, DetailView):
             return redirect('attivita-request-precompiled', pk=self.get_object().id)
         req.save()
         return super().form_valid(form)
+
+
+class RAPDetailView(DetailView):
+    model = Richiesta_prova_finale
+
+    def get(self, request, pk):
+        rel = self.get_object().tutor
+        #print(rel)
+        doc = rel.split()
+        doc_mail = doc[1]
+        print(doc_mail)
+        if request.GET.get('Send') == 'Send':
+            send_mail('provaTesi', 'stiamo provando', settings.EMAIL_HOST_USER, [doc_mail], fail_silently=False)
+            messages.success(request, f'La mail è stata inviata correttamente al seguente indirizzo {doc_mail}!')
+        return super().get(request, pk)
+
