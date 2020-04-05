@@ -1,11 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy
 from users.models import Studente, Docente
-from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale
+from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale, User
 from users.models import Studente, Docente
 from .models import Tesi, Attivita_progettuale, TesiArchiviata, Attivita_progettuale_Archiviata
 from itertools import chain
@@ -17,8 +20,9 @@ from django.views.generic.edit import (
     DeleteView,
     FormView
 )
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.conf import settings
+from django.template.loader import get_template
 
 
 def home(request):
@@ -249,6 +253,7 @@ class RequestTesiDetailView(FormView, DetailView):
         req.tag = tesi.tag
 
         req.autore = form.cleaned_data.get('autore')
+
         nome = req.autore.nome + '.' + req.autore.cognome
         if self.request.user.username != nome:
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
@@ -262,17 +267,169 @@ class RTDetailView(DetailView):
 
     def get(self, request, pk):
         rel = self.get_object().relatore
-        #print(rel)
         doc = rel.split()
         doc_mail = doc[1]
-        print(doc_mail)
+
+        author = self.get_object().autore
+        stud_name = author.nome
+        stud_surname = author.cognome
+
         if request.GET.get('Send') == 'Send':
-            send_mail('provaTesi', 'stiamo provando', settings.EMAIL_HOST_USER, [doc_mail], fail_silently=False)
+            subject = 'Richiesta Tesi'
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [doc_mail]
+            message = EmailMultiAlternatives(subject=subject,
+                                             from_email=from_email,
+                                             to=to_email,
+                                             )
+            context = {
+                'name': stud_name,
+                'surname': stud_surname,
+                'matricola': author.matricola,
+                'mail': author.mail,
+                'inizio': self.get_object().data_inizio,
+                'argomento': self.get_object().argomento,
+                'id': self.get_object().id,
+            }
+            html_template = get_template('home/richiesta_email.html').render(context)
+            message.attach_alternative(html_template, "text/html")
+            message.send()
+
             messages.success(request, f'La mail è stata inviata correttamente al seguente indirizzo {doc_mail}!')
         return super().get(request, pk)
 
 
+"""@login_required
+def accetta_rifiuta(self, request, pk):
+    context = {
+        'name': request.user.username
+
+    }
+    return render(request, 'home/accept.html', context)"""
+
+
+class AccettaRifiutaDetailView(LoginRequiredMixin, DetailView):
+    model = Richiesta_tesi
+    template_name = "home/accept.html"
+    success_url = '/'
+
+    def get(self, request, pk):
+        success_url = '/'
+        self.object = self.get_object()
+        context = {
+            'name': self.object.autore,
+            'argomento': self.object.argomento,
+            'mail': self.object.autore.mail,
+            'inizio': self.get_object().data_inizio,
+            'argomento': self.get_object().argomento,
+
+        }
+
+        if request.GET.get('Accetta') == 'Accetta':
+            rel = self.get_object().relatore
+            doc = rel.split()
+            doc_name = doc[0]
+            doc_mail = doc[1]
+            author = self.get_object().autore
+            stud_name = author.nome
+            stud_surname = author.cognome
+            subject = 'Accettata la Richiesta Tesi'
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [self.object.autore.mail]
+            message = EmailMultiAlternatives(subject=subject,
+                                             from_email=from_email,
+                                             to=to_email,
+                                             )
+            context = {
+                'nome':stud_name,
+                'cognome':stud_surname,
+                'prof': doc_name,
+                'argomento': self.get_object().argomento,
+                'mail': doc_mail
+
+            }
+            html_template = get_template('home/accetta_email.html').render(context)
+            message.attach_alternative(html_template, "text/html")
+            message.send()
+            messages.success(request, f'La mail è stata inviata correttamente al seguente indirizzo {self.object.autore.mail}!')
+            return super().get(request, pk)
+        else:
+            if request.GET.get('Rifiuta') == 'Rifiuta':
+                rel = self.get_object().relatore
+                doc = rel.split()
+                doc_name = doc[0]
+                doc_mail = doc[1]
+                author = self.get_object().autore
+                stud_name = author.nome
+                stud_surname = author.cognome
+                subject = 'Rifiutata la Richiesta Tesi'
+                from_email = settings.EMAIL_HOST_USER
+                to_email = [self.object.autore.mail]
+                message = EmailMultiAlternatives(subject=subject,
+                                                 from_email=from_email,
+                                                 to=to_email,
+                                                 )
+                context = {
+                    'nome': stud_name,
+                    'cognome': stud_surname,
+                    'prof': doc_name,
+                    'argomento': self.get_object().argomento,
+                    'mail': doc_mail
+
+                }
+                html_template = get_template('home/rifiuto_email.html').render(context)
+                message.attach_alternative(html_template, "text/html")
+                message.send()
+                messages.success(request,
+                                 f'La mail è stata inviata correttamente al seguente indirizzo {self.object.autore.mail}!')
+                return super().get(request, pk)
+            else:
+                if request.GET.get('Segnala Errori') == 'Segnala Errori':
+                    rel = self.get_object().relatore
+                    doc = rel.split()
+                    doc_name = doc[0]
+                    doc_mail = doc[1]
+                    author = self.get_object().autore
+                    stud_name = author.nome
+                    stud_surname = author.cognome
+                    subject = 'Errori nella Richiesta Tesi'
+                    from_email = settings.EMAIL_HOST_USER
+                    to_email = [self.object.autore.mail]
+                    message = EmailMultiAlternatives(subject=subject,
+                                                     from_email=from_email,
+                                                     to=to_email,
+                                                     )
+                    context = {
+                        'nome': stud_name,
+                        'cognome': stud_surname,
+                        'prof': doc_name,
+                        'argomento': self.get_object().argomento,
+                        'mail': doc_mail
+
+                    }
+                    html_template = get_template('home/errore_email.html').render(context)
+                    message.attach_alternative(html_template, "text/html")
+                    message.send()
+                    messages.success(request,
+                                     f'La mail è stata inviata correttamente al seguente indirizzo {self.object.autore.mail}!')
+                    return super().get(request, pk)
+
+
+        return self.render_to_response(context)
+
+# controllare che chi si logga sia il relatore -- non funziona
+    def test_func(self):
+        richiesta = self.get_object()
+        nome = richiesta.relatore.split()
+        if self.request.user == nome[0]:
+            return True
+        return False
+
+
+
+
 # RICHIESTA PROVA FINALE
+
 
 def provafin_richiesta(request):
     if request.method == "POST":
@@ -322,7 +479,7 @@ class RAPDetailView(DetailView):
 
     def get(self, request, pk):
         rel = self.get_object().tutor
-        #print(rel)
+        # print(rel)
         doc = rel.split()
         doc_mail = doc[1]
         print(doc_mail)
@@ -330,4 +487,3 @@ class RAPDetailView(DetailView):
             send_mail('provaTesi', 'stiamo provando', settings.EMAIL_HOST_USER, [doc_mail], fail_silently=False)
             messages.success(request, f'La mail è stata inviata correttamente al seguente indirizzo {doc_mail}!')
         return super().get(request, pk)
-

@@ -34,7 +34,8 @@ from home.views import (
     RequestTesiDetailView,
     RequestAttivitaDetailView,
     RTDetailView,
-    RAPDetailView
+    RAPDetailView,
+    AccettaRifiutaDetailView
 
 )
 
@@ -54,6 +55,7 @@ urlpatterns = [
     path('<int:pk>/update_tesi', TesiUpdateView.as_view(), name='tesi-update'),
     path('<int:pk>/delete_tesi', TesiDeleteView.as_view(), name='tesi-delete'),
 
+    path('<int:pk>/accept', AccettaRifiutaDetailView.as_view(), name='accept-request'),
 
     # per l'attivita
     path('profile/new_attivita', AttivitaCreateView.as_view(), name='attivita-create'),

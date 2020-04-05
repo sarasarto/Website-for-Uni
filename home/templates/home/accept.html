@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="content-section">
+    <h1>DETTAGLI RICHIESTA </h1>
+    <h2 class="account-heading"> Argomento:{{ argomento }} inzio il {{ inizio }}</h2>
+    <h2 class="text-secondary"> proposto da {{ name }}</h2>
+    <h2 class="text-secondary"> mail {{ mail }}</h2>
+
+    <div class="form-group">
+        <form method='get' action='#'>
+            <input type="submit" value="Accetta" name="Accetta"/>
+        </form>
+        <form method='get' action='#'>
+            <input type="submit" value="Rifiuta" name="Rifiuta"/>
+        </form>
+        <form method='get' action='#'>
+            <input type="submit" value="Segnala Errori" name="Segnala Errori"/>
+        </form>
+
+
+    </div>
+    <a href="/">Go back</a>
+
+
+</div>
+{% endblock %}
+
+
+
