@@ -35,7 +35,8 @@ from home.views import (
     RequestAttivitaDetailView,
     RTDetailView,
     RAPDetailView,
-    AccettaRifiutaDetailView
+    AccettaRifiutaDetailView,
+    RichiestaTesiInviateListView,
 
 )
 
@@ -66,8 +67,9 @@ urlpatterns = [
 
     #richiesta tesi e prova finale
     path('profile/richiesta_tesi', tesi_richiesta, name='tesi-richiesta'),
-    path('<int:pk>/detail_richiesta_tesi', RTDetailView.as_view(), name='richiesta-tesi-detail'),
+    path('<int:pk>/detail_richiesta_tesi/', RTDetailView.as_view(), name='richiesta-tesi-detail'),
     path('<int:pk>/detail_tesi/tesi_request/', RequestTesiDetailView.as_view(), name='tesi-request-precompiled'),
+    path('profile/richieste_tesi_inviate/', RichiestaTesiInviateListView.as_view(), name='tesi-inviate'),
 
     path('profile/richiesta_prova', provafin_richiesta, name='provafin-richiesta'),
     path('<int:pk>/detail_richiesta_prova_finale', RAPDetailView.as_view(), name='richiesta-prova-finale-detail'),

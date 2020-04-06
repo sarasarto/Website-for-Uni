@@ -1,0 +1,17 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+    {% for richieste in all_richiesta_tesi %}
+        <div class="content-section">
+            <div class="col-sm-15">
+                <h2 class="account-heading"> Argomento: {{ richieste.argomento }}</h2>
+                <p class="text-secondary"> proposto da: {{ richieste.relatore }}</p>
+            <!-- <a href="{% url 'richiesta-tesi-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a> -->
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+
+    <a href="{% url 'profile' %}">Go back</a>
+
+{% endblock %}

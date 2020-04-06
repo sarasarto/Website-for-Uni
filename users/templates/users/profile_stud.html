@@ -1,7 +1,7 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
-    <div class="content-section">
+    <!-- <div class="content-section">
         <h1>Sei studente</h1>
         <h2 class="account-heading">{{ user.username }}</h2>
         <p class="text-secondary">{{ user.email }}</p>
@@ -13,6 +13,33 @@
 
     <br>
     <br>
+ -->
+    <div class="container-fluid" id="tourpackages-carousel">
+
+        <div class="row">
+
+            <div class="col">
+                <h2>Sei studente</h2>
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+            </div>
+            <div class="col">
+                <div class="content-section">
+                    <h3>Sidebar</h3>
+
+                    <ul class="list-group">
+                        <a href="{% url 'tesi-inviate' %}" class="list-group-item list-group-item-light">Richieste Tesi Inviate</a>
+                        <a href="#" class="list-group-item list-group-item-light">Richieste Attivita
+                            Progettuali Inviate</a>
+                        <a href="{% url 'tesi-richiesta' %}" class="list-group-item list-group-item-light" role="button"> Crea Richiesta
+                            Tesi</a>
+                        <a href="{% url 'provafin-richiesta' %}" class="list-group-item list-group-item-light"> Crea Richiesta Attività
+                            progettuale</a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <h3>Tutte le richieste di tesi create</h3>
     {% for richieste in all_richiesta_tesi %}
