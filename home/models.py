@@ -81,7 +81,7 @@ class DateLauree(models.Model):
 
 class Richiesta_tesi(models.Model):
     autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
-    relatore = models.CharField(max_length=100)
+    relatore = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
 
@@ -95,7 +95,7 @@ class Richiesta_tesi(models.Model):
 
 class Richiesta_tesi_inviata(models.Model):
     autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
-    relatore = models.CharField(max_length=100)
+    relatore = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
 
@@ -117,10 +117,10 @@ class Richiesta_prova_finale(models.Model):
         (altro, 'altro')
     ]
     autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
-    tutor = models.CharField(max_length=100)
+    tutor = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
     argomento = models.CharField(max_length=500)
-    titolo_elaborato = models.CharField(max_length=500)
-    tipologia = models.CharField(max_length=500,choices=scelte)
+    titolo_elaborato = models.CharField(max_length=500, null=True)
+    tipologia = models.CharField(max_length=500,choices=scelte, null=True)
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE ,null=True )
 
 
@@ -139,7 +139,7 @@ class Richiesta_prova_finale_inviata(models.Model):
         (altro, 'altro')
     ]
     autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
-    tutor = models.CharField(max_length=100)
+    tutor = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
     argomento = models.CharField(max_length=500)
     titolo_elaborato = models.CharField(max_length=500)
     tipologia = models.CharField(max_length=500,choices=scelte)

@@ -273,9 +273,9 @@ class RTDetailView(DetailView):
 
     def get(self, request, pk):
         rel = self.get_object().relatore
-        doc = rel.split()
-        doc_mail = doc[1]
-
+        #doc = rel.split()
+        #doc_mail = doc[1]
+        doc_mail = rel.mail
         author = self.get_object().autore
         stud_name = author.nome
         stud_surname = author.cognome
@@ -347,9 +347,11 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         }
         if request.GET.get('Accetta') == 'Accetta':
             rel = self.get_object().relatore
-            doc = rel.split()
-            doc_name = doc[0]
-            doc_mail = doc[1]
+            #doc = rel.split()
+            #doc_name = doc[0]
+            #doc_mail = doc[1]
+            doc_name = rel.nome + ' ' + rel.cognome
+            doc_mail = rel.mail
             author = self.get_object().autore
             stud_name = author.nome
             stud_surname = author.cognome
@@ -377,9 +379,11 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         else:
             if request.GET.get('Rifiuta') == 'Rifiuta':
                 rel = self.get_object().relatore
-                doc = rel.split()
-                doc_name = doc[0]
-                doc_mail = doc[1]
+                # doc = rel.split()
+                # doc_name = doc[0]
+                # doc_mail = doc[1]
+                doc_name = rel.nome + ' ' + rel.cognome
+                doc_mail = rel.mail
                 author = self.get_object().autore
                 stud_name = author.nome
                 stud_surname = author.cognome
@@ -420,9 +424,11 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
 
                 if request.GET.get('Segnala Errori') == 'Segnala Errori':
                     rel = self.get_object().relatore
-                    doc = rel.split()
-                    doc_name = doc[0]
-                    doc_mail = doc[1]
+                    # doc = rel.split()
+                    # doc_name = doc[0]
+                    # doc_mail = doc[1]
+                    doc_mail = rel.mail
+                    doc_name = rel.nome + ' ' + rel.cognome
                     author = self.get_object().autore
                     stud_name = author.nome
                     stud_surname = author.cognome
@@ -523,9 +529,9 @@ class RAPDetailView(DetailView):
 
     def get(self, request, pk):
         rel = self.get_object().tutor
-        doc = rel.split()
-        doc_mail = doc[1]
-
+        #doc = rel.split()
+        #doc_mail = doc[1]
+        doc_mail = rel.mail
         author = self.get_object().autore
         stud_name = author.nome
         stud_surname = author.cognome
@@ -590,9 +596,11 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         }
         if request.GET.get('Accetta') == 'Accetta':
             rel = self.get_object().tutor
-            doc = rel.split()
-            doc_name = doc[0]
-            doc_mail = doc[1]
+            # doc = rel.split()
+            # doc_name = doc[0]
+            # doc_mail = doc[1]
+            doc_name = rel.nome + ' ' + rel.cognome
+            doc_mail = rel.mail
             author = self.get_object().autore
             stud_name = author.nome
             stud_surname = author.cognome
@@ -619,9 +627,11 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         else:
             if request.GET.get('Rifiuta') == 'Rifiuta':
                 rel = self.get_object().tutor
-                doc = rel.split()
-                doc_name = doc[0]
-                doc_mail = doc[1]
+                # doc = rel.split()
+                # doc_name = doc[0]
+                # doc_mail = doc[1]
+                doc_name = rel.nome + ' ' + rel.cognome
+                doc_mail = rel.mail
                 author = self.get_object().autore
                 stud_name = author.nome
                 stud_surname = author.cognome
@@ -662,9 +672,11 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
 
                 if request.GET.get('Segnala Errori') == 'Segnala Errori':
                     rel = self.get_object().tutor
-                    doc = rel.split()
-                    doc_name = doc[0]
-                    doc_mail = doc[1]
+                    # doc = rel.split()
+                    # doc_name = doc[0]
+                    # doc_mail = doc[1]
+                    doc_name = rel.nome + ' ' + rel.cognome
+                    doc_mail = rel.mail
                     author = self.get_object().autore
                     stud_name = author.nome
                     stud_surname = author.cognome
