@@ -35,8 +35,11 @@ from home.views import (
     RequestAttivitaDetailView,
     RTDetailView,
     RAPDetailView,
-    AccettaRifiutaDetailView,
+    AccettaRifiutaTesiDetailView,
+    AccettaRifiutaAttivitaDetailView,
     RichiestaTesiInviateListView,
+    RichiestaAttInviateListView,
+
 
 )
 
@@ -56,7 +59,8 @@ urlpatterns = [
     path('<int:pk>/update_tesi', TesiUpdateView.as_view(), name='tesi-update'),
     path('<int:pk>/delete_tesi', TesiDeleteView.as_view(), name='tesi-delete'),
 
-    path('<int:pk>/accept', AccettaRifiutaDetailView.as_view(), name='accept-request'),
+    path('<int:pk>/accept_tesi', AccettaRifiutaTesiDetailView.as_view(), name='accept-request-tesi'),
+    path('<int:pk>/accept_att', AccettaRifiutaAttivitaDetailView.as_view(), name='accept-request-att'),
 
     # per l'attivita
     path('profile/new_attivita', AttivitaCreateView.as_view(), name='attivita-create'),
@@ -74,7 +78,7 @@ urlpatterns = [
     path('profile/richiesta_prova', provafin_richiesta, name='provafin-richiesta'),
     path('<int:pk>/detail_richiesta_prova_finale', RAPDetailView.as_view(), name='richiesta-prova-finale-detail'),
     path('<int:pk>/detail_att/attivita_request/', RequestAttivitaDetailView.as_view(), name='attivita-request-precompiled'),
-
+    path('profile/richieste_att_inviate/', RichiestaAttInviateListView.as_view(), name='att-inviate'),
 
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),

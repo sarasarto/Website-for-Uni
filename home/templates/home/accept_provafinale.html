@@ -2,10 +2,11 @@
 {% load crispy_forms_tags %}
 {% block body %}
 <div class="content-section">
-    <h1>DETTAGLI RICHIESTA DI TESI</h1>
+    <h1>DETTAGLI RICHIESTA DI PROVA FINALE</h1>
     <h2 class="account-heading"> Argomento: {{ argomento }} data di laurea prevista per il {{ data }}</h2>
     <h2 class="text-secondary"> proposto da {{ name }}</h2>
     <h2 class="text-secondary"> mail {{ mail }}</h2>
+     <h2 class="text-secondary"> tipologia {{ mail }}</h2>
 
     <div class="form-group">
         <form method='get' action='#'>
@@ -25,6 +26,4 @@
 
 </div>
 {% endblock %}
-
-
 

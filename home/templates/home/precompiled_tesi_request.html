@@ -5,10 +5,10 @@
     <h1>Nuova richiesta:</h1>
 
     <p class="text-secondary">
-        Verrà creata una richiesta per la tesi
+        Verrà creata una richiesta per la tesi  "{{ object.argomento }}""
     </p>
 
-    <p class="text-secondary">{{ object.argomento }}</p>
+
         <div class="content-section">
             <form method="POST">
                 {% csrf_token %}
