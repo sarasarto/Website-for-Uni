@@ -5,13 +5,19 @@ from django.contrib.auth.models import User
 
 
 class Tesi(models.Model):
+
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     relatore = models.ForeignKey(Docente, on_delete=models.CASCADE)
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
-
-    tirocinio_interno = models.BooleanField(default=False)
-    tirocinio_azienda = models.BooleanField(default=False)
+    in_azienda = 'in azienda'
+    interno = 'interno'
+    scelte = [
+        (in_azienda, 'in azienda'),
+        (interno, 'interno'),
+    ]
+    tirocinio = models.CharField(max_length=500, choices=scelte, null=True)
+    nome_azienda = models.CharField(max_length=1000, null=True, blank=True)
     data_inizio = models.DateTimeField()
     data_fine = models.DateTimeField()
     tag = models.IntegerField()
@@ -29,8 +35,14 @@ class TesiArchiviata(models.Model):
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
 
-    tirocinio_interno = models.BooleanField(default=False)
-    tirocinio_azienda = models.BooleanField(default=False)
+    in_azienda = 'in azienda'
+    interno = 'interno'
+    scelte = [
+        (in_azienda, 'in azienda'),
+        (interno, 'interno'),
+    ]
+    tirocinio = models.CharField(max_length=500, choices=scelte, null=True)
+    nome_azienda = models.CharField(max_length=1000, null=True, blank=True)
     data_inizio = models.DateTimeField()
     data_fine = models.DateTimeField()
     tag = models.IntegerField()
@@ -85,9 +97,15 @@ class Richiesta_tesi(models.Model):
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
 
-    tirocinio_interno = models.BooleanField(default=False)
-    tirocinio_azienda = models.BooleanField(default=False)
-    data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE,null=True)
+    in_azienda = 'in azienda'
+    interno = 'interno'
+    scelte = [
+        (in_azienda, 'in azienda'),
+        (interno, 'interno'),
+    ]
+    tirocinio = models.CharField(max_length=500, choices=scelte, null=True)
+    nome_azienda = models.CharField(max_length=1000, null=True, blank=True)
+    data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
@@ -99,8 +117,14 @@ class Richiesta_tesi_inviata(models.Model):
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
 
-    tirocinio_interno = models.BooleanField(default=False)
-    tirocinio_azienda = models.BooleanField(default=False)
+    in_azienda = 'in azienda'
+    interno = 'interno'
+    scelte = [
+        (in_azienda, 'in azienda'),
+        (interno, 'interno'),
+    ]
+    tirocinio = models.CharField(max_length=500, choices=scelte, null=True)
+    nome_azienda = models.CharField(max_length=1000, null=True, blank=True)
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -120,13 +144,11 @@ class Richiesta_prova_finale(models.Model):
     tutor = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
     argomento = models.CharField(max_length=500)
     titolo_elaborato = models.CharField(max_length=500, null=True)
-    tipologia = models.CharField(max_length=500,choices=scelte, null=True)
-    data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE ,null=True )
-
+    tipologia = models.CharField(max_length=500, choices=scelte, null=True)
+    data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
-
 
 
 class Richiesta_prova_finale_inviata(models.Model):
@@ -142,9 +164,8 @@ class Richiesta_prova_finale_inviata(models.Model):
     tutor = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
     argomento = models.CharField(max_length=500)
     titolo_elaborato = models.CharField(max_length=500)
-    tipologia = models.CharField(max_length=500,choices=scelte)
-    data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE ,null=True )
-
+    tipologia = models.CharField(max_length=500, choices=scelte)
+    data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento

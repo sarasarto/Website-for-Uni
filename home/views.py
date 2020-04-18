@@ -95,7 +95,7 @@ class TesiDetailView(LoginRequiredMixin, DetailView):
 
 class TesiCreateView(LoginRequiredMixin, CreateView):
     model = Tesi
-    fields = ['relatore', 'argomento', 'tirocinio_interno', 'tirocinio_azienda', 'data_inizio', 'data_fine', 'tag']
+    fields = ['relatore', 'argomento', 'tirocinio', 'nome_azienda', 'data_inizio', 'data_fine', 'tag']
 
     # questo per dire che chi crea
     # la tesi è il docente loggato
@@ -106,7 +106,7 @@ class TesiCreateView(LoginRequiredMixin, CreateView):
 
 class TesiUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Tesi
-    fields = ['relatore', 'argomento', 'tirocinio_interno', 'tirocinio_azienda', 'data_inizio', 'data_fine', 'tag']
+    fields = ['relatore', 'argomento', 'tirocinio', 'nome_azienda', 'data_inizio', 'data_fine', 'tag']
 
     # questo per dire che chi update
     # la tesi è il docente loggato
@@ -145,9 +145,9 @@ class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         ta.correlatore = self.object.correlatore
         ta.data_fine = self.object.data_fine
         ta.data_inizio = self.object.data_inizio
-        ta.tirocinio_azienda = self.object.tirocinio_azienda
-        ta.tirocinio_interno = self.object.tirocinio_interno
-        ta.tag = self.object.tirocinio_interno
+        ta.tirocinio = self.object.tirocinio
+        ta.nome_azienda = self.object.nome_azienda
+        ta.tag = self.object.tag
         ta.save()
         self.object.delete()
         return redirect('profile')
@@ -252,8 +252,8 @@ class RequestTesiDetailView(FormView, DetailView):
         req.relatore = tesi.relatore
         req.correlatore = tesi.correlatore
         req.argomento = tesi.argomento
-        req.tirocinio_interno = tesi.tirocinio_interno
-        req.tirocinio_azienda = tesi.tirocinio_azienda
+        req.tirocinio = tesi.tirocinio
+        req.nome_azienda = tesi.nome_azienda
         req.data_inizio = tesi.data_inizio
         req.data_fine = tesi.data_fine
         req.tag = tesi.tag
@@ -285,8 +285,8 @@ class RTDetailView(DetailView):
         rti.relatore = r.relatore
         rti.correlatore = r.correlatore
         rti.argomento = r.argomento
-        rti.tirocinio_interno = r.tirocinio_interno
-        rti.tirocinio_azienda = r.tirocinio_azienda
+        rti.tirocinio = r.tirocinio
+        rti.nome_azienda = r.nome_azienda
 
         rti.autore = r.autore
         rti.data_laurea = r.data_laurea
@@ -342,7 +342,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         context_object_name = {
             'name': self.object.autore,
             'argomento': self.object.argomento,
-            'mail': autore.user,
+            'mail': autore.user.email,
             'data': self.object.data_laurea,
         }
         if request.GET.get('Accetta') == 'Accetta':
@@ -416,8 +416,8 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                 rt.relatore = r.relatore
                 rt.correlatore = r.correlatore
                 rt.argomento = r.argomento
-                rt.tirocinio_interno = r.tirocinio_interno
-                rt.tirocinio_azienda = r.tirocinio_azienda
+                rt.tirocinio = r.tirocinio
+                rt.nome_azienda = r.nome_azienda
                 rt.data_laurea = r.data_laurea
                 rt.autore = r.autore
                 rt.save()
