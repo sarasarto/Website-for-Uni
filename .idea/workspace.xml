@@ -4,10 +4,6 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586094810626</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="- registrazione: controllo nome.cognome&#10;- messo tirocinio azienda o interno e aggiornato ovunque">
+      <created>1587224658548</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1587224658548</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -212,17 +215,18 @@
     <MESSAGE value="aggiunto setting gmail" />
     <MESSAGE value="per database- funziona mail di invio" />
     <MESSAGE value="- tutte le mail vengono inviate&#10;- creata detail view per accept" />
-    <option name="LAST_COMMIT_MESSAGE" value="- tutte le mail vengono inviate&#10;- creata detail view per accept" />
+    <MESSAGE value="- registrazione: controllo nome.cognome&#10;- messo tirocinio azienda o interno e aggiornato ovunque" />
+    <option name="LAST_COMMIT_MESSAGE" value="- registrazione: controllo nome.cognome&#10;- messo tirocinio azienda o interno e aggiornato ovunque" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2" timestamp="1586094809123">
+    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2" timestamp="1587224657094">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586094809123" />
+    <state x="424" y="0" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587224657094" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

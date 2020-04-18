@@ -38,7 +38,7 @@ def register(request):
 
                 return redirect("/")
             else:
-                messages.error(request, f'Errore nello username')
+                messages.error(request, f'Errore! Username deve essere nome.cognome!!!')
                 return redirect('register')
     else:
         form = UserRegisterForm()
