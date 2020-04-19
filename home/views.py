@@ -270,11 +270,13 @@ class RequestTesiDetailView(FormView, DetailView):
 
 class RequestTesiUpdateView(LoginRequiredMixin, UpdateView):
     model = Richiesta_tesi
-    fields = "__all__"
+    form_class = RequestTesiForm
+    template_name = "home/request_tesi_update.html"
+    #fields = "__all__"
 
-    def form_valid(self, form):
-        form.instance.author = self.request.username
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     form.instance.author = self.request.username
+    #     return super().form_valid(form)
 
 
 class RTDetailView(DetailView):
@@ -531,6 +533,12 @@ class RequestAttivitaDetailView(FormView, DetailView):
             return redirect('attivita-request-precompiled', pk=self.get_object().id)
         req.save()
         return super().form_valid(form)
+
+
+class RequestAttivitaUpdateView(LoginRequiredMixin, UpdateView):
+    model = Richiesta_prova_finale
+    form_class = RequestProvaFinaleForm
+    template_name = "home/request_attivita_update.html"
 
 
 class RAPDetailView(DetailView):

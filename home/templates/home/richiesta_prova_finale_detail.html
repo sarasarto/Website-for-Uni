@@ -7,6 +7,7 @@
     <p class="text-secondary"> proposto da: {{ object.tutor }}</p>
 
     <a href="/">Go back</a>
+    <a href="{% url 'richiesta-attivita-update' object.id %}">Update</a>
     <form method='get' action='#'>
         <input type="submit" value="Send" name="Send"/>
     </form>

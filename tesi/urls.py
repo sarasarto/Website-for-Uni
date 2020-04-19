@@ -40,7 +40,7 @@ from home.views import (
     RichiestaTesiInviateListView,
     RichiestaAttInviateListView,
     RequestTesiUpdateView,
-
+    RequestAttivitaUpdateView,
 
 )
 
@@ -73,12 +73,13 @@ urlpatterns = [
     #richiesta tesi e prova finale
     path('profile/richiesta_tesi', tesi_richiesta, name='tesi-richiesta'),
     path('<int:pk>/detail_richiesta_tesi/', RTDetailView.as_view(), name='richiesta-tesi-detail'),
+    path('<int:pk>/update_tesi_request/', RequestTesiUpdateView.as_view(), name='richiesta-tesi-update'),
     path('<int:pk>/detail_tesi/tesi_request/', RequestTesiDetailView.as_view(), name='tesi-request-precompiled'),
-    path('<int:pk>/detail_tesi/tesi_request/update_tesi_request/', RequestTesiUpdateView.as_view(), name='tesi-request-precompiled'),
     path('profile/richieste_tesi_inviate/', RichiestaTesiInviateListView.as_view(), name='tesi-inviate'),
 
     path('profile/richiesta_prova', provafin_richiesta, name='provafin-richiesta'),
     path('<int:pk>/detail_richiesta_prova_finale', RAPDetailView.as_view(), name='richiesta-prova-finale-detail'),
+    path('<int:pk>/update_attivita_request/', RequestAttivitaUpdateView.as_view(), name='richiesta-attivita-update'),
     path('<int:pk>/detail_att/attivita_request/', RequestAttivitaDetailView.as_view(), name='attivita-request-precompiled'),
     path('profile/richieste_att_inviate/', RichiestaAttInviateListView.as_view(), name='att-inviate'),
 
