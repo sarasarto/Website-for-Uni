@@ -268,6 +268,15 @@ class RequestTesiDetailView(FormView, DetailView):
         return super().form_valid(form)
 
 
+class RequestTesiUpdateView(LoginRequiredMixin, UpdateView):
+    model = Richiesta_tesi
+    fields = "__all__"
+
+    def form_valid(self, form):
+        form.instance.author = self.request.username
+        return super().form_valid(form)
+
+
 class RTDetailView(DetailView):
     model = Richiesta_tesi
 
