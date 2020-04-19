@@ -110,6 +110,8 @@ class Richiesta_tesi(models.Model):
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
 
+    def get_absolute_url(self):
+        return reverse('richiesta-tesi-detail', kwargs={'pk': self.pk})
 
 class Richiesta_tesi_inviata(models.Model):
     autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
@@ -149,6 +151,9 @@ class Richiesta_prova_finale(models.Model):
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
+
+    def get_absolute_url(self):
+        return reverse('richiesta-prova-finale-detail', kwargs={'pk': self.pk})
 
 
 class Richiesta_prova_finale_inviata(models.Model):
