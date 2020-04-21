@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy">
 
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'home/griglia.css' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
@@ -20,20 +21,20 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand mr-4" href="{% url 'home:index' %}">Dipartimento di Ingegneria "Enzo Ferrari"</a>
 
-        <div class="container">
+        <div class="container-fluid">
 
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
+            <button class="navbar-toggler hidden-md-up pull-right" type="button" data-toggle="collapse" data-target="#topNavBar"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
 
             <div class="collapse navbar-collapse">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
+                <ul class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
-                </button>
+                </ul>
 
                 <a class="nav-item nav-link" href="{%url 'home:index'  %}">Home</a>
 
@@ -51,9 +52,10 @@
                     </a>
 
                     <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'cerca' %}">
-                        <div class="form-group">
-                            <input type="text" class="form-contro" name="q" value="{{request.GET.q}}" placeholder="Search Here">
-                      <button type="submit" class="nav-item nav-link">Cerca </button>
+                        <div class="nav-item">
+                            <input type="text" name="q" value="{{request.GET.q}}"
+                                   placeholder="Search Here">
+                            <button type="submit" class="nav-item ">Cerca</button>
 
                         </div>
 

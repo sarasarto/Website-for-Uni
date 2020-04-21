@@ -1,29 +1,32 @@
 {% extends 'home/base.html' %}
 
 {% block body %}
-<div class="container-fluid" id="tourpackages-carousel">
-    <div class="row">
+<div class="container-fluid">
 
-        {% for tesi in all_tesi %}
-        <div class="col-sm-4">
-            <div class="caption">
-                <h3>Argomento : {{ tesi.argomento }}</h3>
+    <div class="editor-indent" style="margin-left: 20px; padding: 0 0 0 40px; margin-right: 50px">
 
-                {% if tesi.relatore %}
-                <h3>Relatore : {{ tesi.relatore }}</h3>
-                <h3>tirocinio : {{ tesi.triocinio_interno }}</h3>
-                <!-- dettagli -->
-                <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
-                {% endif %}
 
-            </div>
+        <div class="col-xs-12">
 
+            <ul class="cards">
+                {% for tesi in all_tesi %}
+                <li>
+                    <h3>Argomento : {{ tesi.argomento }}</h3>
+
+                    {% if tesi.relatore %}
+                    <h3>Relatore : {{ tesi.relatore }}</h3>
+                    <h3>tirocinio : {{ tesi.triocinio_interno }}</h3>
+                    <!-- dettagli -->
+                    <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
+                        Details</a>
+                    {% endif %}
+
+
+                </li>
+                {% endfor %}
+            </ul>
 
         </div>
-
-        {% endfor %}
-
     </div>
 </div>
 
