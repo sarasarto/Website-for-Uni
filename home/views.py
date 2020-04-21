@@ -279,6 +279,11 @@ class RequestTesiUpdateView(LoginRequiredMixin, UpdateView):
     #     return super().form_valid(form)
 
 
+class RequestTesiDeleteView(LoginRequiredMixin, DeleteView):
+    model = Richiesta_tesi
+    success_url = '/profile'
+
+
 class RTDetailView(DetailView):
     model = Richiesta_tesi
 
@@ -539,6 +544,11 @@ class RequestAttivitaUpdateView(LoginRequiredMixin, UpdateView):
     model = Richiesta_prova_finale
     form_class = RequestProvaFinaleForm
     template_name = "home/request_attivita_update.html"
+
+
+class RequestAttivitaDeleteView(LoginRequiredMixin, DeleteView):
+    model = Richiesta_prova_finale
+    success_url = '/profile'
 
 
 class RAPDetailView(DetailView):
