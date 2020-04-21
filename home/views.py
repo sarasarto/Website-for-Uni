@@ -8,9 +8,10 @@ from django.views import generic
 from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy
 from users.models import Studente, Docente
-from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_tesi_inviata, Richiesta_prova_finale, User , Richiesta_prova_finale_inviata
+from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_tesi_inviata, Richiesta_prova_finale, User, \
+    Richiesta_prova_finale_inviata
 from users.models import Studente, Docente
-from .models import Tesi, Attivita_progettuale, TesiArchiviata, Attivita_progettuale_Archiviata
+from .models import TaggableManager, Tesi, Attivita_progettuale, TesiArchiviata, Attivita_progettuale_Archiviata
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm
@@ -23,6 +24,8 @@ from django.views.generic.edit import (
 from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.conf import settings
 from django.template.loader import get_template
+from django.db.models import Q
+from itertools import chain
 
 
 def home(request):
@@ -48,6 +51,54 @@ def home(request):
         a_p = Attivita_progettuale.objects.all()
         tot = list(chain(tesi, a_p))
         return tot"""
+
+
+class SearchIndexView(ListView):
+    template_name = 'home/cerca.html'
+    all_tesi = Tesi.objects.all()
+    all_att = Attivita_progettuale.objects.all()
+    context = {
+        'all_tesi': all_tesi,
+        'all_att': all_att
+    }
+
+    def get_queryset(query=None):
+        queryset = []
+        queries = query.split(" ")
+        for q in queries:
+            tesi = Tesi.objects.filter(tag=q).distinct
+            # a_p = Attivita_progettuale.objects.all()
+            # tot = list(chain(tesi, a_p))
+
+            for post in tesi:
+                queryset.append(post)
+
+        return list(set(queryset))
+
+
+def cerca(request):
+    template = 'home/cerca.html'
+
+    query = request.GET.get('q')  # la variabile per le query
+    lista_q = query.split(" ")
+    results = []
+
+    for p in lista_q:
+        risultati = Tesi.objects.filter(Q(argomento__icontains=p) |
+                                        Q(tag__name=p)
+                                        ).distinct()
+        att = Attivita_progettuale.objects.filter(Q(argomento__icontains=p) |
+                                                  Q(tag__name=p)
+                                                  ).distinct()
+        results = list(chain(risultati, results, att))
+
+    results = list(set(results))  # per togliere duplicati
+    context = {
+        'query': query,
+        'results': results,
+
+    }
+    return render(request, template, context)
 
 
 def show_tesi(request):
@@ -272,7 +323,7 @@ class RequestTesiUpdateView(LoginRequiredMixin, UpdateView):
     model = Richiesta_tesi
     form_class = RequestTesiForm
     template_name = "home/request_tesi_update.html"
-    #fields = "__all__"
+    # fields = "__all__"
 
     # def form_valid(self, form):
     #     form.instance.author = self.request.username
@@ -289,8 +340,8 @@ class RTDetailView(DetailView):
 
     def get(self, request, pk):
         rel = self.get_object().relatore
-        #doc = rel.split()
-        #doc_mail = doc[1]
+        # doc = rel.split()
+        # doc_mail = doc[1]
         doc_mail = rel.mail
         author = self.get_object().autore
         stud_name = author.nome
@@ -363,9 +414,9 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         }
         if request.GET.get('Accetta') == 'Accetta':
             rel = self.get_object().relatore
-            #doc = rel.split()
-            #doc_name = doc[0]
-            #doc_mail = doc[1]
+            # doc = rel.split()
+            # doc_name = doc[0]
+            # doc_mail = doc[1]
             doc_name = rel.nome + ' ' + rel.cognome
             doc_mail = rel.mail
             author = self.get_object().autore
@@ -473,10 +524,9 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                     return redirect("/")
                 else:
 
-                   # return super().get(request, pk)
+                    # return super().get(request, pk)
                     rt.delete()
                     return self.render_to_response(context_object_name)
-
 
     # controllare che chi si logga sia il relatore -- non funziona
     def test_func(self):
@@ -485,7 +535,6 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         if self.request.user.username == nome[0]:
             return True
         return False
-
 
 
 # RICHIESTA PROVA FINALE
@@ -556,8 +605,8 @@ class RAPDetailView(DetailView):
 
     def get(self, request, pk):
         rel = self.get_object().tutor
-        #doc = rel.split()
-        #doc_mail = doc[1]
+        # doc = rel.split()
+        # doc_mail = doc[1]
         doc_mail = rel.mail
         author = self.get_object().autore
         stud_name = author.nome
@@ -569,7 +618,7 @@ class RAPDetailView(DetailView):
         rti.tutor = r.tutor
         rti.argomento = r.argomento
         rti.titolo_elaborato = r.titolo_elaborato
-        rti.tipologia =  r.tipologia
+        rti.tipologia = r.tipologia
         rti.data_laurea = r.data_laurea
         rti.save()
 
@@ -588,7 +637,7 @@ class RAPDetailView(DetailView):
                 'mail': author.mail,
                 'laurea': rti.data_laurea,
                 'tipo': rti.tipologia,
-                'titolo':  rti.titolo_elaborato,
+                'titolo': rti.titolo_elaborato,
                 'argomento': rti.argomento,
                 'id': rti.id,
             }
@@ -643,7 +692,7 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
                 'cognome': stud_surname,
                 'prof': doc_name,
                 'argomento': self.get_object().argomento,
-                'mail': doc_mail ,
+                'mail': doc_mail,
             }
             html_template = get_template('home/accetta_email.html').render(context)
             message.attach_alternative(html_template, "text/html")
@@ -732,10 +781,9 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
                     return redirect("/")
                 else:
 
-                   # return super().get(request, pk)
+                    # return super().get(request, pk)
                     rt.delete()
                     return self.render_to_response(context_object_name)
-
 
     # controllare che chi si logga sia il relatore -- non funziona
     def test_func(self):
@@ -744,4 +792,3 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         if self.request.user.username == nome[0]:
             return True
         return False
-

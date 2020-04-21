@@ -18,7 +18,7 @@
 <body>
 <header class="site-header">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-                  <a class="navbar-brand mr-4" href="{% url 'home:index' %}">Dipartimento di Ingegneria "Enzo Ferrari"</a>
+        <a class="navbar-brand mr-4" href="{% url 'home:index' %}">Dipartimento di Ingegneria "Enzo Ferrari"</a>
 
         <div class="container">
 
@@ -30,12 +30,12 @@
 
 
             <div class="collapse navbar-collapse">
-                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
-                    </button>
+                </button>
 
-                    <a class="nav-item nav-link" href="{%url 'home:index'  %}">Home</a>
+                <a class="nav-item nav-link" href="{%url 'home:index'  %}">Home</a>
 
 
                 <!--bottoni-->
@@ -49,6 +49,15 @@
                     <a class="nav-item nav-link" href="{% url 'attivita' %}">
                         Attività Progettuali
                     </a>
+
+                    <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'cerca' %}">
+                        <div class="form-group">
+                            <input type="text" class="form-contro" name="q" value="{{request.GET.q}}" placeholder="Search Here">
+                      <button type="submit" class="nav-item nav-link">Cerca </button>
+
+                        </div>
+
+                    </form>
 
                 </div>
 

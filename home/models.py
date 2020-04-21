@@ -2,7 +2,7 @@ from django.db import models
 from users.models import Docente, Studente
 from django.urls import reverse
 from django.contrib.auth.models import User
-
+from taggit.managers import TaggableManager
 
 class Tesi(models.Model):
 
@@ -20,7 +20,7 @@ class Tesi(models.Model):
     nome_azienda = models.CharField(max_length=1000, null=True, blank=True)
     data_inizio = models.DateTimeField()
     data_fine = models.DateTimeField()
-    tag = models.IntegerField()
+    tag = TaggableManager()
 
     def __str__(self):
         return str(self.argomento)
@@ -60,7 +60,7 @@ class Attivita_progettuale(models.Model):
     argomento = models.CharField(max_length=500)
     data_inizio = models.DateTimeField()
     data_fine = models.DateTimeField()
-    tag = models.IntegerField()
+    tag = TaggableManager()
 
     def __str__(self):
         return str(self.argomento)

@@ -49,6 +49,7 @@ from home.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
+    path('cerca/', views.cerca, name='cerca'),
     path('profile/', user_views.profile, name='profile'),
     path('tesi/', views.show_tesi, name='tesi'),
     path('attivita/', views.show_attivita, name='attivita'),
