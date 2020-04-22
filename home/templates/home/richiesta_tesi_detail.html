@@ -8,6 +8,7 @@
     <p class="text-secondary"> laurea: {{ object.data_laurea }}</p>
     <a href="/">Go back</a>
     <a href="{% url 'richiesta-tesi-update' object.id %}">Update</a>
+    <a href="{% url 'richiesta-tesi-delete' object.id %}">Delete</a>
     <form method='get' action='#'>
         <input type="submit" value="Send" name="Send"/>
     </form>
