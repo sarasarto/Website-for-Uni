@@ -1,23 +1,35 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            /*hideShow();*/
+            $('#id_nome_azienda').hide();
 
-<div class="content-section">
-    <form method="POST">
-        {% csrf_token %}
-        <!--<fieldset class="form-group">-->
-        <!--<legend class="border-bottom mb-4">Creazione Tesi</legend>-->
+            $('#id_tirocinio_azienda').click(function() {
+                //hideShow();
+                $('#id_nome_azienda').toggle(this.checked);
+            });
+        });
+    </script>
 
-        {{ form.as_p }}
-        <!--</fieldset>-->
-        <div class="form-group">
-            <button class="btn btn-black" type="submit">Salva</button>
-        </div>
 
-         <a href="{% url 'profile' %}">Go back</a>
-    </form>
 
-</div>
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <!--<fieldset class="form-group">-->
+            <!--<legend class="border-bottom mb-4">Creazione Tesi</legend>-->
+            {{ form.as_p }}
+            <!--</fieldset>-->
+            <div class="form-group">
+                <button class="btn btn-black" type="submit">Salva</button>
+            </div>
+
+            <a href="{% url 'profile' %}">Go back</a>
+        </form>
+
+    </div>
 
     {% if messages %}
         {% for message in messages %}
@@ -26,7 +38,7 @@
             </div>
         {% endfor %}
     {% endif %}
-
+<!--
     <script type="text/javascript">
         var conditional_fields = $("div.nome_azienda");
         conditional_fileds.hide();
@@ -39,5 +51,5 @@
             }
         });
     </script>
-
+ -->
 {% endblock %}

@@ -15,18 +15,6 @@ class ProvaForm(forms.ModelForm):
 
 class RequestTesiForm(forms.ModelForm):
 
-    def clean(self):
-        cleaned_data = super().clean()
-        tirocinio_azienda = cleaned_data.get('tirocinio_azienda')
-
-        if tirocinio_azienda:
-            msg = forms.ValidationError("This field is required.")
-            self.add_error('nome_azienda', msg)
-        else:
-            self.cleaned_data['nome_azienda'] = ''
-
-        return self.cleaned_data
-
     # def __init__(self, *args, **kwargs):
     #     super(RequestTesiForm, self).__init__(*args, **kwargs)
     #     self.fields['nome_azienda'].widget = forms.HiddenInput()
@@ -34,6 +22,7 @@ class RequestTesiForm(forms.ModelForm):
     class Meta:
         model = Richiesta_tesi
         fields = "__all__"
+        # exclude = ['nome_azienda']
         # fields = ['autore']
 
 
