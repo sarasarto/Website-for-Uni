@@ -97,13 +97,15 @@ class Richiesta_tesi(models.Model):
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
 
-    in_azienda = 'in azienda'
+    """in_azienda = 'in azienda'
     interno = 'interno'
     scelte = [
         (in_azienda, 'in azienda'),
         (interno, 'interno'),
     ]
-    tirocinio = models.CharField(max_length=500, choices=scelte, null=True)
+    tirocinio = models.CharField(max_length=500, choices=scelte, null=True)"""
+    tirocinio_azienda = models.BooleanField()
+    tirocinio_interno = models.BooleanField()
     nome_azienda = models.CharField(max_length=1000, null=True, blank=True)
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
 

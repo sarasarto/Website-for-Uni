@@ -27,4 +27,17 @@
         {% endfor %}
     {% endif %}
 
+    <script type="text/javascript">
+        var conditional_fields = $("div.nome_azienda");
+        conditional_fileds.hide();
+
+        $(".tirocinio_azienda").change(function() {
+            if($(this).prop('checked') === 'checked') {
+                conditional_fields.show();
+            } else {
+                conditional_fields.hide();
+            }
+        });
+    </script>
+
 {% endblock %}
