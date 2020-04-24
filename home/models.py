@@ -1,4 +1,6 @@
 from django.db import models
+
+from tesi import settings
 from users.models import Docente, Studente
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -176,3 +178,8 @@ class Richiesta_prova_finale_inviata(models.Model):
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
+
+
+class Prova(models.Model):
+    nome = models.CharField(max_length=1000)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)

@@ -1,8 +1,16 @@
 from django.contrib.auth.models import User
-from .models import Richiesta_tesi, Richiesta_prova_finale, Studente, User
+from .models import Richiesta_tesi, Richiesta_prova_finale, Studente, User, Prova
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+
+
+class ProvaForm(forms.ModelForm):
+
+    class Meta:
+        model = Prova
+        fields = "__all__"
+        exclude = ['user']
 
 
 class RequestTesiForm(forms.ModelForm):

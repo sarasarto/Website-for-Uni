@@ -11,10 +11,11 @@ from users.models import Studente, Docente
 from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_tesi_inviata, Richiesta_prova_finale, User, \
     Richiesta_prova_finale_inviata
 from users.models import Studente, Docente
-from .models import TaggableManager, Tesi, Attivita_progettuale, TesiArchiviata, Attivita_progettuale_Archiviata
+from .models import TaggableManager, Tesi, Attivita_progettuale, TesiArchiviata, Attivita_progettuale_Archiviata, Prova
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm
+from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm, \
+    ProvaForm
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
@@ -22,7 +23,7 @@ from django.views.generic.edit import (
     FormView
 )
 from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
-from django.conf import settings
+
 from django.template.loader import get_template
 from django.db.models import Q
 from itertools import chain
@@ -265,6 +266,27 @@ class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 # RICHIESTA TESI
+def prova(request):
+    r = request.user.username
+    if request.method == "POST":
+        form = ProvaForm(request.POST)
+        if form.is_valid():
+            p = Prova()
+            nome = form.cleaned_data.get('nome')
+            p.nome = nome
+
+            p.user = User.objects.get(username=nome)
+
+            p.save()
+            #form.save()
+            messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
+            return redirect('profile')
+    else:
+        form = ProvaForm(initial={'nome':r})
+
+    return render(request, 'home/prova.html', {'form': form})
+
+
 
 def tesi_richiesta(request):
     if request.method == "POST":
