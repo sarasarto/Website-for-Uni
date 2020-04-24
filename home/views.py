@@ -29,7 +29,7 @@ from django.db.models import Q
 from itertools import chain
 
 
-def home(request):
+"""def home(request):
     all_tesi = Tesi.objects.all()
     all_attivita = Attivita_progettuale.objects.all()
     tot = list(chain(all_tesi, all_attivita))
@@ -38,20 +38,29 @@ def home(request):
         'all_attivita': all_attivita,
         'all_projects': tot
     }
-    return render(request, 'home/index.html', context)
+    return render(request, 'home/index.html', context)"""
 
 
-"""class IndexView(ListView):
+class IndexView(ListView):
     template_name = 'home/index.html'
-    context_object_name = 'all_projects'
 
-    # questo serve per sapere cosa si vedrà nella home
-    # sia tesi che attivita progettuale
+    def get_context_data(self, **kwargs):
+        all_tesi = Tesi.objects.all()
+        all_attivita = Attivita_progettuale.objects.all()
+        tot = list(chain(all_tesi, all_attivita))
+        tot = sorted(tot, key=lambda x: x.date_posted, reverse=True)
+        context = {
+            'all_tesi': all_tesi,
+            'all_attivita': all_attivita,
+            'all_projects': tot
+        }
+        return context
+
     def get_queryset(self):
         tesi = Tesi.objects.all()
         a_p = Attivita_progettuale.objects.all()
         tot = list(chain(tesi, a_p))
-        return tot"""
+        return tot
 
 
 class SearchIndexView(ListView):
@@ -93,6 +102,7 @@ def cerca(request):
                                                   ).distinct()
         results = list(chain(risultati, results, att))
 
+    results = sorted(results, key=lambda x: x.date_posted, reverse=True)
     results = list(set(results))  # per togliere duplicati
     context = {
         'query': query,
@@ -103,7 +113,7 @@ def cerca(request):
 
 
 def show_tesi(request):
-    all_tesi = Tesi.objects.all()
+    all_tesi = Tesi.objects.all().order_by('-date_posted')
     context = {
         'all_tesi': all_tesi,
 
@@ -132,7 +142,7 @@ def show_att_archiviate(request):
 
 
 def show_attivita(request):
-    all_att = Attivita_progettuale.objects.all()
+    all_att = Attivita_progettuale.objects.all().order_by('-date_posted')
     context = {
         'all_att': all_att,
 

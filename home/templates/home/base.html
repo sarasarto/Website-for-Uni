@@ -19,12 +19,13 @@
 <body>
 <header class="site-header">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand mr-4" href="{% url 'home:index' %}">Dipartimento di Ingegneria "Enzo Ferrari"</a>
+        <a class="navbar-brand mr-4" href="{% url 'index' %}">Dipartimento di Ingegneria "Enzo Ferrari"</a>
 
         <div class="container-fluid">
 
 
-            <button class="navbar-toggler hidden-md-up pull-right" type="button" data-toggle="collapse" data-target="#topNavBar"
+            <button class="navbar-toggler hidden-md-up pull-right" type="button" data-toggle="collapse"
+                    data-target="#topNavBar"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,11 +33,11 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavBar"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 
                 </ul>
 
-                <a class="nav-item nav-link" href="{%url 'home:index'  %}">Home</a>
+                <a class="nav-item nav-link" href="{%url 'index'  %}">Home</a>
 
 
                 <!--bottoni-->
@@ -108,7 +109,10 @@
 {% endfor %}
 {% endif %}
 
-{% block body %}
+
+{% block body%}
 {% endblock %}
+
+
 </body>
 </html>

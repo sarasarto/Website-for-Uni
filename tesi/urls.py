@@ -42,7 +42,7 @@ from home.views import (
     RequestTesiUpdateView,
     RequestAttivitaUpdateView,
     RequestTesiDeleteView,
-    RequestAttivitaDeleteView,
+    RequestAttivitaDeleteView,IndexView,
 
 )
 
@@ -90,5 +90,5 @@ urlpatterns = [
 
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-    path('', include('home.urls')),
+    path('', IndexView.as_view(), name='index'),
 ]

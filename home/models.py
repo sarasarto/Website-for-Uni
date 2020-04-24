@@ -5,6 +5,7 @@ from users.models import Docente, Studente
 from django.urls import reverse
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from django.utils import timezone
 
 class Tesi(models.Model):
 
@@ -23,6 +24,7 @@ class Tesi(models.Model):
     data_inizio = models.DateTimeField()
     data_fine = models.DateTimeField()
     tag = TaggableManager()
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.argomento)
@@ -63,6 +65,7 @@ class Attivita_progettuale(models.Model):
     data_inizio = models.DateTimeField()
     data_fine = models.DateTimeField()
     tag = TaggableManager()
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.argomento)
