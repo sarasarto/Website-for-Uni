@@ -108,13 +108,13 @@ def prova(request):
     return render(request, 'home/prova.html', {'form': form})
 
 
-
 def cerca(request):
     template = 'home/cerca.html'
-
     query = request.GET.get('q')  # la variabile per le query
     lista_q = query.split(" ")
     results = []
+    risultati_tutti = []
+    attivita_tutte = []
 
     for p in lista_q:
         risultati = Tesi.objects.filter(Q(argomento__icontains=p) |
@@ -123,6 +123,8 @@ def cerca(request):
         att = Attivita_progettuale.objects.filter(Q(argomento__icontains=p) |
                                                   Q(tag__name=p)
                                                   ).distinct()
+        risultati_tutti = list(chain(risultati_tutti, risultati))
+        attivita_tutte = list(chain(attivita_tutte, att))
         results = list(chain(risultati, results, att))
 
     if request.method == "POST":
@@ -130,17 +132,20 @@ def cerca(request):
         if form.is_valid():
             att_form = form.cleaned_data.get('attivita')
             tesi_form = form.cleaned_data.get('tesi')
-            if att_form == True:
+
+            if att_form:
+                results = attivita_tutte
                 context = {
                     'query': query,
-                    'results': sorted(att, key=lambda x: x.date_posted, reverse=True),
+                    'results': results,
                     'form': form,
                 }
                 return render(request, template, context)
-            if tesi_form == True:
+            if tesi_form:
+                results = risultati_tutti
                 context = {
                     'query': query,
-                    'results': sorted(risultati, key=lambda x: x.date_posted, reverse=True),
+                    'results': results,
                     'form': form,
                 }
                 return render(request, template, context)
@@ -150,10 +155,16 @@ def cerca(request):
 
     results = sorted(results, key=lambda x: x.date_posted, reverse=True)
     results = list(set(results))  # per togliere duplicati
+    attivita_tutte = sorted(attivita_tutte, key=lambda x: x.date_posted, reverse=True)
+    attivita_tutte = list(set(attivita_tutte))  # per togliere duplicati
+    risultati_tutti = sorted(risultati_tutti, key=lambda x: x.date_posted, reverse=True)
+    risultati_tutti = list(set(risultati_tutti))  # per togliere duplicati
     context = {
         'query': query,
         'results': results,
         'form': form,
+        'att': attivita_tutte,
+        'risultati': risultati_tutti
     }
     return render(request, template, context)
 
