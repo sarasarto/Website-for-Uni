@@ -5,7 +5,9 @@
 <div class="row">
 
     <div class="col">
+        {% if results %}
         <ul class="cards">
+
             {% for res in results %}
             <li>
                 <h3>Argomento : {{ res.argomento }}</h3>
@@ -20,7 +22,7 @@
                 <a href="{% url 'tesi-detail' res.id %}" class="btn btn-info btn-xs" role="button"> View
                     Details</a>
 
-                 <!-- se è una attivita -->
+                <!-- se è una attivita -->
                 {% else %}
                 <h3>Tutor : {{ res.tutor }}</h3>
 
@@ -31,26 +33,31 @@
             </li>
             {% endfor %}
         </ul>
+        {% else %}
+        <h2>Non ci sono risultati</h2>
+        {% endif %}
+
     </div>
     <div class="col">
         <div class="content-section">
-            <h3>Filtra per</h3>
+            <form method="POST">
+                <h3>Filtra per</h3>
+                {% csrf_token %}
 
-            <ul class="list-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="Apple" id="apple">
-                    <label class="form-check-label" for="apple">Solo Attivita progettuali</label>
+                {{ form.as_p }}
+                <!--</fieldset>-->
+                <div class="form-group">
+                    <button class="btn btn-black" type="submit">Applica Filtri</button>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="Mango" id="mango">
-                    <label class="form-check-label" for="mango">Solo Tesi</label>
-                </div>
-            </ul>
-            </p>
+
+
+            </form>
+
         </div>
+
+
     </div>
+
 </div>
-
-
-{% endblock %}
+    {% endblock %}
 

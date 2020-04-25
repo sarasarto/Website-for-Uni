@@ -47,9 +47,13 @@ from home.views import (
 )
 
 urlpatterns = [
+
+    path('prova/', views.prova, name='prova'),
     path('admin/', admin.site.urls),
     path('register/', user_views.register, name='register'),
     path('cerca/', views.cerca, name='cerca'),
+
+
     path('profile/', user_views.profile, name='profile'),
     path('tesi/', views.show_tesi, name='tesi'),
     path('attivita/', views.show_attivita, name='attivita'),
@@ -72,7 +76,7 @@ urlpatterns = [
     path('<int:pk>/update_att', AttivitaUpdateView.as_view(), name='attivita-update'),
     path('<int:pk>/delete_att', AttivitaDeleteView.as_view(), name='attivita-delete'),
 
-    path('prova/', views.prova, name='prova'),
+
     #richiesta tesi e prova finale
     path('profile/richiesta_tesi', tesi_richiesta, name='tesi-richiesta'),
     path('<int:pk>/detail_richiesta_tesi/', RTDetailView.as_view(), name='richiesta-tesi-detail'),

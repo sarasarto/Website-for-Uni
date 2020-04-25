@@ -1,8 +1,14 @@
 from django.contrib.auth.models import User
-from .models import Richiesta_tesi, Richiesta_prova_finale, Studente, User, Prova
+from .models import Richiesta_tesi, Scelte,Richiesta_prova_finale, Studente, User, Prova
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+
+
+class ScelteForm(forms.ModelForm):
+    class Meta:
+        model = Scelte
+        fields = ['attivita', 'tesi']
 
 
 class ProvaForm(forms.ModelForm):
@@ -22,8 +28,8 @@ class RequestTesiForm(forms.ModelForm):
     class Meta:
         model = Richiesta_tesi
         fields = "__all__"
-        # exclude = ['nome_azienda']
-        # fields = ['autore']
+        #exclude = ['nome_azienda']
+        #fields = ['autore', 'relatore', 'correlatore' , 'argomento' , 'tirocinio_azienda' , 'tirocinio_interno', 'data_laurea']
 
 
 class RequestProvaFinaleForm(forms.ModelForm):

@@ -7,8 +7,8 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.utils import timezone
 
-class Tesi(models.Model):
 
+class Tesi(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     relatore = models.ForeignKey(Docente, on_delete=models.CASCADE)
     correlatore = models.CharField(max_length=100)
@@ -120,6 +120,7 @@ class Richiesta_tesi(models.Model):
     def get_absolute_url(self):
         return reverse('richiesta-tesi-detail', kwargs={'pk': self.pk})
 
+
 class Richiesta_tesi_inviata(models.Model):
     autore = models.ForeignKey(Studente, on_delete=models.CASCADE, null=True)
     relatore = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
@@ -186,3 +187,8 @@ class Richiesta_prova_finale_inviata(models.Model):
 class Prova(models.Model):
     nome = models.CharField(max_length=1000)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+
+
+class Scelte(models.Model):
+    attivita = models.BooleanField(default=False)
+    tesi = models.BooleanField(default=False)

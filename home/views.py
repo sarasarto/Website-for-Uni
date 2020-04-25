@@ -7,6 +7,8 @@ from django.utils.html import strip_tags
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy
+
+from tesi import settings
 from users.models import Studente, Docente
 from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_tesi_inviata, Richiesta_prova_finale, User, \
     Richiesta_prova_finale_inviata
@@ -15,7 +17,7 @@ from .models import TaggableManager, Tesi, Attivita_progettuale, TesiArchiviata,
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm, \
-    ProvaForm
+    ProvaForm, ScelteForm
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
@@ -27,7 +29,6 @@ from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.template.loader import get_template
 from django.db.models import Q
 from itertools import chain
-
 
 """def home(request):
     all_tesi = Tesi.objects.all()
@@ -63,7 +64,7 @@ class IndexView(ListView):
         return tot
 
 
-class SearchIndexView(ListView):
+"""class SearchIndexView(ListView):
     template_name = 'home/cerca.html'
     all_tesi = Tesi.objects.all()
     all_att = Attivita_progettuale.objects.all()
@@ -83,7 +84,29 @@ class SearchIndexView(ListView):
             for post in tesi:
                 queryset.append(post)
 
-        return list(set(queryset))
+        return list(set(queryset))"""
+
+
+def prova(request):
+    r = request.user.username
+    if request.method == "POST":
+        form = ProvaForm(request.POST)
+        if form.is_valid():
+            p = Prova()
+            nome = form.cleaned_data.get('nome')
+            p.nome = nome
+
+            p.user = User.objects.get(username=nome)
+
+            p.save()
+            # form.save()
+            messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
+            return redirect('profile')
+    else:
+        form = ProvaForm(initial={'nome': r})
+
+    return render(request, 'home/prova.html', {'form': form})
+
 
 
 def cerca(request):
@@ -102,12 +125,35 @@ def cerca(request):
                                                   ).distinct()
         results = list(chain(risultati, results, att))
 
+    if request.method == "POST":
+        form = ScelteForm(request.POST)
+        if form.is_valid():
+            att_form = form.cleaned_data.get('attivita')
+            tesi_form = form.cleaned_data.get('tesi')
+            if att_form == True:
+                context = {
+                    'query': query,
+                    'results': sorted(att, key=lambda x: x.date_posted, reverse=True),
+                    'form': form,
+                }
+                return render(request, template, context)
+            if tesi_form == True:
+                context = {
+                    'query': query,
+                    'results': sorted(risultati, key=lambda x: x.date_posted, reverse=True),
+                    'form': form,
+                }
+                return render(request, template, context)
+
+    else:
+        form = ScelteForm()
+
     results = sorted(results, key=lambda x: x.date_posted, reverse=True)
     results = list(set(results))  # per togliere duplicati
     context = {
         'query': query,
         'results': results,
-
+        'form': form,
     }
     return render(request, template, context)
 
@@ -276,26 +322,6 @@ class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 # RICHIESTA TESI
-def prova(request):
-    r = request.user.username
-    if request.method == "POST":
-        form = ProvaForm(request.POST)
-        if form.is_valid():
-            p = Prova()
-            nome = form.cleaned_data.get('nome')
-            p.nome = nome
-
-            p.user = User.objects.get(username=nome)
-
-            p.save()
-            #form.save()
-            messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
-            return redirect('profile')
-    else:
-        form = ProvaForm(initial={'nome':r})
-
-    return render(request, 'home/prova.html', {'form': form})
-
 
 
 def tesi_richiesta(request):
