@@ -130,10 +130,13 @@ def cerca(request):
     if request.method == "POST":
         form = ScelteForm(request.POST)
         if form.is_valid():
-            att_form = form.cleaned_data.get('attivita')
-            tesi_form = form.cleaned_data.get('tesi')
+
+            att_form = form.cleaned_data.get('solo_attivita')
+            tesi_form = form.cleaned_data.get('solo_tesi')
 
             if att_form:
+                attivita_tutte = sorted(attivita_tutte, key=lambda x: x.date_posted, reverse=True)
+                attivita_tutte = list(set(attivita_tutte))  # per togliere duplicati
                 results = attivita_tutte
                 context = {
                     'query': query,
@@ -142,7 +145,10 @@ def cerca(request):
                 }
                 return render(request, template, context)
             if tesi_form:
+                risultati_tutti = sorted(risultati_tutti, key=lambda x: x.date_posted, reverse=True)
+                risultati_tutti = list(set(risultati_tutti))  # per togliere duplicati
                 results = risultati_tutti
+
                 context = {
                     'query': query,
                     'results': results,
@@ -155,10 +161,8 @@ def cerca(request):
 
     results = sorted(results, key=lambda x: x.date_posted, reverse=True)
     results = list(set(results))  # per togliere duplicati
-    attivita_tutte = sorted(attivita_tutte, key=lambda x: x.date_posted, reverse=True)
-    attivita_tutte = list(set(attivita_tutte))  # per togliere duplicati
-    risultati_tutti = sorted(risultati_tutti, key=lambda x: x.date_posted, reverse=True)
-    risultati_tutti = list(set(risultati_tutti))  # per togliere duplicati
+
+
     context = {
         'query': query,
         'results': results,

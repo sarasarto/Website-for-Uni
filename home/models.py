@@ -188,7 +188,3 @@ class Prova(models.Model):
     nome = models.CharField(max_length=1000)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
-
-class Scelte(models.Model):
-    attivita = models.BooleanField(default=False)
-    tesi = models.BooleanField(default=False)

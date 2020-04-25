@@ -1,14 +1,13 @@
 from django.contrib.auth.models import User
-from .models import Richiesta_tesi, Scelte,Richiesta_prova_finale, Studente, User, Prova
+from .models import Richiesta_tesi, Richiesta_prova_finale, Studente, User, Prova
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 
-class ScelteForm(forms.ModelForm):
-    class Meta:
-        model = Scelte
-        fields = ['attivita', 'tesi']
+class ScelteForm(forms.Form):
+    solo_attivita = forms.BooleanField(required=False)
+    solo_tesi = forms.BooleanField(required=False)
 
 
 class ProvaForm(forms.ModelForm):
