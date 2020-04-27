@@ -360,10 +360,21 @@ def tesi_richiesta(request):
     return render(request, 'home/tesi_request.html', {'form': form})
 
 
-class RichiestaTesiInviateListView(ListView):
-    model = Richiesta_tesi_inviata
-    template_name = 'home/richiesta_tesi_inviata.html'
-    context_object_name = 'all_richiesta_tesi'
+def RichiestaTesiInviate(request):
+
+    nome = request.user.username.split('.')
+    all_studenti = Studente.objects.all()
+    all_richiesta_tesi = {}
+    nome = request.user.username.split('.')
+    for s in all_studenti:
+        if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
+            all_richiesta_tesi = Richiesta_tesi_inviata.objects.filter(autore=s)
+
+    context = {
+        'all_richiesta_tesi': all_richiesta_tesi,
+    }
+    return render(request, 'home/richiesta_tesi_inviata.html', context)
+
 
 
 class RequestTesiDetailView(FormView, DetailView):
@@ -486,7 +497,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         context_object_name = {
             'name': self.object.autore,
             'argomento': self.object.argomento,
-            'mail': autore.user.email,
+            'mail':  self.object.autore.mail,
             'data': self.object.data_laurea,
         }
         if request.GET.get('Accetta') == 'Accetta':
@@ -637,10 +648,20 @@ def provafin_richiesta(request):
     return render(request, 'home/prova_finale_request.html', {'form': form})
 
 
-class RichiestaAttInviateListView(ListView):
-    model = Richiesta_prova_finale_inviata
-    template_name = 'home/richiesta_att_inviata.html'
-    context_object_name = 'all_richiesta_att'
+def RichiestaAttInviate(request):
+
+    nome = request.user.username.split('.')
+    all_studenti = Studente.objects.all()
+    all_richiesta_tesi = {}
+    nome = request.user.username.split('.')
+    for s in all_studenti:
+        if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
+            all_richiesta_att = Richiesta_prova_finale_inviata.objects.filter(autore=s)
+
+    context = {
+        'all_richiesta_att': all_richiesta_att,
+    }
+    return render(request, 'home/richiesta_att_inviata.html', context)
 
 
 class RequestAttivitaDetailView(FormView, DetailView):
@@ -754,7 +775,7 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         context_object_name = {
             'name': self.object.autore,
             'argomento': self.object.argomento,
-            'mail': autore.user,
+            'mail': self.object.autore.mail,
             'data': self.object.data_laurea,
             'tipo': self.object.tipologia,
             'titolo': self.object.titolo_elaborato,
