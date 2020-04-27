@@ -10,10 +10,10 @@ from django.urls import reverse_lazy
 
 from tesi import settings
 from users.models import Studente, Docente
-from .models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_tesi_inviata, Richiesta_prova_finale, User, \
+from .models import TesiCreata, Attivita_progettuale_creata, Richiesta_tesi_bozza, Richiesta_tesi_inviata, Richiesta_prova_finale_bozza, User, \
     Richiesta_prova_finale_inviata
 from users.models import Studente, Docente
-from .models import TaggableManager, Tesi, Attivita_progettuale, TesiArchiviata, Attivita_progettuale_Archiviata, Prova
+from .models import TaggableManager, TesiArchiviata, Attivita_progettuale_Archiviata, Prova
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm, \
@@ -46,8 +46,8 @@ class IndexView(ListView):
     template_name = 'home/index.html'
 
     def get_context_data(self, **kwargs):
-        all_tesi = Tesi.objects.all()
-        all_attivita = Attivita_progettuale.objects.all()
+        all_tesi = TesiCreata.objects.all()
+        all_attivita = Attivita_progettuale_creata.objects.all()
         tot = list(chain(all_tesi, all_attivita))
         tot = sorted(tot, key=lambda x: x.date_posted, reverse=True)
         context = {
@@ -58,8 +58,8 @@ class IndexView(ListView):
         return context
 
     def get_queryset(self):
-        tesi = Tesi.objects.all()
-        a_p = Attivita_progettuale.objects.all()
+        tesi = TesiCreata.objects.all()
+        a_p = Attivita_progettuale_creata.objects.all()
         tot = list(chain(tesi, a_p))
         return tot
 
@@ -117,10 +117,10 @@ def cerca(request):
     attivita_tutte = []
 
     for p in lista_q:
-        risultati = Tesi.objects.filter(Q(argomento__icontains=p) |
+        risultati = TesiCreata.objects.filter(Q(argomento__icontains=p) |
                                         Q(tag__name=p)
                                         ).distinct()
-        att = Attivita_progettuale.objects.filter(Q(argomento__icontains=p) |
+        att = Attivita_progettuale_creata.objects.filter(Q(argomento__icontains=p) |
                                                   Q(tag__name=p)
                                                   ).distinct()
         risultati_tutti = list(chain(risultati_tutti, risultati))
@@ -174,7 +174,7 @@ def cerca(request):
 
 
 def show_tesi(request):
-    all_tesi = Tesi.objects.all().order_by('-date_posted')
+    all_tesi = TesiCreata.objects.all().order_by('-date_posted')
     context = {
         'all_tesi': all_tesi,
 
@@ -203,7 +203,7 @@ def show_att_archiviate(request):
 
 
 def show_attivita(request):
-    all_att = Attivita_progettuale.objects.all().order_by('-date_posted')
+    all_att = Attivita_progettuale_creata.objects.all().order_by('-date_posted')
     context = {
         'all_att': all_att,
 
@@ -213,11 +213,11 @@ def show_attivita(request):
 
 # TESI
 class TesiDetailView(LoginRequiredMixin, DetailView):
-    model = Tesi
+    model = TesiCreata
 
 
 class TesiCreateView(LoginRequiredMixin, CreateView):
-    model = Tesi
+    model = TesiCreata
     fields = ['relatore', 'argomento', 'tirocinio', 'nome_azienda', 'data_inizio', 'data_fine', 'tag']
 
     # questo per dire che chi crea
@@ -228,7 +228,7 @@ class TesiCreateView(LoginRequiredMixin, CreateView):
 
 
 class TesiUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Tesi
+    model = TesiCreata
     fields = ['relatore', 'argomento', 'tirocinio', 'nome_azienda', 'data_inizio', 'data_fine', 'tag']
 
     # questo per dire che chi update
@@ -247,7 +247,7 @@ class TesiUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Tesi
+    model = TesiCreata
     success_url = '/profile'
 
     def test_func(self):
@@ -262,28 +262,29 @@ class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
         # modo stupido di farlo - ma funziona
         ta = TesiArchiviata()
-        ta.author = self.object.author
-        ta.relatore = self.object.relatore
-        ta.argomento = self.object.argomento
-        ta.correlatore = self.object.correlatore
-        ta.data_fine = self.object.data_fine
-        ta.data_inizio = self.object.data_inizio
-        ta.tirocinio = self.object.tirocinio
-        ta.nome_azienda = self.object.nome_azienda
-        ta.tag = self.object.tag
-        ta.save()
-        self.object.delete()
+        from_tesicreata_to_tesiarchiviata(self.object, ta)
+        # ta.author = self.object.author
+        # ta.relatore = self.object.relatore
+        # ta.argomento = self.object.argomento
+        # ta.correlatore = self.object.correlatore
+        # ta.data_fine = self.object.data_fine
+        # ta.data_inizio = self.object.data_inizio
+        # ta.tirocinio = self.object.tirocinio
+        # ta.nome_azienda = self.object.nome_azienda
+        # ta.tag = self.object.tag
+        # ta.save()
+        # self.object.delete()
         return redirect('profile')
 
 
 # ATTIVITA
 
 class AttivitaDetailView(LoginRequiredMixin, DetailView):
-    model = Attivita_progettuale
+    model = Attivita_progettuale_creata
 
 
 class AttivitaCreateView(LoginRequiredMixin, CreateView):
-    model = Attivita_progettuale
+    model = Attivita_progettuale_creata
     fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
 
     def form_valid(self, form):
@@ -292,7 +293,7 @@ class AttivitaCreateView(LoginRequiredMixin, CreateView):
 
 
 class AttivitaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Attivita_progettuale
+    model = Attivita_progettuale_creata
     fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
 
     def form_valid(self, form):
@@ -309,7 +310,7 @@ class AttivitaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Attivita_progettuale
+    model = Attivita_progettuale_creata
     success_url = '/profile'
 
     def test_func(self):
@@ -324,15 +325,16 @@ class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
         # modo stupido di farlo - ma funziona
         ta = Attivita_progettuale_Archiviata()
-        ta.author = self.object.author
-        ta.tutor = self.object.tutor
-        ta.argomento = self.object.argomento
+        # ta.author = self.object.author
+        # ta.tutor = self.object.tutor
+        # ta.argomento = self.object.argomento
 
-        ta.data_fine = self.object.data_fine
-        ta.data_inizio = self.object.data_inizio
-        ta.tag = self.object.tag
-        ta.save()
-        self.object.delete()
+        # ta.data_fine = self.object.data_fine
+        # ta.data_inizio = self.object.data_inizio
+        # ta.tag = self.object.tag
+        # ta.save()
+        # self.object.delete()
+        from_attivitacreata_to_attivitaarchiviata(self.object, ta)
         return redirect('profile')
 
 
@@ -365,22 +367,23 @@ class RichiestaTesiInviateListView(ListView):
 
 
 class RequestTesiDetailView(FormView, DetailView):
-    model = Tesi
+    model = TesiCreata
     template_name = "home/precompiled_tesi_request.html"
     form_class = PrecompiledTesiRequestForm
     success_url = "/"
 
     def form_valid(self, form):
         tesi = self.get_object()
-        req = Richiesta_tesi()
-        req.relatore = tesi.relatore
-        req.correlatore = tesi.correlatore
-        req.argomento = tesi.argomento
-        req.tirocinio = tesi.tirocinio
-        req.nome_azienda = tesi.nome_azienda
-        req.data_inizio = tesi.data_inizio
-        req.data_fine = tesi.data_fine
-        req.tag = tesi.tag
+        req = Richiesta_tesi_bozza()
+        # req.relatore = tesi.relatore
+        # req.correlatore = tesi.correlatore
+        # req.argomento = tesi.argomento
+        # req.tirocinio = tesi.tirocinio
+        # req.nome_azienda = tesi.nome_azienda
+        # req.data_inizio = tesi.data_inizio
+        # req.data_fine = tesi.data_fine
+        # req.tag = tesi.tag
+        from_tesicreata_to_richiestabozza(tesi, req)
         req.data_laurea = form.cleaned_data.get('data_laurea')
 
         req.autore = form.cleaned_data.get('autore')
@@ -393,7 +396,7 @@ class RequestTesiDetailView(FormView, DetailView):
 
 
 class RequestTesiUpdateView(LoginRequiredMixin, UpdateView):
-    model = Richiesta_tesi
+    model = Richiesta_tesi_bozza
     form_class = RequestTesiForm
     template_name = "home/request_tesi_update.html"
     # fields = "__all__"
@@ -404,12 +407,12 @@ class RequestTesiUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class RequestTesiDeleteView(LoginRequiredMixin, DeleteView):
-    model = Richiesta_tesi
+    model = Richiesta_tesi_bozza
     success_url = '/profile'
 
 
 class RTDetailView(DetailView):
-    model = Richiesta_tesi
+    model = Richiesta_tesi_bozza
 
     def get(self, request, pk):
         rel = self.get_object().relatore
@@ -422,15 +425,16 @@ class RTDetailView(DetailView):
 
         rti = Richiesta_tesi_inviata()
         r = self.get_object()
-        rti.relatore = r.relatore
-        rti.correlatore = r.correlatore
-        rti.argomento = r.argomento
-        rti.tirocinio = r.tirocinio
-        rti.nome_azienda = r.nome_azienda
+        from_richiestatesibozza_to_richiestatesiinviata(r, rti)
+        # rti.relatore = r.relatore
+        # rti.correlatore = r.correlatore
+        # rti.argomento = r.argomento
+        # rti.tirocinio = r.tirocinio
+        # rti.nome_azienda = r.nome_azienda
 
-        rti.autore = r.autore
-        rti.data_laurea = r.data_laurea
-        rti.save()
+        # rti.autore = r.autore
+        # rti.data_laurea = r.data_laurea
+        # rti.save()
 
         if request.GET.get('Send') == 'Send':
             subject = 'Richiesta Tesi'
@@ -551,16 +555,17 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
             else:
                 # se c'è errore allora
                 # rimette la tesi in richiesta tesi
-                rt = Richiesta_tesi()
+                rt = Richiesta_tesi_bozza()
                 r = self.get_object()
-                rt.relatore = r.relatore
-                rt.correlatore = r.correlatore
-                rt.argomento = r.argomento
-                rt.tirocinio = r.tirocinio
-                rt.nome_azienda = r.nome_azienda
-                rt.data_laurea = r.data_laurea
-                rt.autore = r.autore
-                rt.save()
+                from_richiestatesiinviata_to_richiestatesibozza(r, rt)
+                # rt.relatore = r.relatore
+                # rt.correlatore = r.correlatore
+                # rt.argomento = r.argomento
+                # rt.tirocinio = r.tirocinio
+                # rt.nome_azienda = r.nome_azienda
+                # rt.data_laurea = r.data_laurea
+                # rt.autore = r.autore
+                # rt.save()
 
                 if request.GET.get('Segnala Errori') == 'Segnala Errori':
                     rel = self.get_object().relatore
@@ -639,14 +644,14 @@ class RichiestaAttInviateListView(ListView):
 
 
 class RequestAttivitaDetailView(FormView, DetailView):
-    model = Attivita_progettuale
+    model = Attivita_progettuale_creata
     template_name = "home/precompiled_attivita_request.html"
     form_class = PrecompiledAttivitaRequestForm
     success_url = "/"
 
     def form_valid(self, form):
         att = self.get_object()
-        req = Richiesta_prova_finale()
+        req = Richiesta_prova_finale_bozza()
         req.tutor = att.tutor
         req.argomento = att.argomento
         req.titolo_elaborato = form.cleaned_data.get('titolo_elaborato')
@@ -663,18 +668,18 @@ class RequestAttivitaDetailView(FormView, DetailView):
 
 
 class RequestAttivitaUpdateView(LoginRequiredMixin, UpdateView):
-    model = Richiesta_prova_finale
+    model = Richiesta_prova_finale_bozza
     form_class = RequestProvaFinaleForm
     template_name = "home/request_attivita_update.html"
 
 
 class RequestAttivitaDeleteView(LoginRequiredMixin, DeleteView):
-    model = Richiesta_prova_finale
+    model = Richiesta_prova_finale_bozza
     success_url = '/profile'
 
 
 class RAPDetailView(DetailView):
-    model = Richiesta_prova_finale
+    model = Richiesta_prova_finale_bozza
 
     def get(self, request, pk):
         rel = self.get_object().tutor
@@ -687,13 +692,14 @@ class RAPDetailView(DetailView):
 
         rti = Richiesta_prova_finale_inviata()
         r = self.get_object()
-        rti.autore = r.autore
-        rti.tutor = r.tutor
-        rti.argomento = r.argomento
-        rti.titolo_elaborato = r.titolo_elaborato
-        rti.tipologia = r.tipologia
-        rti.data_laurea = r.data_laurea
-        rti.save()
+        from_richiestaattivitabozza_to_richiestaattivitainviata(r, rti)
+        # rti.autore = r.autore
+        # rti.tutor = r.tutor
+        # rti.argomento = r.argomento
+        # rti.titolo_elaborato = r.titolo_elaborato
+        # rti.tipologia = r.tipologia
+        # rti.data_laurea = r.data_laurea
+        # rti.save()
 
         if request.GET.get('Send') == 'Send':
             subject = 'Richiesta Prova Finale'
@@ -725,6 +731,16 @@ class RAPDetailView(DetailView):
         else:
             rti.delete()
             return super().get(request, pk)
+
+
+def from_richiestaattivitabozza_to_richiestaattivitainviata(rab, rai):
+    rai.autore = rab.autore
+    rai.tutor = rab.tutor
+    rai.argomento = rab.argomento
+    rai.titolo_elaborato = rab.titolo_elaborato
+    rai.tipologia = rab.tipologia
+    rai.data_laurea = rab.data_laurea
+    rai.save()
 
 
 class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
@@ -776,9 +792,6 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         else:
             if request.GET.get('Rifiuta') == 'Rifiuta':
                 rel = self.get_object().tutor
-                # doc = rel.split()
-                # doc_name = doc[0]
-                # doc_mail = doc[1]
                 doc_name = rel.nome + ' ' + rel.cognome
                 doc_mail = rel.mail
                 author = self.get_object().autore
@@ -808,16 +821,17 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
             else:
                 # se c'è errore allora
                 # rimette la tesi in richiesta tesi
-                rt = Richiesta_prova_finale()
+                rt = Richiesta_prova_finale_bozza()
                 r = self.get_object()
-                rt.autore = r.autore
-                rt.tutor = r.tutor
-                rt.argomento = r.argomento
-                rt.titolo_elaborato = r.titolo_elaborato
-                rt.tipologia = r.tipologia
-                rt.data_laurea = r.data_laurea
+                from_richiestaattivitainviata_to_richiestaattivitabozza(r, rt)
+                # rt.autore = r.autore
+                # rt.tutor = r.tutor
+                # rt.argomento = r.argomento
+                # rt.titolo_elaborato = r.titolo_elaborato
+                # rt.tipologia = r.tipologia
+                # rt.data_laurea = r.data_laurea
 
-                rt.save()
+                # rt.save()
 
                 if request.GET.get('Segnala Errori') == 'Segnala Errori':
                     rel = self.get_object().tutor
@@ -865,3 +879,75 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         if self.request.user.username == nome[0]:
             return True
         return False
+
+
+
+#METODI PER EVITARE TANTI ASSEGNAMENTI
+
+def from_richiestaattivitainviata_to_richiestaattivitabozza(rai, rab):
+    rab.autore = rai.autore
+    rab.tutor = rai.tutor
+    rab.argomento = rai.argomento
+    rab.titolo_elaborato = rai.titolo_elaborato
+    rab.tipologia = rai.tipologia
+    rab.data_laurea = rai.data_laurea
+    rab.save()
+
+
+def from_richiestatesiinviata_to_richiestatesibozza(ri, rb):
+    rb.relatore = ri.relatore
+    rb.correlatore = ri.correlatore
+    rb.argomento = ri.argomento
+    rb.tirocinio = ri.tirocinio
+    rb.nome_azienda = ri.nome_azienda
+    rb.data_laurea = ri.data_laurea
+    rb.autore = ri.autore
+    rb.save()
+
+
+def from_richiestatesibozza_to_richiestatesiinviata(rb, ri):
+    ri.relatore = rb.relatore
+    ri.correlatore = rb.correlatore
+    ri.argomento = rb.argomento
+    ri.tirocinio = rb.tirocinio
+    ri.nome_azienda = rb.nome_azienda
+
+    ri.autore = rb.autore
+    ri.data_laurea = rb.data_laurea
+    ri.save()
+
+
+def from_tesicreata_to_richiestabozza(tc, rb):
+    rb.relatore = tc.relatore
+    rb.correlatore = tc.correlatore
+    rb.argomento = tc.argomento
+    rb.tirocinio = tc.tirocinio
+    rb.nome_azienda = tc.nome_azienda
+    rb.data_inizio = tc.data_inizio
+    rb.data_fine = tc.data_fine
+    rb.tag = tc.tag
+
+
+def from_attivitacreata_to_attivitaarchiviata(ac, aa):
+    aa.author = ac.author
+    aa.tutor = ac.tutor
+    aa.argomento = ac.argomento
+    aa.data_fine = ac.data_fine
+    aa.data_inizio = ac.data_inizio
+    aa.tag = ac.tag
+    aa.save()
+    ac.delete()
+
+
+def from_tesicreata_to_tesiarchiviata(tc, ta):
+    ta.author = tc.author
+    ta.relatore = tc.relatore
+    ta.argomento = tc.argomento
+    ta.correlatore = tc.correlatore
+    ta.data_fine = tc.data_fine
+    ta.data_inizio = tc.data_inizio
+    ta.tirocinio = tc.tirocinio
+    ta.nome_azienda = tc.nome_azienda
+    ta.tag = tc.tag
+    ta.save()
+    tc.delete()

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Richiesta_tesi, Richiesta_prova_finale, Studente, User, Prova
+from .models import Richiesta_tesi_bozza, Richiesta_prova_finale_bozza, Studente, User, Prova
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -25,7 +25,7 @@ class RequestTesiForm(forms.ModelForm):
     #     self.fields['nome_azienda'].widget = forms.HiddenInput()
 
     class Meta:
-        model = Richiesta_tesi
+        model = Richiesta_tesi_bozza
         fields = "__all__"
         #exclude = ['nome_azienda']
         #fields = ['autore', 'relatore', 'correlatore' , 'argomento' , 'tirocinio_azienda' , 'tirocinio_interno', 'data_laurea']
@@ -33,7 +33,7 @@ class RequestTesiForm(forms.ModelForm):
 
 class RequestProvaFinaleForm(forms.ModelForm):
     class Meta:
-        model = Richiesta_prova_finale
+        model = Richiesta_prova_finale_bozza
         fields = "__all__"
 
 
@@ -45,11 +45,11 @@ class PrecompiledTesiRequestForm(forms.ModelForm):
 
     # autore = forms.CharField()
     class Meta:
-        model = Richiesta_tesi
+        model = Richiesta_tesi_bozza
         fields = ['autore', 'data_laurea']
 
 
 class PrecompiledAttivitaRequestForm(forms.ModelForm):
     class Meta:
-        model = Richiesta_prova_finale
+        model = Richiesta_prova_finale_bozza
         fields = ['autore', 'titolo_elaborato', 'tipologia', 'data_laurea']

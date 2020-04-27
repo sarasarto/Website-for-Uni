@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView
 from users.models import Studente, Docente, Profile
 from .forms import UserRegisterForm
 from django.contrib.auth.models import User
-from home.models import Tesi, Attivita_progettuale, Richiesta_tesi, Richiesta_prova_finale
+from home.models import TesiCreata, Attivita_progettuale_creata, Richiesta_tesi_bozza, Richiesta_prova_finale_bozza
 from itertools import chain
 from django.core.mail import send_mail
 from django.conf import settings
@@ -55,21 +55,22 @@ def profile(request):
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
-            all_richiesta_tesi = Richiesta_tesi.objects.filter(autore=s)
-            all_richiesta_pfinale = Richiesta_prova_finale.objects.filter(autore=s)
+            all_richiesta_tesi = Richiesta_tesi_bozza.objects.filter(autore=s)
+            all_richiesta_pfinale = Richiesta_prova_finale_bozza.objects.filter(autore=s)
     context_richieste = {
         'all_richiesta_tesi': all_richiesta_tesi,
         'all_richiesta_pfinale': all_richiesta_pfinale,
+        'docente': False
     }
 
     for doc in all_docenti:
-        all_tesi = Tesi.objects.filter(author=request.user)
-        all_attivita = Attivita_progettuale.objects.filter(author=request.user)
+        all_tesi = TesiCreata.objects.filter(author=request.user)
+        all_attivita = Attivita_progettuale_creata.objects.filter(author=request.user)
         tot = list(chain(all_tesi, all_attivita))
         context = {
             'all_tesi': all_tesi,
             'all_attivita': all_attivita,
-            # 'tot': tot,
+            'docente': True
         }
         if doc.mail == request.user.email:
             return render(request, 'users/profile_doc.html', context)
