@@ -1,11 +1,12 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+<h1>Le tue prove finali inviate:</h1>
     {% if all_richiesta_att %}
     {% for richieste in all_richiesta_att %}
         <div class="content-section">
             <div class="col-sm-15">
-                <h2 class="account-heading"> Argomento: {{ richieste.argomento }}</h2>
+                <p class="account-heading"> Argomento: {{ richieste.argomento }}</p>
                 <p class="text-secondary"> proposto da: {{ richieste.tutor }}</p>
                 <p class="text-secondary"> data laurea: {{ richieste.data_laurea }}</p>
                  <p class="text-secondary"> tipologia : {{ richieste.tipologia }}</p>
@@ -16,7 +17,7 @@
     {% endfor %}
 
     {% else %}
-    <h1>Non ci sono ancora attività inviate</h1>
+    <h3>Non ci sono ancora prove finali inviate</h3>
     {% endif %}
 
     <a href="{% url 'profile' %}">Go back</a>

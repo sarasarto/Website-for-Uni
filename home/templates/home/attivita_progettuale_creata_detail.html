@@ -6,8 +6,14 @@
     <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
     <p class="text-secondary"> proposto da: {{ object.tutor }}</p>
 
+
+    {% if is_docente %}
+    {% else %}
+
+     <a href="{% url 'attivita-request-precompiled' object.id %}">Richiedi</a>
+    {% endif %}
     <a href="/">Go back</a>
-    <a href="{% url 'attivita-request-precompiled' object.id %}">Richiedi</a>
+
 
 </div>
 {% endblock %}

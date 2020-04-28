@@ -214,6 +214,21 @@ def show_attivita(request):
 # TESI
 class TesiDetailView(LoginRequiredMixin, DetailView):
     model = TesiCreata
+    template_name = 'home/tesicreata_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TesiDetailView, self).get_context_data(**kwargs)
+        is_docente = False
+        all_docenti = Docente.objects.all()
+        #now = self.request.user
+        nome = self.request.user.username.split('.')
+        for doc in all_docenti:
+            d_nome = doc.nome
+            if doc.nome == nome[0] and doc.cognome == nome[1] and doc.mail == self.request.user.email:
+                is_docente = True
+
+        context['is_docente'] = is_docente
+        return context
 
 
 class TesiCreateView(LoginRequiredMixin, CreateView):
@@ -281,6 +296,20 @@ class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class AttivitaDetailView(LoginRequiredMixin, DetailView):
     model = Attivita_progettuale_creata
+
+    def get_context_data(self, **kwargs):
+        context = super(AttivitaDetailView, self).get_context_data(**kwargs)
+        is_docente = False
+        all_docenti = Docente.objects.all()
+        #now = self.request.user
+        nome = self.request.user.username.split('.')
+        for doc in all_docenti:
+            d_nome = doc.nome
+            if doc.nome == nome[0] and doc.cognome == nome[1] and doc.mail == self.request.user.email:
+                is_docente = True
+
+        context['is_docente'] = is_docente
+        return context
 
 
 class AttivitaCreateView(LoginRequiredMixin, CreateView):
@@ -362,7 +391,7 @@ def tesi_richiesta(request):
 
 def RichiestaTesiInviate(request):
 
-    nome = request.user.username.split('.')
+    #nome = request.user.username.split('.')
     all_studenti = Studente.objects.all()
     all_richiesta_tesi = {}
     nome = request.user.username.split('.')
@@ -402,6 +431,14 @@ class RequestTesiDetailView(FormView, DetailView):
         if self.request.user.username != nome:
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
             return redirect('tesi-request-precompiled', pk=self.get_object().id)
+
+        all_bozze = Richiesta_tesi_bozza.objects.all()
+        nome = self.request.user.username.split('.')
+        for s in all_bozze:
+            if s.autore.nome == nome[0] and s.autore.cognome == nome[1] and s.autore.mail == self.request.user.email and s.argomento == req.argomento:
+                messages.error(self.request, f'Esiste già una tua bozza per la tesi {req.argomento}!')
+                return redirect('tesi-request-precompiled', pk=self.get_object().id)
+
         req.save()
         return super().form_valid(form)
 
@@ -464,6 +501,7 @@ class RTDetailView(DetailView):
                 'argomento': rti.argomento,
                 'id': rti.id,
             }
+
             r.delete()
             html_template = get_template('home/richiesta_email.html').render(context)
             message.attach_alternative(html_template, "text/html")
@@ -650,7 +688,6 @@ def provafin_richiesta(request):
 
 def RichiestaAttInviate(request):
 
-    nome = request.user.username.split('.')
     all_studenti = Studente.objects.all()
     all_richiesta_tesi = {}
     nome = request.user.username.split('.')
@@ -684,6 +721,14 @@ class RequestAttivitaDetailView(FormView, DetailView):
         if self.request.user.username != nome:
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
             return redirect('attivita-request-precompiled', pk=self.get_object().id)
+
+        all_bozze = Richiesta_prova_finale_bozza.objects.all()
+        nome = self.request.user.username.split('.')
+        for s in all_bozze:
+            if s.autore.nome == nome[0] and s.autore.cognome == nome[1] and s.autore.mail == self.request.user.email and s.argomento == req.argomento :
+                messages.error(self.request, f'Esiste già una tua bozza per la attività {req.argomento}!')
+                return redirect('attivita-request-precompiled', pk=self.get_object().id)
+
         req.save()
         return super().form_valid(form)
 
