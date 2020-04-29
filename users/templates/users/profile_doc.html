@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %}
+{% extends 'home/base_index.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
 
@@ -13,7 +13,7 @@
             <p class="text-secondary">{{ user.email }}</p>
         </div>
         <div class="col">
-            <div class="content-section">
+             <div class="sidebar">
                 <h3>Sidebar</h3>
 
                 <ul class="list-group">
@@ -33,54 +33,46 @@
 
 </div>
 
-<div class="container-fluid">
+<h1>Tutte le tesi create </h1>
+<ul class="cards">
 
-    <h1>Tutte le tesi create </h1>
+
     {% for tesi in all_tesi %}
 
-    <div class="caption">
-        <div class="row-2">
-            <div class="col-sm-15">
-                <h5>Argomento : {{ tesi.argomento }} </h5>
-                <h5>Autore : {{ tesi.author }}</h5>
+    <li>
+        <h5>Argomento : {{ tesi.argomento }} </h5>
+        <h5>Autore : {{ tesi.author }}</h5>
 
-                <!-- dettagli -->
-                <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
+        <!-- dettagli -->
+        <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
+            Details</a>
 
-                <a href="{% url 'tesi-delete' tesi.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
-                <a href="{% url 'tesi-update' tesi.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
-            </div>
-        </div>
+        <a href="{% url 'tesi-delete' tesi.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
+        <a href="{% url 'tesi-update' tesi.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
+    </li>
+    {% endfor %}
 
-        {% endfor %}
-    </div>
-</div>
+</ul>
 
 
-<div class="container-fluid">
-    <h1>Tutte le attivita create </h1>
-
+<h1>Tutte le attivita create </h1>
+<ul class="cards">
     {% for att in all_attivita %}
 
-    <div class="caption">
-        <div class="row-2">
-            <div class="col-sm-15">
-                <h5>Argomento : {{ att.argomento }} </h5>
-                <h5>Autore : {{ att.author }}</h5>
+    <li>
+        <h5>Argomento : {{ att.argomento }} </h5>
+        <h5>Autore : {{ att.author }}</h5>
 
-                <!-- dettagli -->
-                <a href="{% url 'attivita-detail' att.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
+        <!-- dettagli -->
+        <a href="{% url 'attivita-detail' att.id %}" class="btn btn-info btn-xs" role="button"> View
+            Details</a>
 
-                <a href="{% url 'attivita-delete' att.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
-                <a href="{% url 'attivita-update' att.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
-            </div>
-        </div>
+        <a href="{% url 'attivita-delete' att.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
+        <a href="{% url 'attivita-update' att.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
+    </li>
 
-        {% endfor %}
-    </div>
-</div>
+    {% endfor %}
+</ul>
 
 
 {% endblock %}

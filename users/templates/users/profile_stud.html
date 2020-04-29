@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %}
+{% extends 'home/base_index.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
 <!-- <div class="content-section">
@@ -24,7 +24,7 @@
             <p class="text-secondary">{{ user.email }}</p>
         </div>
         <div class="col">
-            <div class="content-section">
+            <div class="sidebar">
                 <h3>Sidebar</h3>
 
                 <ul class="list-group">
@@ -44,22 +44,23 @@
 </div>
 
 <h3>Tutte le tue bozze di richieste di tesi</h3>
-{% for richieste in all_richiesta_tesi %}
-<div class="content-section">
-    <div class="col-sm-15">
+<ul class="cards">
+    {% for richieste in all_richiesta_tesi %}
+    <li>
         <h5>Relatore: {{ richieste.relatore }} </h5>
         <h5>Argomento: {{ richieste.argomento }}</h5>
         <h5>Data laurea: {{ richieste.data_laurea }}</h5>
         <a href="{% url 'richiesta-tesi-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
-    </div>
-</div>
-{% endfor %}
+    </li>
+    {% endfor %}
+
+</ul>
 
 <br>
 <h3>Tutte le tue bozze di richieste di prove finali</h3>
-{% for richieste in all_richiesta_pfinale %}
-<div class="content-section">
-    <div class="col-sm-15">
+<ul class="cards">
+    {% for richieste in all_richiesta_pfinale %}
+    <li>
         <h5>Tutor: {{ richieste.tutor }} </h5>
         <h5>Argomento: {{ richieste.argomento }}</h5>
         <h5>Data laurea: {{ richieste.data_laurea }}</h5>
@@ -67,8 +68,9 @@
 
         <a href="{% url 'richiesta-prova-finale-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
 
-    </div>
-</div>
-{% endfor %}
+    </li>
+    {% endfor %}
+
+</ul>
 
 {% endblock %}

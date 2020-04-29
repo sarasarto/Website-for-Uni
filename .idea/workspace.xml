@@ -4,10 +4,13 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tesi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toDo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/toDo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_stud.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_stud.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588080556018</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="-aggiunto controllo che solo il docente che riceve la mail deve poter accettare rifiutare una proposta&#10;. MANCA MESSAGGIO DI ERRORE">
+      <created>1588180408248</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1588180408248</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -274,7 +284,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ci  provo" />
     <MESSAGE value="ci  provo 2" />
     <MESSAGE value="-creato velocemente pagina iniziale&#10;-aggiunto in database due docenti e qualche progetto&#10;-il bottone login funziona e ridirige a /login &#10;-fatta molto velocemente pagina login" />
     <MESSAGE value="- resa più carino il log in" />
@@ -299,25 +308,26 @@
     <MESSAGE value="- sistemata visualizzazione tesi inviate e attivita inviate da class listview a def con request&#10;- sistemato reindirizzamento alle mail&#10;-aggiunta condizione di non esistenza di tesi/attivita inviate nel file html" />
     <MESSAGE value="- nella detail view aggiustato: ora i docenti non vedono il bottone Richiedi&#10;- ora uno studente che ha gia fatto richiesta di una tesi o attivita ed è gia presente nelle sue bozze non può richiederla" />
     <MESSAGE value="-aggiunta toDoList" />
-    <option name="LAST_COMMIT_MESSAGE" value="-aggiunta toDoList" />
+    <MESSAGE value="-aggiunto controllo che solo il docente che riceve la mail deve poter accettare rifiutare una proposta&#10;. MANCA MESSAGGIO DI ERRORE" />
+    <option name="LAST_COMMIT_MESSAGE" value="-aggiunto controllo che solo il docente che riceve la mail deve poter accettare rifiutare una proposta&#10;. MANCA MESSAGGIO DI ERRORE" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588180292026">
+    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588180407214">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588180292026" />
+    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588180407214" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="354" height="442" key="Diff.GoToChangePopup/0.0.1536.824@0.0.1536.824" timestamp="1584811505188" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1588180283148">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1588187542034">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1588180283148" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1588187542034" />
     <state x="933" y="167" key="FileChooserDialogImpl" timestamp="1587218882324">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -330,10 +340,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587410696211" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1588080567415">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1588180415014">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588080567415" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588180415014" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584811331973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

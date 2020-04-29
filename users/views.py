@@ -17,8 +17,8 @@ def register(request):
         form = UserRegisterForm(request.POST)
 
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            indice = username.find('.')
+            user = form.cleaned_data.get('username')
+            indice = user.find('.')
             if indice != -1:
                 matricola = form.cleaned_data.get('matricola')
 
@@ -27,17 +27,23 @@ def register(request):
                 else:
                     sd = Docente()
 
-                div = username.split('.')
+                div = user.split('.')
                 sd.nome = div[0]
                 sd.cognome = div[1]
                 sd.matricola = matricola
                 sd.mail = form.cleaned_data.get('email')
 
-                sd.save()
                 form.save()
-                messages.success(request, f'Account created for {username}!')
+                all_utenti = User.objects.all()
+                for utente in all_utenti:
+                    u = utente.username.split('.')
+                    if u[0] == sd.nome and u[1] == sd.cognome and utente.email == sd.mail :
+                        sd.user = utente
 
-                return redirect('profile')
+                sd.save()
+                messages.success(request, f'Account created for {user}!')
+
+                return render('profile')
             else:
                 messages.error(request, f'Errore! Username deve essere nome.cognome!!!')
                 return redirect('register')

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Richiesta_tesi_bozza, Richiesta_prova_finale_bozza, Studente, User, Prova
+from .models import Richiesta_tesi_bozza, Richiesta_prova_finale_bozza, Studente, User, Prova, TesiCreata
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -10,8 +10,13 @@ class ScelteForm(forms.Form):
     solo_tesi = forms.BooleanField(required=False)
 
 
-class ProvaForm(forms.ModelForm):
+class TesiCreataForm(forms.ModelForm):
+    class Meta:
+        model = TesiCreata
+        fields = "__all__"
 
+
+class ProvaForm(forms.ModelForm):
     class Meta:
         model = Prova
         fields = "__all__"
@@ -19,7 +24,6 @@ class ProvaForm(forms.ModelForm):
 
 
 class RequestTesiForm(forms.ModelForm):
-
     # def __init__(self, *args, **kwargs):
     #     super(RequestTesiForm, self).__init__(*args, **kwargs)
     #     self.fields['nome_azienda'].widget = forms.HiddenInput()
@@ -27,8 +31,8 @@ class RequestTesiForm(forms.ModelForm):
     class Meta:
         model = Richiesta_tesi_bozza
         fields = "__all__"
-        #exclude = ['nome_azienda']
-        #fields = ['autore', 'relatore', 'correlatore' , 'argomento' , 'tirocinio_azienda' , 'tirocinio_interno', 'data_laurea']
+        # exclude = ['nome_azienda']
+        # fields = ['autore', 'relatore', 'correlatore' , 'argomento' , 'tirocinio_azienda' , 'tirocinio_interno', 'data_laurea']
 
 
 class RequestProvaFinaleForm(forms.ModelForm):

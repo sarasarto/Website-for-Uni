@@ -18,7 +18,7 @@ from .models import TaggableManager, TesiArchiviata, Attivita_progettuale_Archiv
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm, \
-    ProvaForm, ScelteForm
+    ProvaForm, ScelteForm, TesiCreataForm
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
@@ -229,6 +229,27 @@ class TesiDetailView(LoginRequiredMixin, DetailView):
 
         context['is_docente'] = is_docente
         return context
+
+
+"""def TesiCreate(request):
+    r = request.user.username
+    if request.method == "POST":
+        form = TesiCreataForm(request.POST)
+        if form.is_valid():
+            p = Prova()
+            nome = form.cleaned_data.get('nome')
+            p.nome = nome
+
+            p.user = User.objects.get(username=nome)
+
+            p.save()
+            # form.save()
+            messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
+            return redirect('profile')
+    else:
+        form = TesiCreataForm(initial={'correlatore': r})
+
+    return render(request, 'home/tesicreata_form.html', {'form': form})"""
 
 
 class TesiCreateView(LoginRequiredMixin, CreateView):
@@ -536,7 +557,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         rel_c = self.object.relatore.cognome
         # rt = self.object.banama
         if log[0] != rel_n or log[1] != rel_c:
-            #messages.error(request, f'Errore! si puo loggare solo il docente tutor')
+            # messages.error(request, f'Errore! si puo loggare solo il docente tutor')
             return redirect('/login/?next=/' + str(self.get_object().id) + '/accept_tesi')
         else:
             self.object = self.get_object()
@@ -822,9 +843,9 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         # rt = self.object.banama
 
         if log[0] != tutor_n or log[1] != tutor_c:
-            #url = '/login/?next=/' + str(self.get_object().id) + '/accept_att'
-            #messages.error(url, f'Errore! si puo loggare solo il docente tutor')
-            #message = messages.error(request, f'Errore! si puo loggare solo il docente tutor')
+            # url = '/login/?next=/' + str(self.get_object().id) + '/accept_att'
+            # messages.error(url, f'Errore! si puo loggare solo il docente tutor')
+            # message = messages.error(request, f'Errore! si puo loggare solo il docente tutor')
             return redirect('/login/?next=/' + str(self.get_object().id) + '/accept_att')
         else:
             self.object = self.get_object()
