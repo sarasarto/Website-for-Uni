@@ -37,7 +37,7 @@ def register(request):
                 form.save()
                 messages.success(request, f'Account created for {username}!')
 
-                return redirect("/")
+                return redirect('profile')
             else:
                 messages.error(request, f'Errore! Username deve essere nome.cognome!!!')
                 return redirect('register')
@@ -60,7 +60,6 @@ def profile(request):
     context_richieste = {
         'all_richiesta_tesi': all_richiesta_tesi,
         'all_richiesta_pfinale': all_richiesta_pfinale,
-        'docente': False
     }
 
     for doc in all_docenti:
@@ -70,7 +69,6 @@ def profile(request):
         context = {
             'all_tesi': all_tesi,
             'all_attivita': all_attivita,
-            'docente': True
         }
         if doc.mail == request.user.email:
             return render(request, 'users/profile_doc.html', context)

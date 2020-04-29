@@ -405,7 +405,6 @@ def RichiestaTesiInviate(request):
     return render(request, 'home/richiesta_tesi_inviata.html', context)
 
 
-
 class RequestTesiDetailView(FormView, DetailView):
     model = TesiCreata
     template_name = "home/precompiled_tesi_request.html"
@@ -654,14 +653,13 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                     # return super().get(request, pk)
                     rt.delete()
                     return self.render_to_response(context_object_name)
-
     # controllare che chi si logga sia il relatore -- non funziona
-    def test_func(self):
-        richiesta = self.get_object()
-        nome = richiesta.relatore.split()
-        if self.request.user.username == nome[0]:
-            return True
-        return False
+    # def test_func(self):
+    #     richiesta = self.get_object()
+    #     nome = richiesta.relatore.split()
+    #     if self.request.user.username == nome[0]:
+    #         return True
+    #     return False
 
 
 # RICHIESTA PROVA FINALE
@@ -797,16 +795,6 @@ class RAPDetailView(DetailView):
         else:
             rti.delete()
             return super().get(request, pk)
-
-
-def from_richiestaattivitabozza_to_richiestaattivitainviata(rab, rai):
-    rai.autore = rab.autore
-    rai.tutor = rab.tutor
-    rai.argomento = rab.argomento
-    rai.titolo_elaborato = rab.titolo_elaborato
-    rai.tipologia = rab.tipologia
-    rai.data_laurea = rab.data_laurea
-    rai.save()
 
 
 class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
@@ -949,6 +937,17 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
 
 
 #METODI PER EVITARE TANTI ASSEGNAMENTI
+
+
+def from_richiestaattivitabozza_to_richiestaattivitainviata(rab, rai):
+    rai.autore = rab.autore
+    rai.tutor = rab.tutor
+    rai.argomento = rab.argomento
+    rai.titolo_elaborato = rab.titolo_elaborato
+    rai.tipologia = rab.tipologia
+    rai.data_laurea = rab.data_laurea
+    rai.save()
+
 
 def from_richiestaattivitainviata_to_richiestaattivitabozza(rai, rab):
     rab.autore = rai.autore

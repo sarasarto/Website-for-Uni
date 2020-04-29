@@ -1,5 +1,4 @@
 TO DO:
-* quando ci si registra reindirizzare al login
 * quando il docente vuole accettare o rifiutare una proposta deve loggarsi e deve essere lui
 * uno studente non può fare create tesi o attivita progettuale
 * mostrare richieste archiviate per data di archiviazione --> cambiare modello
@@ -10,3 +9,4 @@ DONE:
 * filtraggio per attivita o tesi le ricerche
 * i docenti possono richiedere una tesi --> detail tesi nell html if è un docente non farmi vedere il bottone richiedi
 * uno studente non può fare richiesta piu di una volta della stessa tesi
+* quando ci si registra reindirizzare al login
