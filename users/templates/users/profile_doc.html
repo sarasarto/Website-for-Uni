@@ -13,7 +13,7 @@
             <p class="text-secondary">{{ user.email }}</p>
         </div>
         <div class="col">
-             <div class="sidebar">
+            <div class="sidebar">
                 <h3>Sidebar</h3>
 
                 <ul class="list-group">
@@ -42,7 +42,10 @@
     <li>
         <h5>Argomento : {{ tesi.argomento }} </h5>
         <h5>Autore : {{ tesi.author }}</h5>
-
+        <h5>tirocinio : {{ tesi.tirocinio }}</h5>
+        {% if tesi.tirocinio == 'in azienda' %}
+        <h5>nome azienda : {{ tesi.nome_azienda }}</h5>
+        {% endif %}
         <!-- dettagli -->
         <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
             Details</a>

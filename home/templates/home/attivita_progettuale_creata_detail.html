@@ -1,11 +1,11 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+<h1>DETTAGLI</h1>
 <div class="content-section">
-    <h1>DETTAGLI</h1>
-    <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
-    <p class="text-secondary"> proposto da: {{ object.tutor }}</p>
 
+    <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
+    <h2 class="text-secondary"> proposto da: {{ object.tutor }}</h2>
 
     {% if is_docente %}
     {% else %}

@@ -61,16 +61,16 @@ def profile(request):
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
-            all_richiesta_tesi = Richiesta_tesi_bozza.objects.filter(autore=s)
-            all_richiesta_pfinale = Richiesta_prova_finale_bozza.objects.filter(autore=s)
+            all_richiesta_tesi = Richiesta_tesi_bozza.objects.filter(autore=s).order_by('-date_posted')
+            all_richiesta_pfinale = Richiesta_prova_finale_bozza.objects.filter(autore=s).order_by('-date_posted')
     context_richieste = {
         'all_richiesta_tesi': all_richiesta_tesi,
         'all_richiesta_pfinale': all_richiesta_pfinale,
     }
 
     for doc in all_docenti:
-        all_tesi = TesiCreata.objects.filter(author=request.user)
-        all_attivita = Attivita_progettuale_creata.objects.filter(author=request.user)
+        all_tesi = TesiCreata.objects.filter(author=request.user).order_by('-date_posted')
+        all_attivita = Attivita_progettuale_creata.objects.filter(author=request.user).order_by('-date_posted')
         tot = list(chain(all_tesi, all_attivita))
         context = {
             'all_tesi': all_tesi,

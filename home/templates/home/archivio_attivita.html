@@ -1,32 +1,21 @@
-{% extends 'home/base.html' %}
+{% extends 'home/base_index.html' %}
 
-{% block body %}
-<h3> Tutte le attività progettuali archiviate</h3>
-<div class="container-fluid" id="tourpackages-carousel">
-    <div class="row">
+{% block for %}
+<h1> Tutte le attività progettuali archiviate</h1>
+<ul class="cards">
+    {% for att in all_att %}
+    <li>
+        <h3>Argomento : {{ att.argomento }}</h3>
+        <h3>Relatore : {{ att.tutor }}</h3>
 
-        {% for att in all_att %}
-        <div class="col-sm-4">
-            <div class="caption">
-                <h3>Argomento : {{ att.argomento }}</h3>
-
-                {% if att.tutor %}
-                <h3>Relatore : {{ att.tutor }}</h3>
-
-                <!-- dettagli -->
-                <a href="{% url 'attivita-detail' att.id %}" class="btn btn-info btn-xs" role="button"> NON VA.
-                    DETTAGLI</a>
-                {% endif %}
-
-            </div>
+        <!-- dettagli -->
+        <a href="{% url 'att_archiviata_detail' att.id %}" class="btn btn-info btn-xs" role="button"> View
+            Details</a>
 
 
-        </div>
-
-        {% endfor %}
-
-    </div>
-</div>
+    </li>
+    {% endfor %}
+</ul>
 
 <div class="btn btn-black">
     <a class="btn btn-outline-secondary" href="{% url 'profile' %}">Indietro</a>

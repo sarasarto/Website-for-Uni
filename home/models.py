@@ -44,7 +44,8 @@ class TesiCreata(Tesi):
 
 
 class TesiArchiviata(Tesi):
-    pass
+    data_archiviazione = models.DateTimeField(default=timezone.now)
+
 
 
 class Attivita_progettuale(models.Model):
@@ -70,7 +71,7 @@ class Attivita_progettuale_creata(Attivita_progettuale):
 
 
 class Attivita_progettuale_Archiviata(Attivita_progettuale):
-    pass
+    data_archiviazione = models.DateTimeField(default=timezone.now)
 
 
 class DateLauree(models.Model):
@@ -95,6 +96,7 @@ class Richiesta_tesi(models.Model):
     tirocinio = models.CharField(max_length=500, choices=scelte, null=True)
     nome_azienda = models.CharField(max_length=1000, null=True, blank=True)
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
@@ -127,6 +129,7 @@ class Richiesta_prova_finale(models.Model):
     titolo_elaborato = models.CharField(max_length=500, null=True)
     tipologia = models.CharField(max_length=500, choices=scelte, null=True)
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento

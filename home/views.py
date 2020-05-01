@@ -182,8 +182,19 @@ def show_tesi(request):
     return render(request, 'home/tesi_index.html', context)
 
 
+class TesiArchiviataDetailView(DetailView):
+    model = TesiArchiviata
+    template_name = 'home/tesicreata_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TesiArchiviataDetailView, self).get_context_data(**kwargs)
+        is_docente = True
+        context['is_docente'] = is_docente
+        return context
+
+
 def show_tesi_archiviate(request):
-    all_tesi = TesiArchiviata.objects.filter(author=request.user)
+    all_tesi = TesiArchiviata.objects.filter(author=request.user).order_by('-data_archiviazione')
 
     context = {
         'all_tesi': all_tesi,
@@ -193,13 +204,24 @@ def show_tesi_archiviate(request):
 
 
 def show_att_archiviate(request):
-    all_att = Attivita_progettuale_Archiviata.objects.filter(author=request.user)
+    all_att = Attivita_progettuale_Archiviata.objects.filter(author=request.user).order_by('-data_archiviazione')
 
     context = {
         'all_att': all_att,
 
     }
     return render(request, 'home/archivio_attivita.html', context)
+
+
+class AttivitaArchiviataDetailView(DetailView):
+    model = Attivita_progettuale_Archiviata
+    template_name = 'home/attivita_progettuale_creata_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AttivitaArchiviataDetailView, self).get_context_data(**kwargs)
+        is_docente = True
+        context['is_docente'] = is_docente
+        return context
 
 
 def show_attivita(request):
@@ -212,6 +234,8 @@ def show_attivita(request):
 
 
 # TESI
+
+
 class TesiDetailView(LoginRequiredMixin, DetailView):
     model = TesiCreata
     template_name = 'home/tesicreata_detail.html'
@@ -417,7 +441,7 @@ def RichiestaTesiInviate(request):
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
-            all_richiesta_tesi = Richiesta_tesi_inviata.objects.filter(autore=s)
+            all_richiesta_tesi = Richiesta_tesi_inviata.objects.filter(autore=s).order_by('-date_posted')
 
     context = {
         'all_richiesta_tesi': all_richiesta_tesi,
@@ -721,7 +745,7 @@ def RichiestaAttInviate(request):
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
-            all_richiesta_att = Richiesta_prova_finale_inviata.objects.filter(autore=s)
+            all_richiesta_att = Richiesta_prova_finale_inviata.objects.filter(autore=s).order_by('-date_posted')
 
     context = {
         'all_richiesta_att': all_richiesta_att,

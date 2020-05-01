@@ -1,22 +1,22 @@
-{% extends 'home/base.html' %}
+{% extends 'home/base_index.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
 <h1>Le tue tesi inviate:</h1>
-    {% if all_richiesta_tesi %}
+{% if all_richiesta_tesi %}
+<ul class="cards">
     {% for richieste in all_richiesta_tesi %}
-        <div class="content-section">
-            <div class="col-sm-15">
-                <p class="account-heading"> Argomento: {{ richieste.argomento }}</p>
-                <p class="text-secondary"> proposto da: {{ richieste.relatore }}</p>
-                <p class="text-secondary"> data laurea: {{ richieste.data_laurea }}</p>
-                <!-- <a href="{% url 'richiesta-tesi-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a> -->
-            </div>
-        </div>
-        <br>
+    <li>
+        <h3 class="account-heading"> Argomento: {{ richieste.argomento }}</h3>
+        <p class="text-secondary"> proposto da: {{ richieste.relatore }}</p>
+        <p class="text-secondary"> data laurea: {{ richieste.data_laurea }}</p>
+
+
+    </li>
     {% endfor %}
-    {% else %}
-    <h3>Non ci sono ancora tesi inviate</h3>
-    {% endif %}
-    <a href="{% url 'profile' %}">Go back</a>
+</ul>
+{% else %}
+<h3>Non ci sono ancora tesi inviate</h3>
+{% endif %}
+<a href="{% url 'profile' %}">Go back</a>
 
 {% endblock %}

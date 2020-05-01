@@ -1,7 +1,4 @@
 TO DO:
-
-* uno studente non può fare create tesi o attivita progettuale
-* mostrare richieste archiviate per data di archiviazione --> cambiare modello
 * nei bottoni back tornare indietro nella pagina precedente non alla home page o al profilo
 * MANCA MESSAGGIO ERRORE SE LOGIN SBAGLIATO IN ACCETTA-RIFIUTA PROPOSTA
 
@@ -11,3 +8,7 @@ DONE:
 * uno studente non può fare richiesta piu di una volta della stessa tesi
 * quando ci si registra reindirizzare al login
 * quando il docente vuole accettare o rifiutare una proposta deve loggarsi e deve essere lui
+* mostrare richieste archiviate per data di archiviazione --> cambiare modello
+
+DA CHIEDERE:
+* uno studente non può fare create tesi o attivita progettuale

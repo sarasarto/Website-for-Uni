@@ -42,7 +42,7 @@ from home.views import (
     RequestTesiUpdateView,
     RequestAttivitaUpdateView,
     RequestTesiDeleteView,
-    RequestAttivitaDeleteView,IndexView,
+    RequestAttivitaDeleteView,IndexView,TesiDetailView,AttivitaArchiviataDetailView,TesiArchiviataDetailView
 
 )
 
@@ -58,8 +58,9 @@ urlpatterns = [
     path('tesi/', views.show_tesi, name='tesi'),
     path('attivita/', views.show_attivita, name='attivita'),
     path('tesi_archiviata/', views.show_tesi_archiviate, name='t_archiviata'),
+    path('tesi_archiviata/<int:pk>/detail', TesiArchiviataDetailView.as_view(), name='t_archiviata_detail'),
     path('att_archiviata/', views.show_att_archiviate, name='att_archiviata'),
-
+    path('att_archiviata/<int:pk>/detail', AttivitaArchiviataDetailView.as_view(), name='att_archiviata_detail'),
 
     # per la tesi
     path('profile/new_tesi', TesiCreateView.as_view(), name='tesi-create'),
