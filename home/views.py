@@ -654,6 +654,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                     message.send()
                     messages.success(request,
                                      f'La mail è stata inviata correttamente al seguente indirizzo {self.object.autore.mail}!')
+                    self.get_object().delete()
                     return redirect("/")
                 else:
                     # se c'è errore allora
@@ -940,6 +941,7 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
                     message.send()
                     messages.success(request,
                                      f'La mail è stata inviata correttamente al seguente indirizzo {self.object.autore.mail}!')
+                    self.get_object().delete()
                     return redirect("/")
                 else:
                     # se c'è errore allora

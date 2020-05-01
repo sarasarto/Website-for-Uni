@@ -75,7 +75,7 @@ class Attivita_progettuale_Archiviata(Attivita_progettuale):
 
 
 class DateLauree(models.Model):
-    data = models.DateTimeField()
+    data = models.DateField()
 
     def __str__(self):
         return str(self.data)
