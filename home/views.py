@@ -1135,7 +1135,6 @@ def from_tesicreata_to_richiestabozza(tc, rb):
 
 
 def from_attprogettualecreata_to_richiestaProvabozza(ac, rb):
-
     rb.argomento = ac.argomento
     rb.date_posted = ac.date_posted
     tutor = User.objects.get(username=ac.tutor)
@@ -1163,5 +1162,6 @@ def from_tesicreata_to_tesiarchiviata(tc, ta):
     ta.tirocinio = tc.tirocinio
     ta.nome_azienda = tc.nome_azienda
     ta.tag = tc.tag
+    ta.date_posted = tc.date_posted
     ta.save()
     tc.delete()
