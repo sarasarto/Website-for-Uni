@@ -14,6 +14,7 @@ class TesiCreataForm(forms.ModelForm):
     class Meta:
         model = TesiCreata
         fields = "__all__"
+        exclude = ['author', 'date_posted']
 
 
 class ProvaForm(forms.ModelForm):

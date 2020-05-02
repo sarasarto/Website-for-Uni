@@ -4,19 +4,10 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="- cambiati modelli con data per mostrare in ordine&#10;- aggiustati bottoni di detail view con crezione due nuovi url">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/archivio_attivita.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/archivio_attivita.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/archivio_tesi.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/archivio_tesi.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/attivita_progettuale_creata_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/attivita_progettuale_creata_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/richiesta_att_inviata.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/richiesta_att_inviata.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/richiesta_tesi_inviata.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/richiesta_tesi_inviata.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/tesicreata_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/tesicreata_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tesi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toDo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/toDo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_stud.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_stud.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588189775590</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="- cambiati modelli con data per mostrare in ordine&#10;- aggiustati bottoni di detail view con crezione due nuovi url">
+      <created>1588323143436</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1588323143436</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -297,7 +295,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-creato velocemente pagina iniziale&#10;-aggiunto in database due docenti e qualche progetto&#10;-il bottone login funziona e ridirige a /login &#10;-fatta molto velocemente pagina login" />
     <MESSAGE value="- resa più carino il log in" />
     <MESSAGE value="- dopo login torna a homepage&#10;- sposato file login.html in registration" />
     <MESSAGE value="- durante registrazione divide in Docente/Studente" />
@@ -322,25 +319,26 @@
     <MESSAGE value="-aggiunta toDoList" />
     <MESSAGE value="-aggiunto controllo che solo il docente che riceve la mail deve poter accettare rifiutare una proposta&#10;. MANCA MESSAGGIO DI ERRORE" />
     <MESSAGE value="- aggiustato salvataggio utente in fase di registrazione&#10;- cambiata grafica dei profili" />
-    <option name="LAST_COMMIT_MESSAGE" value="- aggiustato salvataggio utente in fase di registrazione&#10;- cambiata grafica dei profili" />
+    <MESSAGE value="- cambiati modelli con data per mostrare in ordine&#10;- aggiustati bottoni di detail view con crezione due nuovi url" />
+    <option name="LAST_COMMIT_MESSAGE" value="- cambiati modelli con data per mostrare in ordine&#10;- aggiustati bottoni di detail view con crezione due nuovi url" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588322712073">
+    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588323141629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588322712073" />
+    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588323141629" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="354" height="442" key="Diff.GoToChangePopup/0.0.1536.824@0.0.1536.824" timestamp="1584811505188" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1588322695820">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1588347086137">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1588322695820" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1588347086137" />
     <state x="933" y="167" key="FileChooserDialogImpl" timestamp="1587218882324">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -353,22 +351,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587410696211" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1588189818537">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1588323344331">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588189818537" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588323344331" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584811331973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811331973" />
-    <state x="848" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1588315423320">
+    <state x="848" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1588401725140">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="848" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1588315423320" />
-    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588315429448">
+    <state x="848" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1588401725140" />
+    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588401750998">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1588315429448" />
+    <state x="962" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1588401750998" />
     <state x="533" y="204" key="git4idea.merge.GitMergeDialog" timestamp="1584811311175">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

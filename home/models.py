@@ -14,7 +14,7 @@ class Prova(models.Model):
 
 class Tesi(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    relatore = models.ForeignKey(Docente, on_delete=models.CASCADE)
+    relatore = models.CharField(max_length=100)
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
     in_azienda = 'in azienda'

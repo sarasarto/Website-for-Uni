@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from home import views
 from users import views as user_views
 from home.views import (
-    TesiCreateView,
+    #TesiCreateView,
     AttivitaCreateView,
     TesiDetailView,
     AttivitaDetailView,
@@ -63,7 +63,8 @@ urlpatterns = [
     path('att_archiviata/<int:pk>/detail', AttivitaArchiviataDetailView.as_view(), name='att_archiviata_detail'),
 
     # per la tesi
-    path('profile/new_tesi', TesiCreateView.as_view(), name='tesi-create'),
+    #path('profile/new_tesi', TesiCreateView.as_view(), name='tesi-create'),
+    path('profile/new_tesi', views.TesiCreate, name='tesi-create'),
     path('<int:pk>/detail_tesi', TesiDetailView.as_view(), name='tesi-detail'),
     path('<int:pk>/update_tesi', TesiUpdateView.as_view(), name='tesi-update'),
     path('<int:pk>/delete_tesi', TesiDeleteView.as_view(), name='tesi-delete'),

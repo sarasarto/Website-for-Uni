@@ -7,7 +7,6 @@ from django.utils.html import strip_tags
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy, reverse
-
 from tesi import settings
 from users.models import Studente, Docente
 from .models import TesiCreata, Attivita_progettuale_creata, Richiesta_tesi_bozza, Richiesta_tesi_inviata, \
@@ -255,28 +254,29 @@ class TesiDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-"""def TesiCreate(request):
+def TesiCreate(request):
     r = request.user.username
     if request.method == "POST":
         form = TesiCreataForm(request.POST)
         if form.is_valid():
-            p = Prova()
-            nome = form.cleaned_data.get('nome')
-            p.nome = nome
 
-            p.user = User.objects.get(username=nome)
-
-            p.save()
-            # form.save()
+            nome = form.cleaned_data.get('relatore')
+            tesi_create = form.save(commit=False)
+            user = User.objects.get(username=nome)
+            tesi_create.author = user
+            form.fields['author'] = User.objects.get(username=nome)
+            #p.save()
+            tesi_create.save()
+            form.save_m2m()
             messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
             return redirect('profile')
     else:
-        form = TesiCreataForm(initial={'correlatore': r})
+        form = TesiCreataForm(initial={'relatore': r})
 
-    return render(request, 'home/tesicreata_form.html', {'form': form})"""
+    return render(request, 'home/tesicreata_form.html', {'form': form})
 
 
-class TesiCreateView(LoginRequiredMixin, CreateView):
+"""class TesiCreateView(LoginRequiredMixin, CreateView):
     model = TesiCreata
     fields = ['relatore', 'argomento', 'tirocinio', 'nome_azienda', 'data_inizio', 'data_fine', 'tag']
 
@@ -284,7 +284,7 @@ class TesiCreateView(LoginRequiredMixin, CreateView):
     # la tesi è il docente loggato
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super().form_valid(form)
+        return super().form_valid(form)"""
 
 
 class TesiUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
