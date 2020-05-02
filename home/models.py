@@ -8,6 +8,13 @@ from taggit.managers import TaggableManager
 from django.utils import timezone
 
 
+class DateLauree(models.Model):
+    data = models.DateField()
+
+    def __str__(self):
+        return str(self.data)
+
+
 class Prova(models.Model):
     nome = models.CharField(max_length=1000)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
@@ -72,13 +79,6 @@ class Attivita_progettuale_creata(Attivita_progettuale):
 
 class Attivita_progettuale_Archiviata(Attivita_progettuale):
     data_archiviazione = models.DateTimeField(default=timezone.now)
-
-
-class DateLauree(models.Model):
-    data = models.DateField()
-
-    def __str__(self):
-        return str(self.data)
 
 
 class Richiesta_tesi(models.Model):

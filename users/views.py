@@ -43,8 +43,7 @@ def register(request):
                 sd.save()
                 messages.success(request, f'Account created for {user}!')
 
-                return ('/')
-                    #render('profile')
+                return redirect('profile')
             else:
                 messages.error(request, f'Errore! Username deve essere nome.cognome!!!')
                 return redirect('register')

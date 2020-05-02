@@ -39,7 +39,7 @@ class RequestTesiForm(forms.ModelForm):
     class Meta:
         model = Richiesta_tesi_bozza
         fields = "__all__"
-        exclude = ['date_posted']
+        exclude = ['date_posted', 'autore']
         # fields = ['autore', 'relatore', 'correlatore' , 'argomento' , 'tirocinio_azienda' , 'tirocinio_interno', 'data_laurea']
 
 
@@ -47,19 +47,16 @@ class RequestProvaFinaleForm(forms.ModelForm):
     class Meta:
         model = Richiesta_prova_finale_bozza
         fields = "__all__"
-        exclude = ['date_posted']
+        exclude = ['date_posted', 'autore']
 
 
 class PrecompiledTesiRequestForm(forms.ModelForm):
-    """ autore = forms.ModelChoiceField(queryset=Studente.objects.all(),
-                                     widget=forms.TextInput,
-                                     required=False ,
-                                     empty_label=None)"""
 
-    # autore = forms.CharField()
+    autore = forms.CharField(initial="nome.cognome")
     class Meta:
         model = Richiesta_tesi_bozza
         fields = ['autore', 'data_laurea']
+
 
 
 class PrecompiledAttivitaRequestForm(forms.ModelForm):

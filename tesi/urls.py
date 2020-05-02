@@ -85,7 +85,10 @@ urlpatterns = [
     path('<int:pk>/detail_richiesta_tesi/', RTDetailView.as_view(), name='richiesta-tesi-detail'),
     path('<int:pk>/update_tesi_request/', RequestTesiUpdateView.as_view(), name='richiesta-tesi-update'),
     path('<int:pk>/delete_tesi_request/', RequestTesiDeleteView.as_view(), name='richiesta-tesi-delete'),
+
+    # ce ne sono due perchè volevo fare non una class
     path('<int:pk>/detail_tesi/tesi_request/', RequestTesiDetailView.as_view(), name='tesi-request-precompiled'),
+   # path('<int:pk>/detail_tesi/tesi_request/', RequestTesiDetail, name='tesi-request-precompiled'),
     path('profile/richieste_tesi_inviate/', RichiestaTesiInviate, name='tesi-inviate'),
 
     path('profile/richiesta_prova', provafin_richiesta, name='provafin-richiesta'),

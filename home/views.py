@@ -260,7 +260,6 @@ def TesiCreate(request):
     if request.method == "POST":
         form = TesiCreataForm(request.POST)
         if form.is_valid():
-
             tesi_create = form.save(commit=False)
 
             utente = User.objects.get(username=r)
@@ -363,13 +362,12 @@ def AttivitaCreate(request):
     if request.method == "POST":
         form = AttivitaCreataForm(request.POST)
         if form.is_valid():
-
             att_create = form.save(commit=False)
 
             utente = User.objects.get(username=r)
             docente_log = Docente.objects.get(user=utente)
             att_create.author = docente_log
-            #form.fields['author'] = docente_log
+            # form.fields['author'] = docente_log
             # p.save()
 
             att_create.save()
@@ -445,14 +443,17 @@ def tesi_richiesta(request):
     if request.method == "POST":
         form = RequestTesiForm(request.POST)
         if form.is_valid():
-            autore = form.cleaned_data.get('autore')
-            nome = autore.nome + '.' + autore.cognome
-            if request.user.username != nome:
+            r = request.user.username
+            richiesta_create = form.save(commit=False)
+            utente = User.objects.get(username=r)
+            studente_log = Studente.objects.get(user=utente)
+            richiesta_create.autore = studente_log
+
+            if r != str(studente_log):
                 messages.error(request, f'Autore deve essere lo studente {request.user.username}!')
                 return redirect('tesi-richiesta')
-            # req = form.save(commit=False)
-            # req.autore = request.user
-            form.save()
+
+            richiesta_create.save()
             messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
             return redirect('profile')
     else:
@@ -479,6 +480,8 @@ class RequestTesiDetailView(FormView, DetailView):
     model = TesiCreata
     template_name = "home/precompiled_tesi_request.html"
     form_class = PrecompiledTesiRequestForm
+
+
     success_url = "/"
 
     def form_valid(self, form):
@@ -504,13 +507,37 @@ class RequestTesiDetailView(FormView, DetailView):
         all_bozze = Richiesta_tesi_bozza.objects.all()
         nome = self.request.user.username.split('.')
         for s in all_bozze:
-            if s.autore.nome == nome[0] and s.autore.cognome == nome[
-                1] and s.autore.mail == self.request.user.email and s.argomento == req.argomento:
+            if s.autore.nome == nome[0] and s.autore.cognome == nome[1] and \
+                    s.autore.mail == self.request.user.email and \
+                    s.argomento == req.argomento:
                 messages.error(self.request, f'Esiste già una tua bozza per la tesi {req.argomento}!')
                 return redirect('tesi-request-precompiled', pk=self.get_object().id)
 
         req.save()
         return super().form_valid(form)
+
+
+def RequestTesiDetail(request):
+    r = request.user.username
+    if request.method == "POST":
+        form = PrecompiledTesiRequestForm(request.POST)
+        if form.is_valid():
+
+            richiesta_create = form.save(commit=False)
+            utente = User.objects.get(username=r)
+            studente_log = Studente.objects.get(user=utente)
+            richiesta_create.autore = studente_log
+
+            if r != str(studente_log):
+                messages.error(request, f'Autore deve essere lo studente {request.user.username}!')
+                return redirect('tesi-richiesta')
+
+            richiesta_create.save()
+            messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
+            return redirect('profile')
+    else:
+        form = PrecompiledTesiRequestForm(initial={'autore': r})
+    return render(request, 'home/precompiled_tesi_request.html', {'form': form})
 
 
 class RequestTesiUpdateView(LoginRequiredMixin, UpdateView):
@@ -751,14 +778,16 @@ def provafin_richiesta(request):
     if request.method == "POST":
         form = RequestProvaFinaleForm(request.POST)
         if form.is_valid():
-            autore = form.cleaned_data.get('autore')
-            nome = autore.nome + '.' + autore.cognome
-            if request.user.username != nome:
+            r = request.user.username
+            richiesta_create = form.save(commit=False)
+            utente = User.objects.get(username=r)
+            studente_log = Studente.objects.get(user=utente)
+            richiesta_create.autore = studente_log
+            if r != str(studente_log):
                 messages.error(request, f'Autore deve essere lo studente {request.user.username}!')
                 return redirect('provafin-richiesta')
-            # req = form.save(commit=False)
-            # req.autore = request.user
-            form.save()
+
+            richiesta_create.save()
             messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
             return redirect('profile')
     else:
