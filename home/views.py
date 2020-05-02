@@ -288,23 +288,11 @@ def TesiCreate(request):
         return super().form_valid(form)"""
 
 
-class TesiUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class TesiUpdateView(LoginRequiredMixin, UpdateView):
     model = TesiCreata
     fields = ['relatore', 'argomento', 'tirocinio', 'nome_azienda', 'data_inizio', 'data_fine', 'tag']
 
-    # questo per dire che chi update
-    # la tesi è il docente loggato
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
-    # UserPassesTestMixin serve per controllare che solo
-    # chi ha creato il post possa fare update
-    def test_func(self):
-        tesi = self.get_object()
-        if self.request.user == tesi.author:
-            return True
-        return False
 
 
 class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -391,11 +379,13 @@ def AttivitaCreate(request):
 """
 
 
-class AttivitaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class AttivitaUpdateView(LoginRequiredMixin, UpdateView):
     model = Attivita_progettuale_creata
+    #form_class = AttivitaCreataForm
     fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
+    #template_name = 'home/request_attivita_update.html'
 
-    def form_valid(self, form):
+    """def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
@@ -406,7 +396,7 @@ class AttivitaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == attivita.author:
             return True
         return False
-
+"""
 
 class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Attivita_progettuale_creata
