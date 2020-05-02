@@ -295,15 +295,9 @@ class TesiUpdateView(LoginRequiredMixin, UpdateView):
 
 
 
-class TesiDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class TesiDeleteView(LoginRequiredMixin, DeleteView):
     model = TesiCreata
     success_url = '/profile'
-
-    def test_func(self):
-        tesi = self.get_object()
-        if self.request.user == tesi.author:
-            return True
-        return False
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -398,15 +392,9 @@ class AttivitaUpdateView(LoginRequiredMixin, UpdateView):
         return False
 """
 
-class AttivitaDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class AttivitaDeleteView(LoginRequiredMixin, DeleteView):
     model = Attivita_progettuale_creata
     success_url = '/profile'
-
-    def test_func(self):
-        tesi = self.get_object()
-        if self.request.user == tesi.author:
-            return True
-        return False
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
