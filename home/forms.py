@@ -52,14 +52,14 @@ class RequestProvaFinaleForm(forms.ModelForm):
 
 class PrecompiledTesiRequestForm(forms.ModelForm):
 
-    autore = forms.CharField(initial="nome.cognome")
+    #autore = forms.CharField(initial="nome.cognome")
     class Meta:
         model = Richiesta_tesi_bozza
-        fields = ['autore', 'data_laurea']
+        fields = ['data_laurea']
 
 
 
 class PrecompiledAttivitaRequestForm(forms.ModelForm):
     class Meta:
         model = Richiesta_prova_finale_bozza
-        fields = ['autore', 'titolo_elaborato', 'tipologia', 'data_laurea']
+        fields = [ 'titolo_elaborato', 'tipologia', 'data_laurea']

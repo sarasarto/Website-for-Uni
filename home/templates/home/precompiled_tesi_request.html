@@ -4,9 +4,15 @@
 <div class="content-section">
     <h1>Nuova richiesta:</h1>
 
-    <p class="text-secondary">
+    <h3 class="text">
         Verrà creata una richiesta per la tesi  "{{ object.argomento }}""
-    </p>
+    </h3>
+    <p class="text">Nome relatore : {{ object.relatore }}</p>
+    <p class="text">Nome argomento : {{ object.argomento }}</p>
+    <p class="text">Tirocinio : {{ object.tirocinio }}</p>
+    {% if object.tirocinio == 'in_azienda' %}
+    <p class="text">Nome azienda : {{ object.nome_azienda }}</p>
+    {% endif %}
 
 
         <div class="content-section">

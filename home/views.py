@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotModif
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.html import strip_tags
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView
@@ -480,8 +481,6 @@ class RequestTesiDetailView(FormView, DetailView):
     model = TesiCreata
     template_name = "home/precompiled_tesi_request.html"
     form_class = PrecompiledTesiRequestForm
-
-
     success_url = "/"
 
     def form_valid(self, form):
@@ -498,11 +497,16 @@ class RequestTesiDetailView(FormView, DetailView):
         from_tesicreata_to_richiestabozza(tesi, req)
         req.data_laurea = form.cleaned_data.get('data_laurea')
 
-        req.autore = form.cleaned_data.get('autore')
-        nome = req.autore.nome + '.' + req.autore.cognome
-        if self.request.user.username != nome:
+        #req.autore = form.cleaned_data.get('autore')
+        a = req.relatore
+        r = self.request.user.username
+        utente = User.objects.get(username=r)
+        stud_log = Studente.objects.get(user=utente)
+        req.autore = stud_log
+        #nome = req.autore.nome + '.' + req.autore.cognome
+        """if self.request.user.username != nome:
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
-            return redirect('tesi-request-precompiled', pk=self.get_object().id)
+            return redirect('tesi-request-precompiled', pk=self.get_object().id)"""
 
         all_bozze = Richiesta_tesi_bozza.objects.all()
         nome = self.request.user.username.split('.')
@@ -818,25 +822,33 @@ class RequestAttivitaDetailView(FormView, DetailView):
     def form_valid(self, form):
         att = self.get_object()
         req = Richiesta_prova_finale_bozza()
-        req.tutor = att.tutor
-        req.argomento = att.argomento
+        #req.tutor = att.tutor
+        #req.argomento = att.argomento
         req.titolo_elaborato = form.cleaned_data.get('titolo_elaborato')
         req.tipologia = form.cleaned_data.get('tipologia')
         req.data_laurea = form.cleaned_data.get('data_laurea')
+        from_attprogettualecreata_to_richiestaProvabozza(att, req)
 
-        req.autore = form.cleaned_data.get('autore')
-        nome = req.autore.nome + '.' + req.autore.cognome
-        if self.request.user.username != nome:
+        a = req.tutor
+
+        r = self.request.user.username
+        utente = User.objects.get(username=r)
+        stud_log = Studente.objects.get(user=utente)
+        req.autore = stud_log
+
+        """if self.request.user.username != nome:
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
-            return redirect('attivita-request-precompiled', pk=self.get_object().id)
+            return redirect('attivita-request-precompiled', pk=self.get_object().id)"""
 
         all_bozze = Richiesta_prova_finale_bozza.objects.all()
-        nome = self.request.user.username.split('.')
-        for s in all_bozze:
-            if s.autore.nome == nome[0] and s.autore.cognome == nome[
-                1] and s.autore.mail == self.request.user.email and s.argomento == req.argomento:
-                messages.error(self.request, f'Esiste già una tua bozza per la attività {req.argomento}!')
-                return redirect('attivita-request-precompiled', pk=self.get_object().id)
+        if all_bozze:
+            nome = self.request.user.username.split('.')
+            for s in all_bozze:
+                if s.autore.nome == nome[0] and s.autore.cognome == nome[1]\
+                        and s.autore.mail == self.request.user.email \
+                        and s.argomento == req.argomento:
+                    messages.error(self.request, f'Esiste già una tua bozza per la attività {req.argomento}!')
+                    return redirect('attivita-request-precompiled', pk=self.get_object().id)
 
         req.save()
         return super().form_valid(form)
@@ -1109,14 +1121,25 @@ def from_richiestatesibozza_to_richiestatesiinviata(rb, ri):
 
 
 def from_tesicreata_to_richiestabozza(tc, rb):
-    rb.relatore = tc.relatore
+    #rb.relatore = tc.relatore
     rb.correlatore = tc.correlatore
     rb.argomento = tc.argomento
     rb.tirocinio = tc.tirocinio
     rb.nome_azienda = tc.nome_azienda
     rb.data_inizio = tc.data_inizio
     rb.data_fine = tc.data_fine
+    rb.date_posted = tc.date_posted
     rb.tag = tc.tag
+    relatore = User.objects.get(username=tc.relatore)
+    rb.relatore = Docente.objects.get(user=relatore)
+
+
+def from_attprogettualecreata_to_richiestaProvabozza(ac, rb):
+
+    rb.argomento = ac.argomento
+    rb.date_posted = ac.date_posted
+    tutor = User.objects.get(username=ac.tutor)
+    rb.tutor = Docente.objects.get(user=tutor)
 
 
 def from_attivitacreata_to_attivitaarchiviata(ac, aa):
