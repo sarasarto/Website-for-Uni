@@ -4,9 +4,6 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="- cambiati modelli con data per mostrare in ordine&#10;- aggiustati bottoni di detail view con crezione due nuovi url">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/precompiled_tesi_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/precompiled_tesi_request.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588435165374</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="-FINITI FORM: vanno tutti.">
+      <created>1588439379016</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1588439379016</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -308,7 +312,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- durante registrazione divide in Docente/Studente" />
     <MESSAGE value="divisionee profilo docente e studente" />
     <MESSAGE value="tentativo add tesi" />
     <MESSAGE value="- fatto crea tesi &#10;- mostra i dettagli dei progetti se clicchi su View&#10;- cambiato nel modello tesi il tirocinio" />
@@ -333,25 +336,26 @@
     <MESSAGE value="- cambiati modelli con data per mostrare in ordine&#10;- aggiustati bottoni di detail view con crezione due nuovi url" />
     <MESSAGE value="- aggiustato form di docente in crea tesi e attività&#10;( anche le relative archiviazioni )" />
     <MESSAGE value="-aggiustato form studente" />
-    <option name="LAST_COMMIT_MESSAGE" value="-aggiustato form studente" />
+    <MESSAGE value="-FINITI FORM: vanno tutti." />
+    <option name="LAST_COMMIT_MESSAGE" value="-FINITI FORM: vanno tutti." />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588435164653">
+    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588439378361">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588435164653" />
+    <state x="341" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588439378361" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="354" height="442" key="Diff.GoToChangePopup/0.0.1536.824@0.0.1536.824" timestamp="1584811505188" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1588435160912">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1588439357369">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1588435160912" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1588439357369" />
     <state x="933" y="167" key="FileChooserDialogImpl" timestamp="1588425560319">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -364,10 +368,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587410696211" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1588435187441">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1588439384501">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588435187441" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588439384501" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584811331973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
