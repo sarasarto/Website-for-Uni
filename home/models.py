@@ -7,13 +7,14 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.utils import timezone
 
+
 class Prova(models.Model):
     nome = models.CharField(max_length=1000)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
 
 class Tesi(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
     relatore = models.CharField(max_length=100)
     correlatore = models.CharField(max_length=100)
     argomento = models.CharField(max_length=500)
@@ -47,10 +48,9 @@ class TesiArchiviata(Tesi):
     data_archiviazione = models.DateTimeField(default=timezone.now)
 
 
-
 class Attivita_progettuale(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    tutor = models.ForeignKey(Docente, on_delete=models.CASCADE)
+    author = models.ForeignKey(Docente, on_delete=models.CASCADE, null=True)
+    tutor = models.CharField(max_length=500)
     argomento = models.CharField(max_length=500)
     data_inizio = models.DateTimeField()
     data_fine = models.DateTimeField()
@@ -145,5 +145,3 @@ class Richiesta_prova_finale_bozza(Richiesta_prova_finale):
 
 class Richiesta_prova_finale_inviata(Richiesta_prova_finale):
     pass
-
-

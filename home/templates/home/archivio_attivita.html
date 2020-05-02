@@ -3,6 +3,7 @@
 {% block for %}
 <h1> Tutte le attività progettuali archiviate</h1>
 <ul class="cards">
+    {% if all_att %}
     {% for att in all_att %}
     <li>
         <h3>Argomento : {{ att.argomento }}</h3>
@@ -15,6 +16,9 @@
 
     </li>
     {% endfor %}
+    {% else %}
+    <h3>Non ci sono attività archiviate</h3>
+    {% endif %}
 </ul>
 
 <div class="btn btn-black">

@@ -3,6 +3,7 @@
 {% block for %}
 <h1> Tutte le tesi archiviate:</h1>
 <ul class="cards">
+    {% if all_tesi %}
     {% for tesi in all_tesi %}
     <li>
         <h3>Argomento : {{ tesi.argomento }}</h3>
@@ -18,6 +19,10 @@
 
     </li>
     {% endfor %}
+    {% else %}
+    <h3>Non ci sono tesi archiviate</h3>
+    {% endif %}
+
 </ul>
 
 <div class="btn btn-black">

@@ -22,7 +22,7 @@ from home import views
 from users import views as user_views
 from home.views import (
     #TesiCreateView,
-    AttivitaCreateView,
+    #AttivitaCreateView,
     TesiDetailView,
     AttivitaDetailView,
     TesiUpdateView,
@@ -73,7 +73,8 @@ urlpatterns = [
     path('<int:pk>/accept_att', AccettaRifiutaAttivitaDetailView.as_view(), name='accept-request-att'),
 
     # per l'attivita
-    path('profile/new_attivita', AttivitaCreateView.as_view(), name='attivita-create'),
+    #path('profile/new_attivita', AttivitaCreateView.as_view(), name='attivita-create'),
+    path('profile/new_attivita', views.AttivitaCreate, name='attivita-create'),
     path('<int:pk>/detail_att', AttivitaDetailView.as_view(), name='attivita-detail'),
     path('<int:pk>/update_att', AttivitaUpdateView.as_view(), name='attivita-update'),
     path('<int:pk>/delete_att', AttivitaDeleteView.as_view(), name='attivita-delete'),

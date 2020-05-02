@@ -17,7 +17,7 @@ from .models import TaggableManager, TesiArchiviata, Attivita_progettuale_Archiv
 from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm, \
-    ProvaForm, ScelteForm, TesiCreataForm
+    ProvaForm, ScelteForm, TesiCreataForm, AttivitaCreataForm
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
@@ -193,17 +193,18 @@ class TesiArchiviataDetailView(DetailView):
 
 
 def show_tesi_archiviate(request):
-    all_tesi = TesiArchiviata.objects.filter(author=request.user).order_by('-data_archiviazione')
+    utente = User.objects.get(username=request.user.username)
+    docente_log = Docente.objects.get(user=utente)
+    all_tesi = TesiArchiviata.objects.filter(author=docente_log).order_by('-data_archiviazione')
 
-    context = {
-        'all_tesi': all_tesi,
-
-    }
+    context = {'all_tesi': all_tesi, }
     return render(request, 'home/archivio_tesi.html', context)
 
 
 def show_att_archiviate(request):
-    all_att = Attivita_progettuale_Archiviata.objects.filter(author=request.user).order_by('-data_archiviazione')
+    utente = User.objects.get(username=request.user.username)
+    docente_log = Docente.objects.get(user=utente)
+    all_att = Attivita_progettuale_Archiviata.objects.filter(author=docente_log).order_by('-data_archiviazione')
 
     context = {
         'all_att': all_att,
@@ -260,15 +261,15 @@ def TesiCreate(request):
         form = TesiCreataForm(request.POST)
         if form.is_valid():
 
-            nome = form.cleaned_data.get('relatore')
             tesi_create = form.save(commit=False)
-            user = User.objects.get(username=nome)
-            tesi_create.author = user
-            form.fields['author'] = User.objects.get(username=nome)
-            #p.save()
+
+            utente = User.objects.get(username=r)
+            docente_log = Docente.objects.get(user=utente)
+            tesi_create.author = docente_log
+
             tesi_create.save()
             form.save_m2m()
-            messages.success(request, f'La richiesta di {request.user.username} è stata creata correttamente!')
+            messages.success(request, f'La tesi di {request.user.username} è stata creata correttamente!')
             return redirect('profile')
     else:
         form = TesiCreataForm(initial={'relatore': r})
@@ -357,13 +358,38 @@ class AttivitaDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class AttivitaCreateView(LoginRequiredMixin, CreateView):
+def AttivitaCreate(request):
+    r = request.user.username
+    if request.method == "POST":
+        form = AttivitaCreataForm(request.POST)
+        if form.is_valid():
+
+            att_create = form.save(commit=False)
+
+            utente = User.objects.get(username=r)
+            docente_log = Docente.objects.get(user=utente)
+            att_create.author = docente_log
+            #form.fields['author'] = docente_log
+            # p.save()
+
+            att_create.save()
+            form.save_m2m()
+            messages.success(request, f'La attività di {request.user.username} è stata creata correttamente!')
+            return redirect('profile')
+    else:
+        form = AttivitaCreataForm(initial={'tutor': r})
+
+    return render(request, 'home/attivita_progettuale_creata_form.html', {'form': form})
+
+
+"""class AttivitaCreateView(LoginRequiredMixin, CreateView):
     model = Attivita_progettuale_creata
     fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+"""
 
 
 class AttivitaUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):

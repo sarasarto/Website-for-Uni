@@ -43,7 +43,8 @@ def register(request):
                 sd.save()
                 messages.success(request, f'Account created for {user}!')
 
-                return render('profile')
+                return ('/')
+                    #render('profile')
             else:
                 messages.error(request, f'Errore! Username deve essere nome.cognome!!!')
                 return redirect('register')
@@ -57,7 +58,7 @@ def profile(request):
     all_docenti = Docente.objects.all()
     all_studenti = Studente.objects.all()
 
-    all_richiesta_tesi = all_richiesta_pfinale = {}
+    all_richiesta_tesi = all_richiesta_pfinale =all_tesi= all_attivita  ={}
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
@@ -69,9 +70,10 @@ def profile(request):
     }
 
     for doc in all_docenti:
-        all_tesi = TesiCreata.objects.filter(author=request.user).order_by('-date_posted')
-        all_attivita = Attivita_progettuale_creata.objects.filter(author=request.user).order_by('-date_posted')
-        tot = list(chain(all_tesi, all_attivita))
+        if doc.nome == nome[0] and doc.cognome == nome[1] and doc.mail == request.user.email:
+            all_tesi = TesiCreata.objects.filter(author=doc).order_by('-date_posted')
+            all_attivita = Attivita_progettuale_creata.objects.filter(author=doc).order_by('-date_posted')
+            tot = list(chain(all_tesi, all_attivita))
         context = {
             'all_tesi': all_tesi,
             'all_attivita': all_attivita,
