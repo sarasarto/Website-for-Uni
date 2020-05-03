@@ -17,7 +17,9 @@
      <a href="{% url 'tesi-request-precompiled' object.id %}">Richiedi</a>
     {% endif %}
 
-    <a href="{{request.META.HTTP_REFERER}}">Go back</a>
+    <!-- <a href="{{request.META.HTTP_REFERER}}">Go back</a> -->
+    <a href="{% url 'profile'  %}">Vai al Profilo</a>
+    <a href='/' >Vai alla HomePage</a>
 
 
 
