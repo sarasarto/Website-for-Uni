@@ -12,7 +12,7 @@
 
      <a href="{% url 'attivita-request-precompiled' object.id %}">Richiedi</a>
     {% endif %}
-    <a href="/">Go back</a>
+    <a href="{{request.META.HTTP_REFERER}}">Go back</a>
 
 
 </div>
