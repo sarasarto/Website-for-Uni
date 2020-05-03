@@ -17,12 +17,6 @@ class TesiCreataForm(forms.ModelForm):
         exclude = ['author', 'date_posted']
 
 
-class AttivitaCreataForm(forms.ModelForm):
-    class Meta:
-        model = Attivita_progettuale_creata
-        fields = "__all__"
-        exclude = ['author', 'date_posted']
-
 
 class ProvaForm(forms.ModelForm):
     class Meta:

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
+    'attivita.apps.AttivitaConfig',
     'crispy_forms',
     'taggit',
     'django.contrib.admin',
