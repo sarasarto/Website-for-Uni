@@ -473,6 +473,7 @@ class RequestTesiDetailView(FormView, DetailView):
         # req.data_fine = tesi.data_fine
         # req.tag = tesi.tag
         from_tesicreata_to_richiestabozza(tesi, req)
+        req.modified = False
         req.data_laurea = form.cleaned_data.get('data_laurea')
 
         #req.autore = form.cleaned_data.get('autore')
@@ -813,6 +814,7 @@ class RequestAttivitaDetailView(FormView, DetailView):
         utente = User.objects.get(username=r)
         stud_log = Studente.objects.get(user=utente)
         req.autore = stud_log
+        req.modified = False
 
         """if self.request.user.username != nome:
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
@@ -1072,6 +1074,7 @@ def from_richiestaattivitainviata_to_richiestaattivitabozza(rai, rab):
     rab.titolo_elaborato = rai.titolo_elaborato
     rab.tipologia = rai.tipologia
     rab.data_laurea = rai.data_laurea
+    rab.modified = True
     rab.save()
 
 
@@ -1083,6 +1086,7 @@ def from_richiestatesiinviata_to_richiestatesibozza(ri, rb):
     rb.nome_azienda = ri.nome_azienda
     rb.data_laurea = ri.data_laurea
     rb.autore = ri.autore
+    rb.modified = True
     rb.save()
 
 

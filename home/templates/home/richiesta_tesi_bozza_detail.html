@@ -6,8 +6,11 @@
     <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
     <p class="text-secondary"> proposto da: {{ object.relatore }}</p>
     <p class="text-secondary"> laurea: {{ object.data_laurea }}</p>
-    <a href="/">Go back</a>
-    <a href="{% url 'richiesta-tesi-update' object.id %}">Update</a>
+    <a href="{% url 'profile' %}">Go back</a>
+    {% if object.modified %}
+        <a href="{% url 'richiesta-tesi-update' object.id %}">Update</a>
+    {% else %}
+    {% endif %}
     <a href="{% url 'richiesta-tesi-delete' object.id %}">Delete</a>
     <form method='get' action='#'>
         <input type="submit" value="Send" name="Send"/>

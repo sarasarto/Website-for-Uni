@@ -1,8 +1,8 @@
 TO DO:
-* nei bottoni back tornare indietro nella pagina precedente non alla home page o al profilo
 * MANCA MESSAGGIO ERRORE SE LOGIN SBAGLIATO IN ACCETTA-RIFIUTA PROPOSTA
 
 DONE:
+* nei bottoni back tornare indietro nella pagina precedente non alla home page o al profilo (?)
 * filtraggio per attivita o tesi le ricerche
 * i docenti possono richiedere una tesi --> detail tesi nell html if è un docente non farmi vedere il bottone richiedi
 * uno studente non può fare richiesta piu di una volta della stessa tesi

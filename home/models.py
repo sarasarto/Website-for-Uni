@@ -106,6 +106,8 @@ class Richiesta_tesi(models.Model):
 
 
 class Richiesta_tesi_bozza(Richiesta_tesi):
+    modified = models.BooleanField(default=True)
+
     def get_absolute_url(self):
         return reverse('richiesta-tesi-detail', kwargs={'pk': self.pk})
 
@@ -139,6 +141,8 @@ class Richiesta_prova_finale(models.Model):
 
 
 class Richiesta_prova_finale_bozza(Richiesta_prova_finale):
+    modified = models.BooleanField(default=True)
+
     def get_absolute_url(self):
         return reverse('richiesta-prova-finale-detail', kwargs={'pk': self.pk})
 

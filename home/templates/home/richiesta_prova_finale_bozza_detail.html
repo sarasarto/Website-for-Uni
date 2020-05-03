@@ -6,8 +6,11 @@
     <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
     <p class="text-secondary"> proposto da: {{ object.tutor }}</p>
 
-    <a href="/">Go back</a>
-    <a href="{% url 'richiesta-attivita-update' object.id %}">Update</a>
+    <a href="{% url 'profile' %}">Go back</a>
+    {% if object.modified %}
+        <a href="{% url 'richiesta-attivita-update' object.id %}">Update</a>
+    {% else %}
+    {% endif %}
     <a href="{% url 'richiesta-attivita-delete' object.id %}">Delete</a>
     <form method='get' action='#'>
         <input type="submit" value="Send" name="Send"/>
