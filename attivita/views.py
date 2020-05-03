@@ -36,6 +36,7 @@ from itertools import chain
 
 class AttivitaDetailView(LoginRequiredMixin, DetailView):
     model = Attivita_progettuale_creata
+    template_name = 'attivita/attivita_progettuale_creata_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(AttivitaDetailView, self).get_context_data(**kwargs)
@@ -77,12 +78,14 @@ def AttivitaCreate(request):
 
 class AttivitaUpdateView(LoginRequiredMixin, UpdateView):
     model = Attivita_progettuale_creata
+    template_name = 'attivita/attivita_progettuale_creata_form.html'
     fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
 
 
 class AttivitaDeleteView(LoginRequiredMixin, DeleteView):
     model = Attivita_progettuale_creata
     success_url = '/profile'
+    template_name = 'attivita/attivita_progettuale_creata_confirm_delete.html'
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()

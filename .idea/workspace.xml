@@ -3,16 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="- sistemato Update per il profilo Docente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attivita/templates/attivita/attivita_progettuale_creata_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/attivita/templates/attivita/attivita_progettuale_creata_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attivita/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/attivita/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/attivita_index.html" beforeDir="false" afterPath="$PROJECT_DIR$/attivita/templates/attivita/attivita_index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/attivita_progettuale_creata_confirm_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/attivita/templates/attivita/attivita_progettuale_creata_confirm_delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/attivita_progettuale_creata_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/attivita/templates/attivita/attivita_progettuale_creata_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/attivita_progettuale_creata_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/attivita/templates/attivita/attivita_progettuale_creata_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/tesicreata_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/tesicreata_form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tesi/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tesi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588500223838</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="- aggiunta app solo per le attivita">
+      <created>1588524172426</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1588524172426</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -343,7 +344,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- modificato models tesi e attivita &#10;-aggiunta tutte le funzionalità di crea , update e delete per attivita" />
     <MESSAGE value="aggiunti bottoni tesi e attivita" />
     <MESSAGE value="-aggiunto modello e pagine per archivio tesi e modelli&#10;-aggiunta tabella nel profilo docente" />
     <MESSAGE value="aggiunto setting gmail" />
@@ -368,17 +368,18 @@
     <MESSAGE value="tutto" />
     <MESSAGE value="- sistemato Update per il profilo Docente" />
     <MESSAGE value="- sistemato goback rimanente" />
-    <option name="LAST_COMMIT_MESSAGE" value="- sistemato goback rimanente" />
+    <MESSAGE value="- aggiunta app solo per le attivita" />
+    <option name="LAST_COMMIT_MESSAGE" value="- aggiunta app solo per le attivita" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588500222682">
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1588524170552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588500222682" />
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588524170552" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

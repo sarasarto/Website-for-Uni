@@ -217,7 +217,7 @@ def show_att_archiviate(request):
 
 class AttivitaArchiviataDetailView(DetailView):
     model = Attivita_progettuale_Archiviata
-    template_name = 'home/attivita_progettuale_creata_detail.html'
+    template_name = 'attivita/attivita_progettuale_creata_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(AttivitaArchiviataDetailView, self).get_context_data(**kwargs)
@@ -232,7 +232,7 @@ def show_attivita(request):
         'all_att': all_att,
 
     }
-    return render(request, 'home/attivita_index.html', context)
+    return render(request, 'attivita/attivita_index.html', context)
 
 
 # TESI
