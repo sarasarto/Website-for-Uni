@@ -6,6 +6,7 @@
     <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
     <p class="text-secondary"> proposto da: {{ object.relatore }}</p>
     <p class="text-secondary"> laurea: {{ object.data_laurea }}</p>
+    <p class="text-secondary"> tirocinio: {{ object.tirocinio }}</p>
     <a href="{% url 'profile' %}">Go back</a>
     {% if object.modified %}
         <a href="{% url 'richiesta-tesi-update' object.id %}">Update</a>

@@ -19,12 +19,17 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 
+import attivita
 from attivita import views
 from attivita.views import (
     AttivitaDetailView,
     AttivitaCreate,
     AttivitaUpdateView,
-    AttivitaDeleteView,)
+    AttivitaDeleteView,
+    AttivitaArchiviataDetailView,
+    RequestAttivitaDetailView,
+    RequestAttivitaUpdateView,
+)
 from home import views
 from users import views as user_views
 from home.views import (
@@ -39,7 +44,7 @@ from home.views import (
     tesi_richiesta,
     provafin_richiesta,
     RequestTesiDetailView,
-    RequestAttivitaDetailView,
+
     RTDetailView,
     RAPDetailView,
     AccettaRifiutaTesiDetailView,
@@ -47,9 +52,9 @@ from home.views import (
     RichiestaTesiInviate,
     RichiestaAttInviate,
     RequestTesiUpdateView,
-    RequestAttivitaUpdateView,
+
     RequestTesiDeleteView,
-    RequestAttivitaDeleteView,IndexView,TesiDetailView,AttivitaArchiviataDetailView,TesiArchiviataDetailView
+    RequestAttivitaDeleteView,IndexView,TesiDetailView,TesiArchiviataDetailView
 
 )
 
@@ -63,10 +68,10 @@ urlpatterns = [
 
     path('profile/', user_views.profile, name='profile'),
     path('tesi/', views.show_tesi, name='tesi'),
-    path('attivita/', views.show_attivita, name='attivita'),
+    path('attivita/', attivita.views.show_attivita, name='attivita'),
     path('tesi_archiviata/', views.show_tesi_archiviate, name='t_archiviata'),
     path('tesi_archiviata/<int:pk>/detail', TesiArchiviataDetailView.as_view(), name='t_archiviata_detail'),
-    path('att_archiviata/', views.show_att_archiviate, name='att_archiviata'),
+    path('att_archiviata/', attivita.views.show_att_archiviate, name='att_archiviata'),
     path('att_archiviata/<int:pk>/detail', AttivitaArchiviataDetailView.as_view(), name='att_archiviata_detail'),
 
     # per la tesi

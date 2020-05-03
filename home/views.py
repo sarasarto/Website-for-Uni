@@ -203,36 +203,7 @@ def show_tesi_archiviate(request):
     return render(request, 'home/archivio_tesi.html', context)
 
 
-def show_att_archiviate(request):
-    utente = User.objects.get(username=request.user.username)
-    docente_log = Docente.objects.get(user=utente)
-    all_att = Attivita_progettuale_Archiviata.objects.filter(author=docente_log).order_by('-data_archiviazione')
 
-    context = {
-        'all_att': all_att,
-
-    }
-    return render(request, 'home/archivio_attivita.html', context)
-
-
-class AttivitaArchiviataDetailView(DetailView):
-    model = Attivita_progettuale_Archiviata
-    template_name = 'attivita/attivita_progettuale_creata_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(AttivitaArchiviataDetailView, self).get_context_data(**kwargs)
-        is_docente = True
-        context['is_docente'] = is_docente
-        return context
-
-
-def show_attivita(request):
-    all_att = Attivita_progettuale_creata.objects.all().order_by('-date_posted')
-    context = {
-        'all_att': all_att,
-
-    }
-    return render(request, 'attivita/attivita_index.html', context)
 
 
 # TESI
@@ -719,52 +690,7 @@ def RichiestaAttInviate(request):
     return render(request, 'home/richiesta_att_inviata.html', context)
 
 
-class RequestAttivitaDetailView(FormView, DetailView):
-    model = Attivita_progettuale_creata
-    template_name = "home/precompiled_attivita_request.html"
-    form_class = PrecompiledAttivitaRequestForm
-    success_url = "/"
 
-    def form_valid(self, form):
-        att = self.get_object()
-        req = Richiesta_prova_finale_bozza()
-        #req.tutor = att.tutor
-        #req.argomento = att.argomento
-        req.titolo_elaborato = form.cleaned_data.get('titolo_elaborato')
-        req.tipologia = form.cleaned_data.get('tipologia')
-        req.data_laurea = form.cleaned_data.get('data_laurea')
-        from_attprogettualecreata_to_richiestaProvabozza(att, req)
-
-        a = req.tutor
-
-        r = self.request.user.username
-        utente = User.objects.get(username=r)
-        stud_log = Studente.objects.get(user=utente)
-        req.autore = stud_log
-        req.modified = False
-
-        """if self.request.user.username != nome:
-            messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
-            return redirect('attivita-request-precompiled', pk=self.get_object().id)"""
-
-        all_bozze = Richiesta_prova_finale_bozza.objects.all()
-        if all_bozze:
-            nome = self.request.user.username.split('.')
-            for s in all_bozze:
-                if s.autore.nome == nome[0] and s.autore.cognome == nome[1]\
-                        and s.autore.mail == self.request.user.email \
-                        and s.argomento == req.argomento:
-                    messages.error(self.request, f'Esiste già una tua bozza per la attività {req.argomento}!')
-                    return redirect('attivita-request-precompiled', pk=self.get_object().id)
-
-        req.save()
-        return super().form_valid(form)
-
-
-class RequestAttivitaUpdateView(LoginRequiredMixin, UpdateView):
-    model = Richiesta_prova_finale_bozza
-    form_class = RequestProvaFinaleForm
-    template_name = "home/request_attivita_update.html"
 
 
 class RequestAttivitaDeleteView(LoginRequiredMixin, DeleteView):
