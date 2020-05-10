@@ -7,13 +7,25 @@
     <h3 class="text">
         Verrà creata una richiesta per la tesi  "{{ object.argomento }}""
     </h3>
-    <p class="text">Nome relatore : {{ object.relatore }}</p>
+    <!-- <p class="text">Nome relatore : {{ object.relatore }}</p>
     <p class="text">Nome argomento : {{ object.argomento }}</p>
     <p class="text">Tirocinio : {{ object.tirocinio }}</p>
     {% if object.tirocinio == 'in_azienda' %}
     <p class="text">Nome azienda : {{ object.nome_azienda }}</p>
-    {% endif %}
+    {% endif %} -->
+    <label for="fname">Nome relatore:</label>
+    <input type="text" id="fname" name="fname" value="{{ object.relatore }}" readonly><br><br>
 
+    <label for="fname">Argomento:</label>
+    <input type="text" id="fname" name="fname" value="{{ object.argomento }}" readonly><br><br>
+
+    <label for="fname">Tirocinio:</label>
+    <input type="text" id="fname" name="fname" value="{{ object.tirocinio }}" readonly><br><br>
+
+    {% if object.tirocinio == 'in_azienda' %}
+        <label for="fname">Nome azienda:</label>
+        <input type="text" id="fname" name="fname" value="{{ object.nome_azienda }}" readonly><br><br>
+    {% endif %}
 
         <div class="content-section">
             <form method="POST">

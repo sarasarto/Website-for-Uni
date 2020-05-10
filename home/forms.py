@@ -11,6 +11,9 @@ class ScelteForm(forms.Form):
 
 
 class TesiCreataForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(TesiCreataForm, self).__init__(*args, **kwargs)
+        self.fields['relatore'].widget.attrs['readonly'] = True
     class Meta:
         model = TesiCreata
         fields = "__all__"
