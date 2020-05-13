@@ -19,8 +19,6 @@
 </head>
 <body>
 <div id="wrapper">
-
-
     <header id="page-header" class="clearfix">
         <div class="container-fluid">
             <div class="row-fluid">
@@ -36,8 +34,9 @@
             </div>
         </div>
     </header>
-
 </div>
+
+
 <div>
     <header class="site-header">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="margin-top:20px">
@@ -81,29 +80,27 @@
                     <div class="navbar-nav">
 
                         {% if user.is_authenticated %}
-                        <a class="nav-item ml-4" href="{% url 'logout' %}">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout
-                        </a>
-
-                    </div>
-                </div>
-                <a class="nav-item ml-4" href="{% url 'profile' %}"> Profile </a>
+                            <a class="nav-item ml-4" href="{% url 'logout' %}">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout
+                            </a>
+                            <a class="nav-item ml-4" href="{% url 'profile' %}"> Profile </a>
 
                 <!-- <a class="nav-item ml-4" href="{% url 'profile' %}"> {{ user }} </a> -->
 
 
-                {% else %}
-                <a class="nav-item ml-4" href="{% url 'login' %}">
-                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login
-                </a>
+                        {% else %}
+                            <a class="nav-item ml-4" href="{% url 'login' %}">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login
+                            </a>
 
-                <a href="{% url 'register' %}">Registration</a>
+                            <a class="nav-item ml-4" href="{% url 'register' %}">Registration</a>
 
-                {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
-
 </div>
 
 <!--Items-->
@@ -122,11 +119,11 @@
 
 
 {% if messages %}
-{% for message in messages %}
-<div class="alert alert-{{ message.tags }}">
-    {{ message }}
-</div>
-{% endfor %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
 {% endif %}
 
 
