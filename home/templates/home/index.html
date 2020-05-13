@@ -1,35 +1,46 @@
 {% extends 'home/base_index.html' %}
 
+
 {% block for %}
-<h2></h2>
-<ul class="cards">
-    {% for progetto in all_projects %}
-    <li>
-        <h3>Argomento : {{ progetto.argomento }}</h3>
- <!-- se è una tesi -->
-        {% if progetto.relatore %}
-        <h3>Relatore : {{ progetto.relatore }}</h3>
-        <h3>tirocinio : {{ progetto.tirocinio }}</h3>
-        {% if progetto.tirocinio == 'in azienda' %}
-        <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
-        {% endif %}
-        <!-- dettagli -->
-        <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-            Details</a>
- <!-- se è una attivita -->
-        {% else %}
-        <h3>Tutor : {{ progetto.tutor }}</h3>
 
-        <!-- dettagli -->
-        <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-            Details</a>
-        {% endif %}
-    </li>
+<h2> {{ title }}</h2>
+<div class="row">
+    {% if results %}
+
+    <ul class="cards">
+        {% for progetto in results %}
+        <li>
+            <h3>Argomento : {{ progetto.argomento }}</h3>
+            <!-- se è una tesi -->
+            {% if progetto.relatore %}
+            <h3>Relatore : {{ progetto.relatore }}</h3>
+            <h3>tirocinio : {{ progetto.tirocinio }}</h3>
+            {% if progetto.tirocinio == 'in azienda' %}
+            <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
+            {% endif %}
+            <!-- dettagli -->
+            <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                Details</a>
+            <!-- se è una attivita -->
+            {% else %}
+            <h3>Tutor : {{ progetto.tutor }}</h3>
+
+            <!-- dettagli -->
+            <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                Details</a>
+            {% endif %}
+        </li>
 
 
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h2>Non ci sono risultati</h2>
+    {% endif %}
 
+    {% block filtra %}
+    {% endblock filtra %}
 
+</div>
 {% endblock %}
 

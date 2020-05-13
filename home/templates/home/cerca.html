@@ -1,64 +1,23 @@
-{% extends 'home/base_index.html' %}
-
-{% block for %}
-<h1>Risulati della tua ricerca per "{{ query }}": </h1>
-<div class="row">
-
-    <div class="col">
-
-        {% if results %}
-        <ul class="cards">
-
-            {% for res in results %}
-            <li>
-                <h3>Argomento : {{ res.argomento }}</h3>
-                <!-- se è una tesi -->
-                {% if res.relatore %}
-                <h3>Relatore : {{ res.relatore }}</h3>
-                <h3>tirocinio : {{ res.tirocinio }}</h3>
-                {% if res.tirocinio == 'in azienda' %}
-                <h3>nome azienda : {{ res.nome_azienda }}</h3>
-                {% endif %}
-                <!-- dettagli -->
-                <a href="{% url 'tesi-detail' res.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
-
-                <!-- se è una attivita -->
-                {% else %}
-                <h3>Tutor : {{ res.tutor }}</h3>
-
-                <!-- dettagli -->
-                <a href="{% url 'attivita-detail' res.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <h2>Non ci sono risultati</h2>
-        {% endif %}
-
-    </div>
-    <div class="col">
-        <div class="content-section">
-            <form method="POST">
-                <h3>Filtra per</h3>
-                {% csrf_token %}
-
-                {{ form.as_p }}
-                <!--</fieldset>-->
-                <div class="form-group">
-                    <button class="btn btn-black" type="submit">Applica Filtri</button>
-                </div>
+{% extends 'home/index.html' %}
 
 
-            </form>
+{% block filtra %}
+<div class="col">
+    <div class="content-section">
+        <form method="POST">
+            <h3>Filtra per</h3>
+            {% csrf_token %}
 
-        </div>
+            {{ form.as_p }}
 
+            <div class="form-group">
+                <button class="btn btn-black" type="submit">Applica Filtri</button>
+            </div>
+
+
+        </form>
 
     </div>
 
 </div>
-    {% endblock %}
-
+{% endblock filtra %}

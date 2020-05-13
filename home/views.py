@@ -55,7 +55,7 @@ class IndexView(ListView):
         context = {
             'all_tesi': all_tesi,
             'all_attivita': all_attivita,
-            'all_projects': tot
+            'results': tot
         }
         return context
 
@@ -117,6 +117,7 @@ def cerca(request):
     results = []
     risultati_tutti = []
     attivita_tutte = []
+    title = "Risultati della ricerca per " + "'" + query + "'" + " :"
 
     for p in lista_q:
         risultati = TesiCreata.objects.filter(Q(argomento__icontains=p) |
@@ -140,10 +141,12 @@ def cerca(request):
                 attivita_tutte = sorted(attivita_tutte, key=lambda x: x.date_posted, reverse=True)
                 attivita_tutte = list(set(attivita_tutte))  # per togliere duplicati
                 results = attivita_tutte
+
                 context = {
                     'query': query,
                     'results': results,
                     'form': form,
+                    'title': title,
                 }
                 return render(request, template, context)
             if tesi_form:
@@ -155,6 +158,7 @@ def cerca(request):
                     'query': query,
                     'results': results,
                     'form': form,
+                    'title': title,
                 }
                 return render(request, template, context)
 
@@ -169,18 +173,22 @@ def cerca(request):
         'results': results,
         'form': form,
         'att': attivita_tutte,
-        'risultati': risultati_tutti
+        'risultati': risultati_tutti,
+        'title': title,
     }
     return render(request, template, context)
 
 
 def show_tesi(request):
-    all_tesi = TesiCreata.objects.all().order_by('-date_posted')
+    # all_tesi = TesiCreata.objects.all().order_by('-date_posted')
+    results = TesiCreata.objects.all().order_by('-date_posted')
+    title = "Tutte le tesi:"
     context = {
-        'all_tesi': all_tesi,
+        'results': results,
+        'title': title,
 
     }
-    return render(request, 'home/tesi_index.html', context)
+    return render(request, 'home/index.html', context)
 
 
 class TesiArchiviataDetailView(DetailView):

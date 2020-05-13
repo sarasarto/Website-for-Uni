@@ -83,12 +83,13 @@ class AttivitaUpdateView(LoginRequiredMixin, UpdateView):
 
 
 def show_attivita(request):
-    all_att = Attivita_progettuale_creata.objects.all().order_by('-date_posted')
+    results = Attivita_progettuale_creata.objects.all().order_by('-date_posted')
+    title = "Tutte le attivita progettuali:"
     context = {
-        'all_att': all_att,
-
+         'results': results,
+         'title': title,
     }
-    return render(request, 'attivita/attivita_index.html', context)
+    return render(request, 'home/index.html', context)
 
 
 def show_att_archiviate(request):
