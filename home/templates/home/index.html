@@ -4,6 +4,8 @@
 {% block for %}
 
 <h2> {{ title }}</h2>
+
+
 <div class="row">
     {% if results %}
 
@@ -11,23 +13,42 @@
         {% for progetto in results %}
         <li>
             <h3>Argomento : {{ progetto.argomento }}</h3>
+
             <!-- se è una tesi -->
             {% if progetto.relatore %}
+
             <h3>Relatore : {{ progetto.relatore }}</h3>
             <h3>tirocinio : {{ progetto.tirocinio }}</h3>
+
             {% if progetto.tirocinio == 'in azienda' %}
             <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
             {% endif %}
+
             <!-- dettagli -->
+            {% if progetto.data_archiviazione %}
+            <a href="{% url 't_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                Details</a>
+            {% else %}
             <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
                 Details</a>
+            {% endif %}
+
             <!-- se è una attivita -->
             {% else %}
+
             <h3>Tutor : {{ progetto.tutor }}</h3>
 
             <!-- dettagli -->
+            {% if progetto.data_archiviazione %}
+            <h3> archiviata </h3>
+            <a href="{% url 'att_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                Details</a>
+            {% else %}
             <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
                 Details</a>
+            {% endif %}
+
+
             {% endif %}
         </li>
 
@@ -35,12 +56,14 @@
         {% endfor %}
     </ul>
     {% else %}
-    <h2>Non ci sono risultati</h2>
+    <h2>{{no_results}}</h2>
     {% endif %}
 
     {% block filtra %}
     {% endblock filtra %}
 
 </div>
+
+
 {% endblock %}
 

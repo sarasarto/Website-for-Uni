@@ -86,8 +86,9 @@ def show_attivita(request):
     results = Attivita_progettuale_creata.objects.all().order_by('-date_posted')
     title = "Tutte le attivita progettuali:"
     context = {
-         'results': results,
-         'title': title,
+        'results': results,
+        'title': title,
+        'no_results': "Non ci sono attivita progettuali",
     }
     return render(request, 'home/index.html', context)
 
@@ -95,13 +96,15 @@ def show_attivita(request):
 def show_att_archiviate(request):
     utente = User.objects.get(username=request.user.username)
     docente_log = Docente.objects.get(user=utente)
-    all_att = Attivita_progettuale_Archiviata.objects.filter(author=docente_log).order_by('-data_archiviazione')
+    results = Attivita_progettuale_Archiviata.objects.filter(author=docente_log).order_by('-data_archiviazione')
+    title = "Tutte le attività progettuali archiviate: "
 
     context = {
-        'all_att': all_att,
-
+        'results': results,
+        'title': title,
+        'no_results': "Non ci sono attivita progettuali archiviate",
     }
-    return render(request, 'attivita/archivio_attivita.html', context)
+    return render(request, 'home/index.html', context)
 
 
 class AttivitaDeleteView(LoginRequiredMixin, DeleteView):

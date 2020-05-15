@@ -186,6 +186,7 @@ def show_tesi(request):
     context = {
         'results': results,
         'title': title,
+        'no_results': "Non ci sono tesi"
 
     }
     return render(request, 'home/index.html', context)
@@ -205,14 +206,15 @@ class TesiArchiviataDetailView(DetailView):
 def show_tesi_archiviate(request):
     utente = User.objects.get(username=request.user.username)
     docente_log = Docente.objects.get(user=utente)
-    all_tesi = TesiArchiviata.objects.filter(author=docente_log).order_by('-data_archiviazione')
+    results = TesiArchiviata.objects.filter(author=docente_log).order_by('-data_archiviazione')
+    title = "Tutte le tesi archiviate:"
 
-    context = {'all_tesi': all_tesi, }
-    return render(request, 'home/archivio_tesi.html', context)
-
-
-
-
+    context = {
+        'results': results,
+        'title': title,
+        'no_results': "Non ci sono tesi archiviate"
+    }
+    return render(request, 'home/index.html', context)
 
 # TESI
 
