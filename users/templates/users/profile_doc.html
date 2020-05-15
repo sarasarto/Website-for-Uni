@@ -2,80 +2,97 @@
 {% load crispy_forms_tags %}
 {% block body %}
 
-
 <div class="container-fluid" id="tourpackages-carousel">
 
     <div class="row">
+        <div class="col-7">
 
-        <div class="col">
-            <h2>Sei docente</h2>
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
+            <h1>Tutte le tesi create </h1>
+            <ul class="cards">
+
+
+                {% for tesi in all_tesi %}
+
+                <li>
+                    <h5>Argomento : {{ tesi.argomento }} </h5>
+                    <h5>Autore : {{ tesi.author }}</h5>
+                    <h5>tirocinio : {{ tesi.tirocinio }}</h5>
+                    {% if tesi.tirocinio == 'in azienda' %}
+                    <h5>nome azienda : {{ tesi.nome_azienda }}</h5>
+                    {% endif %}
+                    <!-- dettagli -->
+                    <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button">
+                        View
+                        Details</a>
+
+                    <a href="{% url 'tesi-delete' tesi.id %}" class="btn btn-info btn-xs" role="button">
+                        Elimina </a>
+                    <a href="{% url 'tesi-update' tesi.id %}" class="btn btn-info btn-xs" role="button">
+                        Aggiorna </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+
         </div>
-        <div class="col">
-            <div class="sidebar">
-                <h3>Sidebar</h3>
 
-                <ul class="list-group">
-                    <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">Tesi Archiviate</a>
-                    <a href="{% url 'att_archiviata' %}" class="list-group-item list-group-item-light">Attivita
-                        progettuali archiviate</a>
-                    <a href="{% url 'tesi-create' %}" class="list-group-item list-group-item-light" role="button"> Crea
-                        Tesi</a>
-                    <a href="{% url 'attivita-create' %}" class="list-group-item list-group-item-light"> Crea Attività
-                        progettuale</a>
-                </ul>
-                </p>
+        <div class="col">
+            <div class="container">
+                <div class="col">
+
+                    <h1 class="account-heading">Docente {{ user.username }}</h1>
+                    <h3 class="text-secondary">{{ user.email }}</h3>
+                </div>
+
+                <div class="w-100"></div>
+
+                <div class="col">
+                    <h1>Sidebar</h1>
+
+                    <ul class="list-group">
+                        <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">Tesi
+                            Archiviate</a>
+                        <a href="{% url 'att_archiviata' %}" class="list-group-item list-group-item-light">Attivita
+                            progettuali archiviate</a>
+                        <a href="{% url 'tesi-create' %}" class="list-group-item list-group-item-light"
+                           role="button"> Crea
+                            Tesi</a>
+                        <a href="{% url 'attivita-create' %}" class="list-group-item list-group-item-light">
+                            Crea
+                            Attività
+                            progettuale</a>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-7">
+            <h1>Tutte le attivita create </h1>
+            <ul class="cards">
+                {% for att in all_attivita %}
+
+                <li>
+                    <h5>Argomento : {{ att.argomento }} </h5>
+                    <h5>Autore : {{ att.author }}</h5>
+
+                    <!-- dettagli -->
+                    <a href="{% url 'attivita-detail' att.id %}" class="btn btn-info btn-xs" role="button">
+                        View
+                        Details</a>
+
+                    <a href="{% url 'attivita-delete' att.id %}" class="btn btn-info btn-xs" role="button">
+                        Elimina </a>
+                    <a href="{% url 'attivita-update' att.id %}" class="btn btn-info btn-xs" role="button">
+                        Aggiorna </a>
+                </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 
 </div>
-
-<h1>Tutte le tesi create </h1>
-<ul class="cards">
-
-
-    {% for tesi in all_tesi %}
-
-    <li>
-        <h5>Argomento : {{ tesi.argomento }} </h5>
-        <h5>Autore : {{ tesi.author }}</h5>
-        <h5>tirocinio : {{ tesi.tirocinio }}</h5>
-        {% if tesi.tirocinio == 'in azienda' %}
-        <h5>nome azienda : {{ tesi.nome_azienda }}</h5>
-        {% endif %}
-        <!-- dettagli -->
-        <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button"> View
-            Details</a>
-
-        <a href="{% url 'tesi-delete' tesi.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
-        <a href="{% url 'tesi-update' tesi.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
-    </li>
-    {% endfor %}
-
-</ul>
-
-
-<h1>Tutte le attivita create </h1>
-<ul class="cards">
-    {% for att in all_attivita %}
-
-    <li>
-        <h5>Argomento : {{ att.argomento }} </h5>
-        <h5>Autore : {{ att.author }}</h5>
-
-        <!-- dettagli -->
-        <a href="{% url 'attivita-detail' att.id %}" class="btn btn-info btn-xs" role="button"> View
-            Details</a>
-
-        <a href="{% url 'attivita-delete' att.id %}" class="btn btn-info btn-xs" role="button"> Elimina </a>
-        <a href="{% url 'attivita-update' att.id %}" class="btn btn-info btn-xs" role="button"> Aggiorna </a>
-    </li>
-
-    {% endfor %}
-</ul>
-
 
 {% endblock %}

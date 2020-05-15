@@ -4,10 +4,8 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="- sistemato Update per il profilo Docente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/richiesta_tesi_inviata.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/richiesta_tesi_inviata.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/tesi_request.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/tesi_request.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_stud.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_stud.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -353,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589569473767</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="- ottimizzazione codice per template studenti.. ancora da cancellare i vecchi">
+      <created>1589571665315</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1589571665315</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -373,7 +378,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- tutte le mail vengono inviate&#10;- creata detail view per accept" />
     <MESSAGE value="- registrazione: controllo nome.cognome&#10;- messo tirocinio azienda o interno e aggiornato ovunque" />
     <MESSAGE value="- Ricerca per tags funzionante &#10;- aggiunta search bar nel template di base&#10;- creato nuovo template cerca per mostrare i risultati" />
     <MESSAGE value="- aggiunto file base_index che viene esteso da tutti gli html index.html&#10;- sistemati campi dei modelli in index &#10;- aggiunta visualizzazione per data ultima creazione (aggiunta di campi nei modelli)&#10;- cambiata la home da def a class con listview&#10;- aggiunta sidebar per cerca.html" />
@@ -398,25 +402,26 @@
     <MESSAGE value="- ulteriori spostamenti e piccoli dettagli" />
     <MESSAGE value="- sistemata navbar" />
     <MESSAGE value="- ottimizzazione codice template per profilo docente: cancellati due templati per archiviazione tesi e attivita" />
-    <option name="LAST_COMMIT_MESSAGE" value="- ottimizzazione codice template per profilo docente: cancellati due templati per archiviazione tesi e attivita" />
+    <MESSAGE value="- ottimizzazione codice per template studenti.. ancora da cancellare i vecchi" />
+    <option name="LAST_COMMIT_MESSAGE" value="- ottimizzazione codice per template studenti.. ancora da cancellare i vecchi" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1589569472833">
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1589571664644">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589569472833" />
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589571664644" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="354" height="442" key="Diff.GoToChangePopup/0.0.1536.824@0.0.1536.824" timestamp="1584811505188" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1589569426259">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1589571660875">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1589569426259" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1589571660875" />
     <state x="933" y="167" key="FileChooserDialogImpl" timestamp="1588425560319">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -429,10 +434,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587410696211" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1589387308709">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1589571676854">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589387308709" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589571676854" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584811331973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

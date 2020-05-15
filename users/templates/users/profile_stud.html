@@ -1,81 +1,81 @@
 {% extends 'home/base_index.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
-<!-- <div class="content-section">
-    <h1>Sei studente</h1>
-    <h2 class="account-heading">{{ user.username }}</h2>
-    <p class="text-secondary">{{ user.email }}</p>
 
-    <a href="{%url 'tesi-richiesta' %}">Crea Richiesta Tesi</a>
-    <br>
-    <a href="{%url 'provafin-richiesta' %}">Crea Richiesta Prova Finale</a>
-</div>
-
-<br>
-<br>
--->
 <div class="container-fluid" id="tourpackages-carousel">
 
     <div class="row">
+        <div class="col-7">
+            <h1>Tutte le tue bozze di richieste di tesi</h1>
+            <ul class="cards">
+                {% for richieste in all_richiesta_tesi %}
+                <li>
+                    <h5>Relatore: {{ richieste.relatore }} </h5>
+                    <h5>Argomento: {{ richieste.argomento }}</h5>
+                    <h5>tirocinio : {{ richieste.tirocinio }}</h5>
+                    {% if richieste.tirocinio == 'in azienda' %}
+                    <h5>nome azienda : {{ richieste.nome_azienda }}</h5>
+                    {% endif %}
+                    <h5>Data laurea: {{ richieste.data_laurea }}</h5>
+                    <a href="{% url 'richiesta-tesi-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
+                </li>
+                {% endfor %}
 
-        <div class="col">
-            <h2>Sei studente</h2>
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
+            </ul>
         </div>
-        <div class="col">
-            <div class="sidebar">
-                <h3>Sidebar</h3>
 
-                <ul class="list-group">
-                    <a href="{% url 'tesi-inviate' %}" class="list-group-item list-group-item-light">Richieste Tesi
-                        Inviate</a>
-                    <a href="{% url 'att-inviate' %}" class="list-group-item list-group-item-light">Richieste Prove
-                        Finali Inviate</a>
-                    <a href="{% url 'tesi-richiesta' %}" class="list-group-item list-group-item-light" role="button">
-                        Crea Richiesta
-                        Tesi</a>
-                    <a href="{% url 'provafin-richiesta' %}" class="list-group-item list-group-item-light"> Crea
-                        Richiesta Prova Finale</a>
-                </ul>
+        <div class="col">
+            <div class="container">
+                <div class="col">
+
+                    <h1 class="account-heading">Studente {{ user.username }}</h1>
+                    <h3 class="text-secondary">{{ user.email }}</h3>
+                </div>
+
+                <div class="w-100"></div>
+
+                <div class="col">
+
+                    <h3>Sidebar</h3>
+
+                    <ul class="list-group">
+                        <a href="{% url 'tesi-inviate' %}" class="list-group-item list-group-item-light">Richieste Tesi
+                            Inviate</a>
+                        <a href="{% url 'att-inviate' %}" class="list-group-item list-group-item-light">Richieste Prove
+                            Finali Inviate</a>
+                        <a href="{% url 'tesi-richiesta' %}" class="list-group-item list-group-item-light"
+                           role="button">
+                            Crea Richiesta
+                            Tesi</a>
+                        <a href="{% url 'provafin-richiesta' %}" class="list-group-item list-group-item-light"> Crea
+                            Richiesta Prova Finale</a>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-7">
+            <h1>Tutte le tue bozze di richieste di prove finali</h1>
+            <ul class="cards">
+                {% for richieste in all_richiesta_pfinale %}
+                <li>
+                    <h5>Tutor: {{ richieste.tutor }} </h5>
+                    <h5>Argomento: {{ richieste.argomento }}</h5>
+                    <h5>Titolo elaborato: {{ richieste.titolo_elaborato }}</h5>
+                    <h5>Data laurea: {{ richieste.data_laurea }}</h5>
+                    <h5>Tipologia: {{ richieste.tipologia }}</h5>
+
+                    <a href="{% url 'richiesta-prova-finale-detail' richieste.id %}" class="btn btn-info btn-xs"
+                       role="button">Detail</a>
+
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
 </div>
-
-<h3>Tutte le tue bozze di richieste di tesi</h3>
-<ul class="cards">
-    {% for richieste in all_richiesta_tesi %}
-    <li>
-        <h5>Relatore: {{ richieste.relatore }} </h5>
-        <h5>Argomento: {{ richieste.argomento }}</h5>
-        <h5>tirocinio : {{ richieste.tirocinio }}</h5>
-        {% if richieste.tirocinio == 'in azienda' %}
-        <h5>nome azienda : {{ richieste.nome_azienda }}</h5>
-        {% endif %}
-        <h5>Data laurea: {{ richieste.data_laurea }}</h5>
-        <a href="{% url 'richiesta-tesi-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
-    </li>
-    {% endfor %}
-
-</ul>
-
-<br>
-<h3>Tutte le tue bozze di richieste di prove finali</h3>
-<ul class="cards">
-    {% for richieste in all_richiesta_pfinale %}
-    <li>
-        <h5>Tutor: {{ richieste.tutor }} </h5>
-        <h5>Argomento: {{ richieste.argomento }}</h5>
-        <h5>Titolo elaborato: {{ richieste.titolo_elaborato }}</h5>
-        <h5>Data laurea: {{ richieste.data_laurea }}</h5>
-        <h5>Tipologia: {{ richieste.tipologia }}</h5>
-
-        <a href="{% url 'richiesta-prova-finale-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
-
-    </li>
-    {% endfor %}
-
-</ul>
-
 {% endblock %}
