@@ -304,11 +304,6 @@ class TesiDeleteView(LoginRequiredMixin, DeleteView):
 
 # ATTIVITA
 
-
-
-
-
-
 """class AttivitaCreateView(LoginRequiredMixin, CreateView):
     model = Attivita_progettuale_creata
     fields = ['tutor', 'argomento', 'data_inizio', 'data_fine', 'tag']
@@ -351,16 +346,20 @@ def tesi_richiesta(request):
 def RichiestaTesiInviate(request):
     # nome = request.user.username.split('.')
     all_studenti = Studente.objects.all()
-    all_richiesta_tesi = {}
+    results = {}
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
-            all_richiesta_tesi = Richiesta_tesi_inviata.objects.filter(autore=s).order_by('-date_posted')
+            results = Richiesta_tesi_inviata.objects.filter(autore=s).order_by('-date_posted')
+
 
     context = {
-        'all_richiesta_tesi': all_richiesta_tesi,
+        #'all_richiesta_tesi': all_richiesta_tesi,
+        'results': results,
+        'title': "Le tue tesi inviate: ",
+        'no_results': "Non hai ancora inviato nessuna tesi"
     }
-    return render(request, 'home/richiesta_tesi_inviata.html', context)
+    return render(request, 'home/index.html', context)
 
 
 class RequestTesiDetailView(FormView, DetailView):
@@ -688,16 +687,19 @@ def provafin_richiesta(request):
 
 def RichiestaAttInviate(request):
     all_studenti = Studente.objects.all()
-    all_richiesta_tesi = {}
+    results = {}
     nome = request.user.username.split('.')
     for s in all_studenti:
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
-            all_richiesta_att = Richiesta_prova_finale_inviata.objects.filter(autore=s).order_by('-date_posted')
+            results = Richiesta_prova_finale_inviata.objects.filter(autore=s).order_by('-date_posted')
 
     context = {
-        'all_richiesta_att': all_richiesta_att,
+        #'all_richiesta_att': all_richiesta_att,
+        'results': results,
+        'title': "Le tue attività inviate: ",
+        'no_results': "Non hai ancora inviato nessuna attività"
     }
-    return render(request, 'home/richiesta_att_inviata.html', context)
+    return render(request, 'home/index.html', context)
 
 
 

@@ -2,9 +2,11 @@
 {% load crispy_forms_tags %}
 {% block body %}
 <h1>Le tue tesi inviate:</h1>
-{% if all_richiesta_tesi %}
+{% if results %}
+{{ title  }}
 <ul class="cards">
-    {% for richieste in all_richiesta_tesi %}
+
+    {% for richieste in results %}
     <li>
         <h3 class="account-heading"> Argomento: {{ richieste.argomento }}</h3>
         <p class="text-secondary"> proposto da: {{ richieste.relatore }}</p>
