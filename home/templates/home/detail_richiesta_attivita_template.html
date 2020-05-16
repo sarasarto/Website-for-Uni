@@ -5,16 +5,14 @@
     <h2 class="text-secondary"> tipologia : {{ object.tipologia }}</h2>
     <h2 class="text-secondary">laurea: {{ object.data_laurea }}</h2>
 
-    <a href="{% url 'profile' %}" class="btn btn-info btn-xs" role="button">Go back</a>
-    {% if object.modified %}
-    <a href="{% url 'richiesta-attivita-update' object.id %}" class="btn btn-info btn-xs" role="button">Update</a>
-    {% else %}
-    {% endif %}
-    <a href="{% url 'richiesta-attivita-delete' object.id %}" class="btn btn-info btn-xs" role="button">Delete</a>
-    <br>
-    <br>
     <form method='get' action='#'>
-        <input type="submit" value="Send" name="Send"/>
+        <input class="btn btn-info btn-xs" type="submit" value="Send" name="Send"/>
+        {% if object.modified %}
+            <a href="{% url 'richiesta-attivita-update' object.id %}" class="btn btn-info btn-xs" role="button">Update</a>
+        {% else %}
+        {% endif %}
+        <a href="{% url 'richiesta-attivita-delete' object.id %}" class="btn btn-info btn-xs" role="button">Delete</a>
+        <a href="{% url 'profile' %}" class="btn btn-info btn-xs" role="button">Go back</a>
     </form>
 
 </div>
