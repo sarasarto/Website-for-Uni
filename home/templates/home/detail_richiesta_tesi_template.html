@@ -1,0 +1,26 @@
+{% include 'home/detail_tesi_template.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+    <h3 class="text-secondary">laurea: {{ object.data_laurea }}</h3>
+    <a href="{% url 'profile'  %}" class="btn btn-info btn-xs" role="button">Back</a>
+    {% if object.modified %}
+        <a href="{% url 'richiesta-tesi-update' object.id %}" class="btn btn-info btn-xs" role="button">Update</a>
+    {% else %}
+    {% endif %}
+    <a href="{% url 'richiesta-tesi-delete' object.id %}" class="btn btn-info btn-xs" role="button">Delete</a>
+    <br>
+    <br>
+    <form method='get' action='#'>
+        <input type="submit" value="Send" name="Send"/>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

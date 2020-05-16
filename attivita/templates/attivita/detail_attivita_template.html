@@ -1,0 +1,10 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<h1>DETTAGLI</h1>
+<div class="content-section">
+
+    <h2 class="account-heading"> Argomento: {{ object.argomento }}</h2>
+    <h2 class="text-secondary"> proposto da: {{ object.tutor }}</h2>
+</div>
+{% endblock %}

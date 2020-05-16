@@ -1,0 +1,28 @@
+{% include 'attivita/detail_attivita_template.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <h2 class="text-secondary"> titolo elaborato : {{ object.titolo_elaborato }}</h2>
+    <h2 class="text-secondary"> tipologia : {{ object.tipologia }}</h2>
+    <h2 class="text-secondary">laurea: {{ object.data_laurea }}</h2>
+
+    <a href="{% url 'profile' %}" class="btn btn-info btn-xs" role="button">Go back</a>
+    {% if object.modified %}
+    <a href="{% url 'richiesta-attivita-update' object.id %}" class="btn btn-info btn-xs" role="button">Update</a>
+    {% else %}
+    {% endif %}
+    <a href="{% url 'richiesta-attivita-delete' object.id %}" class="btn btn-info btn-xs" role="button">Delete</a>
+    <br>
+    <br>
+    <form method='get' action='#'>
+        <input type="submit" value="Send" name="Send"/>
+    </form>
+
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

@@ -36,7 +36,7 @@ from itertools import chain
 
 class AttivitaDetailView(LoginRequiredMixin, DetailView):
     model = Attivita_progettuale_creata
-    template_name = 'attivita/attivita_progettuale_creata_detail.html'
+    template_name = 'attivita/detail_attivita_creata_template.html'
 
     def get_context_data(self, **kwargs):
         context = super(AttivitaDetailView, self).get_context_data(**kwargs)

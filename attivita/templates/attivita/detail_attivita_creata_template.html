@@ -1,0 +1,15 @@
+{% include 'attivita/detail_attivita_template.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+    <h2 class="text-secondary"> data inizio : {{ object.data_inizio }}</h2>
+    <h2 class="text-secondary"> data fine : {{ object.data_fine }}</h2>
+    {% if is_docente %}
+    {% else %}
+
+     <a href="{% url 'attivita-request-precompiled' object.id %}" class="btn btn-info btn-xs" role="button">Richiedi</a>
+    {% endif %}
+   <!-- <a href="{{request.META.HTTP_REFERER}}">Go back</a>-->
+    <a href="{% url 'profile'  %}" class="btn btn-info btn-xs" role="button">Vai al Profilo</a>
+    <a href='/' class="btn btn-info btn-xs" role="button">Vai alla HomePage</a>
+
+{% endblock %}

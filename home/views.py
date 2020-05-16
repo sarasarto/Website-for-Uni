@@ -221,7 +221,8 @@ def show_tesi_archiviate(request):
 
 class TesiDetailView(LoginRequiredMixin, DetailView):
     model = TesiCreata
-    template_name = 'home/tesicreata_detail.html'
+    # template_name = 'home/tesicreata_detail.html'
+    template_name = 'home/detail_tesi_creata_template.html'
 
     def get_context_data(self, **kwargs):
         context = super(TesiDetailView, self).get_context_data(**kwargs)
@@ -448,6 +449,7 @@ class RequestTesiDeleteView(LoginRequiredMixin, DeleteView):
 
 class RTDetailView(DetailView):
     model = Richiesta_tesi_bozza
+    template_name = 'home/detail_richiesta_tesi_template.html'
 
     def get(self, request, pk):
         rel = self.get_object().relatore
@@ -712,6 +714,7 @@ class RequestAttivitaDeleteView(LoginRequiredMixin, DeleteView):
 
 class RAPDetailView(DetailView):
     model = Richiesta_prova_finale_bozza
+    template_name = 'home/detail_richiesta_attivita_template.html'
 
     def get(self, request, pk):
         rel = self.get_object().tutor
