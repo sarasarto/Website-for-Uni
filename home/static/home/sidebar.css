@@ -11,16 +11,21 @@
 
 /* Sidebar links */
 .sidebar a {
-  display: block;
+  color: #93a3b5;
+  font-size: 14px;
+  font-weight: 400;
+  /*display: block;
   color: black;
   padding: 16px;
-  text-decoration: none;
+  text-decoration: none;*/
 }
 
 /* Active/current link */
 .sidebar a.active {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #fafcfd;
+  color: #5b9bd1;
+  /*background-color: #4CAF50;
+  color: white;*/
 }
 /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
 div.content {

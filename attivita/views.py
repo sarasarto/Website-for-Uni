@@ -150,7 +150,7 @@ class AttivitaDeleteView(LoginRequiredMixin, DeleteView):
 
 class AttivitaArchiviataDetailView(DetailView):
     model = Attivita_progettuale_Archiviata
-    template_name = 'attivita/attivita_progettuale_creata_detail.html'
+    template_name = 'attivita/detail_attivita_creata_template.html'
 
     def get_context_data(self, **kwargs):
         context = super(AttivitaArchiviataDetailView, self).get_context_data(**kwargs)

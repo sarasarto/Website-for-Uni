@@ -240,7 +240,7 @@ def show_tesi(request):
 
 class TesiArchiviataDetailView(DetailView):
     model = TesiArchiviata
-    template_name = 'home/tesicreata_detail.html'
+    template_name = 'home/detail_tesi_creata_template.html'
 
     def get_context_data(self, **kwargs):
         context = super(TesiArchiviataDetailView, self).get_context_data(**kwargs)

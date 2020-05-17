@@ -25,7 +25,6 @@
                     <a href="{% url 'tesi-detail' tesi.id %}" class="btn btn-info btn-xs" role="button">
                         View
                         Details</a>
-
                     <a href="{% url 'tesi-delete' tesi.id %}" class="btn btn-info btn-xs" role="button">
                         Elimina </a>
                     <a href="{% url 'tesi-update' tesi.id %}" class="btn btn-info btn-xs" role="button">
@@ -101,21 +100,46 @@
                  <div class="w-100"></div>
 
                  <div class="col">
-                     <h1>Sidebar</h1>
+                    <div class="profile-usermenu">
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="{% url 't_archiviata' %}">
+                                <i class="glyphicon glyphicon-home"></i>
+                                Tesi Archiviate</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'att_archiviata' %}">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Attivita progettuali archiviate</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'tesi-create' %}">
+                                <i class="glyphicon glyphicon-ok"></i>
+                                Crea Tesi </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'attivita-create' %}">
+                                <i class="glyphicon glyphicon-flag"></i>
+                                Crea Attività Progettuale </a>
+                            </li>
+                        </ul>
+                    </div>
+                     <!-- <h1>Sidebar</h1>
 
                      <ul class="list-group">
-                         <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">Tesi
-                             Archiviate</a>
-                         <a href="{% url 'att_archiviata' %}" class="list-group-item list-group-item-light">Attivita
-                             progettuali archiviate</a>
-                         <a href="{% url 'tesi-create' %}" class="list-group-item list-group-item-light"
-                            role="button"> Crea
-                             Tesi</a>
+                         <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">
+                            <i class="glyphicon glyphicon-home"></i>
+                            Tesi Archiviate</a>
+                         <a href="{% url 'att_archiviata' %}" class="list-group-item list-group-item-light">
+                            <i class="glyphicon glyphicon-user"></i>
+                            Attivita progettuali archiviate</a>
+                         <a href="{% url 'tesi-create' %}" class="list-group-item list-group-item-light" role="button">
+                            <i class="glyphicon glyphicon-ok"></i>
+                            Crea Tesi</a>
                          <a href="{% url 'attivita-create' %}" class="list-group-item list-group-item-light">
-                             Crea
-                             Attività
-                             progettuale</a>
-                     </ul>
+                            <i class="glyphicon glyphicon-flag"></i>
+                            Crea Attività Progettuale</a>
+                     </ul> -->
                  </div>
              </div>
          </div>
