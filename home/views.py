@@ -1,3 +1,7 @@
+import functools
+import itertools
+
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotModified
 from django.shortcuts import render, redirect
@@ -8,6 +12,8 @@ from django.utils.html import strip_tags
 from django.views import generic
 from django.views.generic import ListView, DetailView, FormView
 from django.urls import reverse_lazy, reverse
+from taggit.models import Tag
+
 from tesi import settings
 from users.models import Studente, Docente
 from .models import TesiCreata, Attivita_progettuale_creata, Richiesta_tesi_bozza, Richiesta_tesi_inviata, \
@@ -19,7 +25,7 @@ from itertools import chain
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import RequestTesiForm, RequestProvaFinaleForm, PrecompiledTesiRequestForm, PrecompiledAttivitaRequestForm, \
     ProvaForm, ScelteForm, TesiCreataForm
-from attivita.forms import  AttivitaCreataForm
+from attivita.forms import AttivitaCreataForm
 from django.views.generic.edit import (
     CreateView,
     UpdateView,
@@ -31,6 +37,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.template.loader import get_template
 from django.db.models import Q
 from itertools import chain
+from taggit.managers import TaggableManager
 
 """def home(request):
     all_tesi = Tesi.objects.all()
@@ -50,12 +57,47 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         all_tesi = TesiCreata.objects.all()
         all_attivita = Attivita_progettuale_creata.objects.all()
-        tot = list(chain(all_tesi, all_attivita))
-        tot = sorted(tot, key=lambda x: x.date_posted, reverse=True)
+
+        tot_nolist = chain(all_tesi, all_attivita)
+        tot_nolist = sorted(tot_nolist, key=lambda x: x.date_posted, reverse=True)
+        tot = list(tot_nolist)
+        all = Tag.objects.all()
+        tag_tesi = []
+
+        i = 0
+        for t in tot_nolist:
+            actual = t
+            if TesiCreata.objects.filter(argomento=t.argomento) and TesiCreata.objects.filter(id=t.id):
+                a = 5
+                prog_corrente = TesiCreata.objects.filter(id=t.id)[0]
+            else:
+                prog_corrente = Attivita_progettuale_creata.objects.filter(id=t.id)[0]
+                a = 50
+
+            a2 = final = []
+            a2 = prog_corrente.tag.all()
+            for a in a2:
+                r = str(a.name)
+                final.append(r)
+
+            tag_tesi.append(list(final))
+            #tag_tesi.append(list(a2))
+            #tag_tesi = tag_tesi + list(a2)
+            #tag_tesi.append(" ")
+
+        #prog_corrente.taggggggggg
+        # tot = sorted(tot, key=lambda x: x.date_posted, reverse=True)
+        iterator = itertools.count()
         context = {
             'all_tesi': all_tesi,
             'all_attivita': all_attivita,
-            'results': tot
+            'results': tot,
+            'tag_tot': list(tag_tesi),
+            'esterno' : functools.partial(next, itertools.count(0)),
+            'iterator':functools.partial(next, itertools.count(1)),
+            'a' : 0,
+            'lung' : len(list(tag_tesi))
+
         }
         return context
 
@@ -64,6 +106,29 @@ class IndexView(ListView):
         a_p = Attivita_progettuale_creata.objects.all()
         tot = list(chain(tesi, a_p))
         return tot
+
+
+class Counter:
+    count = 0
+
+    def __init__(self):
+        count = 0
+
+    def increment(self):
+        self.count += 1
+        return ''
+
+    def set_zero(self):
+        self.count = 0
+        return ''
+
+    def decrement(self):
+        self.count -= 1
+        return ''
+
+    def double(self):
+        self.count *= 2
+        return ''
 
 
 """class SearchIndexView(ListView):
@@ -216,6 +281,7 @@ def show_tesi_archiviate(request):
     }
     return render(request, 'home/index.html', context)
 
+
 # TESI
 
 
@@ -276,8 +342,6 @@ class TesiUpdateView(LoginRequiredMixin, UpdateView):
     fields = ['relatore', 'argomento', 'tirocinio', 'nome_azienda', 'data_inizio', 'data_fine', 'tag']
 
 
-
-
 class TesiDeleteView(LoginRequiredMixin, DeleteView):
     model = TesiCreata
     success_url = '/profile'
@@ -315,10 +379,6 @@ class TesiDeleteView(LoginRequiredMixin, DeleteView):
 """
 
 
-
-
-
-
 # RICHIESTA TESI
 
 
@@ -353,9 +413,8 @@ def RichiestaTesiInviate(request):
         if s.nome == nome[0] and s.cognome == nome[1] and s.mail == request.user.email:
             results = Richiesta_tesi_inviata.objects.filter(autore=s).order_by('-date_posted')
 
-
     context = {
-        #'all_richiesta_tesi': all_richiesta_tesi,
+        # 'all_richiesta_tesi': all_richiesta_tesi,
         'results': results,
         'title': "Le tue tesi inviate: ",
         'no_results': "Non hai ancora inviato nessuna tesi"
@@ -384,13 +443,13 @@ class RequestTesiDetailView(FormView, DetailView):
         req.modified = False
         req.data_laurea = form.cleaned_data.get('data_laurea')
 
-        #req.autore = form.cleaned_data.get('autore')
+        # req.autore = form.cleaned_data.get('autore')
         a = req.relatore
         r = self.request.user.username
         utente = User.objects.get(username=r)
         stud_log = Studente.objects.get(user=utente)
         req.autore = stud_log
-        #nome = req.autore.nome + '.' + req.autore.cognome
+        # nome = req.autore.nome + '.' + req.autore.cognome
         """if self.request.user.username != nome:
             messages.error(self.request, f'Autore deve essere lo studente {self.request.user.username}!')
             return redirect('tesi-request-precompiled', pk=self.get_object().id)"""
@@ -696,15 +755,12 @@ def RichiestaAttInviate(request):
             results = Richiesta_prova_finale_inviata.objects.filter(autore=s).order_by('-date_posted')
 
     context = {
-        #'all_richiesta_att': all_richiesta_att,
+        # 'all_richiesta_att': all_richiesta_att,
         'results': results,
         'title': "Le tue attività inviate: ",
         'no_results': "Non hai ancora inviato nessuna attività"
     }
     return render(request, 'home/index.html', context)
-
-
-
 
 
 class RequestAttivitaDeleteView(LoginRequiredMixin, DeleteView):
@@ -971,7 +1027,7 @@ def from_richiestatesibozza_to_richiestatesiinviata(rb, ri):
 
 
 def from_tesicreata_to_richiestabozza(tc, rb):
-    #rb.relatore = tc.relatore
+    # rb.relatore = tc.relatore
     rb.correlatore = tc.correlatore
     rb.argomento = tc.argomento
     rb.tirocinio = tc.tirocinio

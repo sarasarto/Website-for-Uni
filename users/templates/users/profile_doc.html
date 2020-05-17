@@ -5,7 +5,8 @@
 <div class="container-fluid" id="tourpackages-carousel">
 
     <div class="row">
-        <div class="col-7">
+
+        <div class="col-6">
 
             <h1>Tutte le tesi create </h1>
             <ul class="cards">
@@ -36,35 +37,88 @@
 
         </div>
 
-        <div class="col">
-            <div class="container">
-                <div class="col">
+       <!-- <div class="col-5">
+             <div class="container-fluid">
+                    <div class="profile-sidebar">
 
-                    <h1 class="account-heading">Docente {{ user.username }}</h1>
-                    <h3 class="text-secondary">{{ user.email }}</h3>
+
+                        <div class="profile-usertitle">
+                            <div class="profile-usertitle-name">
+                                <h4> Utente {{ user.username }} </h4>
+                                {{ user.email }}
+                            </div>
+                            <div class="profile-usertitle-job">
+                                Docente
+                            </div>
+                        </div>
+
+                         <div class="col-3">
+
+                        <div class="profile-usermenu">
+                            <ul class="nav">
+
+                                <li>
+                                   <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">Tesi
+                             Archiviate</a>
+                                </li>
+
+                                <li>
+                                    <a href="{% url 'att_archiviata' %}">
+                                        <i class="glyphicon glyphicon-folder-close"></i>
+                                        Attivita
+                                        progettuali archiviate</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'tesi-create' %}">
+                                      <i  class="glyphicon glyphicon-plus"></i> Crea
+                                        Tesi</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'attivita-create' %}">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        Crea
+                                        Attività
+                                        progettuale</a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                    </div>
                 </div>
 
-                <div class="w-100"></div>
 
-                <div class="col">
-                    <h1>Sidebar</h1>
+        </div> -->
+         <div class="col">
+             <div class="container-fluid">
+                 <div class="col">
 
-                    <ul class="list-group">
-                        <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">Tesi
-                            Archiviate</a>
-                        <a href="{% url 'att_archiviata' %}" class="list-group-item list-group-item-light">Attivita
-                            progettuali archiviate</a>
-                        <a href="{% url 'tesi-create' %}" class="list-group-item list-group-item-light"
-                           role="button"> Crea
-                            Tesi</a>
-                        <a href="{% url 'attivita-create' %}" class="list-group-item list-group-item-light">
-                            Crea
-                            Attività
-                            progettuale</a>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                     <h1 class="account-heading">Docente {{ user.username }}</h1>
+                     <h3 class="text-secondary">{{ user.email }}</h3>
+                 </div>
+
+                 <div class="w-100"></div>
+
+                 <div class="col">
+                     <h1>Sidebar</h1>
+
+                     <ul class="list-group">
+                         <a href="{% url 't_archiviata' %}" class="list-group-item list-group-item-light">Tesi
+                             Archiviate</a>
+                         <a href="{% url 'att_archiviata' %}" class="list-group-item list-group-item-light">Attivita
+                             progettuali archiviate</a>
+                         <a href="{% url 'tesi-create' %}" class="list-group-item list-group-item-light"
+                            role="button"> Crea
+                             Tesi</a>
+                         <a href="{% url 'attivita-create' %}" class="list-group-item list-group-item-light">
+                             Crea
+                             Attività
+                             progettuale</a>
+                     </ul>
+                 </div>
+             </div>
+         </div>
     </div>
 
     <div class="row">

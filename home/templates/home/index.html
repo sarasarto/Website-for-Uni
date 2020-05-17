@@ -1,10 +1,8 @@
 {% extends 'home/base_index.html' %}
 
-
 {% block for %}
 
 <h2> {{ title }}</h2>
-
 
 <div class="row">
     {% if results %}
@@ -14,72 +12,101 @@
         <li>
             <h3>Argomento : {{ progetto.argomento }}</h3>
 
-            <!-- se è una tesi -->
-            {% if progetto.relatore %}
+                {% with padre=esterno %}<br>
 
-            <!-- se è una proposta -->
-            {% if progetto.data_laurea %}
-             <h3>Proposto da : {{ progetto.relatore }}</h3>
-            <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
-            {% else %}
+                <!-- se è una tesi -->
+                {% if progetto.relatore %}
 
-            <h3>Relatore : {{ progetto.relatore }}</h3>
-             {% endif %}
-            <h3>tirocinio : {{ progetto.tirocinio }}</h3>
+                <!-- se è una proposta -->
+                {% if progetto.data_laurea %}
+                <h3>Proposto da : {{ progetto.relatore }}</h3>
+                <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
+                {% else %}
 
-            {% if progetto.tirocinio == 'in azienda' %}
-            <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
-            {% endif %}
+                <h3>Relatore : {{ progetto.relatore }}</h3>
+                {% endif %}
+                <h3>tirocinio : {{ progetto.tirocinio }}</h3>
 
-            <!-- se è una tesi archiviata -->
-            {% if progetto.data_archiviazione %}
-            <a href="{% url 't_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                Details</a>
-            {% else %}
-            {% if progetto.data_laurea %}
-            <!-- non si devono vedere i dettagli -->
-             {% else %}
-            <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                Details</a>
-            {% endif %}
-             {% endif %}
+                {% if progetto.tirocinio == 'in azienda' %}
+                <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
+                {% endif %}
 
-            <!-- se è una attivita -->
-            {% else %}
-            {% if progetto.data_laurea %}
-             <h3>Proposto da : {{ progetto.tutor }}</h3>
-            <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
-            <h3>Tipologia : {{ progetto.tipologia }}</h3>
-            {% else %}
-            <h3>Tutor : {{ progetto.tutor }}</h3>
-            {% endif %}
+                <!-- se è una tesi archiviata -->
+                {% if progetto.data_archiviazione %}
+                <a href="{% url 't_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                    Details</a>
+                {% else %}
+                {% if progetto.data_laurea %}
+                <!-- non si devono vedere i dettagli -->
+                {% else %}
+                <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                    Details</a>
+                {% endif %}
+                {% endif %}
 
-            <!-- dettagli -->
-            {% if progetto.data_archiviazione %}
-            <h3> archiviata </h3>
+                <!-- se è una attivita -->
+                {% else %}
+                {% if progetto.data_laurea %}
+                <h3>Proposto da : {{ progetto.tutor }}</h3>
+                <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
+                <h3>Tipologia : {{ progetto.tipologia }}</h3>
+                {% else %}
+                <h3>Tutor : {{ progetto.tutor }}</h3>
+                {% endif %}
+
+                <!-- dettagli -->
+                {% if progetto.data_archiviazione %}
+                <h3> archiviata </h3>
+
             <a href="{% url 'att_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                Details</a>
-            {% else %}
-            {% if progetto.data_laurea %}
-            <!-- non si devono vedere i dettagli -->
-             {% else %}
-            <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                Details</a>
-            {% endif %}
-{% endif %}
+                    Details</a>
 
-            {% endif %}
-        </li>
+                {% else %}
+                {% if progetto.data_laurea %}
+                <!-- non si devono vedere i dettagli -->
+                {% else %}
+                <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                    Details</a>
+                {% endif %}
+
+                {% endif %}
+                {% endif %}
+                <div >
+                    <span class="badge badge-light"> Postato {{progetto.date_posted}}</span>
+
+                </div>
+                <div class="pull-right">
+
+                    <!-- padre is {{ padre }}
+                    counter {{ forloop.counter0 }}<br>
+    -->
+                    {% for tag in tag_tot %}
+                    {% ifequal padre forloop.counter0 %}
+
+                    {% for t in tag %}
+                    <span class="label label-info">{{ t }}</span>
 
 
+                    {% endfor %}
+                    {% endifequal %}
+
+                    {% endfor %}
+                    {% endwith %}
+
+                </div>
+
+  </li>
         {% endfor %}
-    </ul>
+
+</ul>
+
     {% else %}
     <h2>{{no_results}}</h2>
     {% endif %}
 
     {% block filtra %}
     {% endblock filtra %}
+
 
 </div>
 

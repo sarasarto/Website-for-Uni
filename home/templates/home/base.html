@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <title> {% block title %} Home {% endblock %} </title>
     {% load static %}
+      <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy">
 
+
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}"/>
+     <link rel="stylesheet" type="text/css" href="{% static 'home/profile_doc.css' %}"/>
+
     <link rel="stylesheet" type="text/css" href="{% static 'home/griglia.css' %}"/>
+
     <link rel="stylesheet" type="text/css" href="{% static 'home/sidebar.css' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 
 </head>
 <body>
@@ -80,20 +89,20 @@
                     <div class="navbar-nav">
 
                         {% if user.is_authenticated %}
-                            <a class="nav-item ml-4" href="{% url 'logout' %}">
-                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout
-                            </a>
-                            <a class="nav-item ml-4" href="{% url 'profile' %}"> Profile </a>
+                        <a class="nav-item ml-4" href="{% url 'logout' %}">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout
+                        </a>
+                        <a class="nav-item ml-4" href="{% url 'profile' %}"> Profile </a>
 
-                <!-- <a class="nav-item ml-4" href="{% url 'profile' %}"> {{ user }} </a> -->
+                        <!-- <a class="nav-item ml-4" href="{% url 'profile' %}"> {{ user }} </a> -->
 
 
                         {% else %}
-                            <a class="nav-item ml-4" href="{% url 'login' %}">
-                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login
-                            </a>
+                        <a class="nav-item ml-4" href="{% url 'login' %}">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Login
+                        </a>
 
-                            <a class="nav-item ml-4" href="{% url 'register' %}">Registration</a>
+                        <a class="nav-item ml-4" href="{% url 'register' %}">Registration</a>
 
                         {% endif %}
                     </div>
@@ -119,11 +128,11 @@
 
 
 {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-        {{ message }}
-    </div>
-    {% endfor %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">
+    {{ message }}
+</div>
+{% endfor %}
 {% endif %}
 
 
