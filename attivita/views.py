@@ -1,3 +1,6 @@
+import functools
+import itertools
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -85,10 +88,24 @@ class AttivitaUpdateView(LoginRequiredMixin, UpdateView):
 def show_attivita(request):
     results = Attivita_progettuale_creata.objects.all().order_by('-date_posted')
     title = "Tutte le attivita progettuali:"
+    tag_tesi = []
+    for t in results:
+        prog_corrente = Attivita_progettuale_creata.objects.filter(id=t.id)[0]
+
+        final = []
+        tag_final = prog_corrente.tag.all()
+        for a in tag_final:
+            r = str(a.name)
+            final.append(r)
+
+        tag_tesi.append(list(final))
     context = {
         'results': results,
         'title': title,
         'no_results': "Non ci sono attivita progettuali",
+        'tag_tot': list(tag_tesi),
+        'esterno': functools.partial(next, itertools.count(0)),
+
     }
     return render(request, 'home/index.html', context)
 

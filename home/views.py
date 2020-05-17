@@ -61,42 +61,31 @@ class IndexView(ListView):
         tot_nolist = chain(all_tesi, all_attivita)
         tot_nolist = sorted(tot_nolist, key=lambda x: x.date_posted, reverse=True)
         tot = list(tot_nolist)
-        all = Tag.objects.all()
+
         tag_tesi = []
 
-        i = 0
         for t in tot_nolist:
-            actual = t
             if TesiCreata.objects.filter(argomento=t.argomento) and TesiCreata.objects.filter(id=t.id):
-                a = 5
+                # a = 5
                 prog_corrente = TesiCreata.objects.filter(id=t.id)[0]
             else:
                 prog_corrente = Attivita_progettuale_creata.objects.filter(id=t.id)[0]
-                a = 50
+                # a = 50
 
-            a2 = final = []
-            a2 = prog_corrente.tag.all()
-            for a in a2:
+            final = []
+            tag_final = prog_corrente.tag.all()
+            for a in tag_final:
                 r = str(a.name)
                 final.append(r)
 
             tag_tesi.append(list(final))
-            #tag_tesi.append(list(a2))
-            #tag_tesi = tag_tesi + list(a2)
-            #tag_tesi.append(" ")
 
-        #prog_corrente.taggggggggg
-        # tot = sorted(tot, key=lambda x: x.date_posted, reverse=True)
-        iterator = itertools.count()
         context = {
             'all_tesi': all_tesi,
             'all_attivita': all_attivita,
             'results': tot,
             'tag_tot': list(tag_tesi),
-            'esterno' : functools.partial(next, itertools.count(0)),
-            'iterator':functools.partial(next, itertools.count(1)),
-            'a' : 0,
-            'lung' : len(list(tag_tesi))
+            'esterno': functools.partial(next, itertools.count(0)),
 
         }
         return context
@@ -107,28 +96,6 @@ class IndexView(ListView):
         tot = list(chain(tesi, a_p))
         return tot
 
-
-class Counter:
-    count = 0
-
-    def __init__(self):
-        count = 0
-
-    def increment(self):
-        self.count += 1
-        return ''
-
-    def set_zero(self):
-        self.count = 0
-        return ''
-
-    def decrement(self):
-        self.count -= 1
-        return ''
-
-    def double(self):
-        self.count *= 2
-        return ''
 
 
 """class SearchIndexView(ListView):
@@ -248,10 +215,24 @@ def show_tesi(request):
     # all_tesi = TesiCreata.objects.all().order_by('-date_posted')
     results = TesiCreata.objects.all().order_by('-date_posted')
     title = "Tutte le tesi:"
+    tag_tesi = []
+    for t in results:
+        prog_corrente = TesiCreata.objects.filter(id=t.id)[0]
+
+        final = []
+        tag_final = prog_corrente.tag.all()
+        for a in tag_final:
+            r = str(a.name)
+            final.append(r)
+
+        tag_tesi.append(list(final))
+
     context = {
         'results': results,
         'title': title,
-        'no_results': "Non ci sono tesi"
+        'no_results': "Non ci sono tesi",
+        'tag_tot': list(tag_tesi),
+        'esterno': functools.partial(next, itertools.count(0)),
 
     }
     return render(request, 'home/index.html', context)
