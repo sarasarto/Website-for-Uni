@@ -1,4 +1,7 @@
+{% extends "home/base_index.html" %}
 {% block body %}
+<div class="col-md-10">
+<div class="content-section">
 <h2>Logged out</h2>
 <div class="border-top pt-3">
     <small class="text-muted">
@@ -6,5 +9,7 @@
         <br>
         <a class="ml-2" href="{% url 'index' %}">Back To The Home Page</a>
     </small>
+</div>
+</div>
 </div>
 {% endblock %}

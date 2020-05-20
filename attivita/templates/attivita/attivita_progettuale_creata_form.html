@@ -1,13 +1,14 @@
 {% extends 'home/base.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+<div class="col-md-8">
 <div class="content-section">
     <form method="POST">
         {% csrf_token %}
+        <legend class="border-bottom mb-4">{{ user.username }}</legend>
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">{{ user.username }} - {{ object.argomento }}</legend>
 
-            {{ form.as_p }}
+            {{ form|crispy }}
         </fieldset>
         <div class="form-group">
             <button class="btn btn-info btn-xs" type="submit">Salva</button>
@@ -15,6 +16,6 @@
 
         </div>
     </form>
-
+</div>
 </div>
 {% endblock %}
