@@ -2,7 +2,10 @@
 
 {% block for %}
 
-<h2> {{ title }}</h2>
+<legend class="border-bottom mt-4 mb-4">
+    <h2> {{ title }}</h2>
+</legend>
+
 
 <div class="row">
     {% if results %}
@@ -12,93 +15,93 @@
         <li>
             <h2>Argomento : {{ progetto.argomento }}</h2>
 
-                {% with padre=esterno %}<br>
+            {% with padre=esterno %}<br>
 
-                <!-- se è una tesi -->
-                {% if progetto.relatore %}
+            <!-- se è una tesi -->
+            {% if progetto.relatore %}
 
-                <!-- se è una proposta -->
-                {% if progetto.data_laurea %}
-                <h3>Proposto da : {{ progetto.relatore }}</h3>
-                <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
-                {% else %}
+            <!-- se è una proposta -->
+            {% if progetto.data_laurea %}
+            <h3>Proposto da : {{ progetto.relatore }}</h3>
+            <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
+            {% else %}
 
-                <h3>Relatore : {{ progetto.relatore }}</h3>
-                {% endif %}
-                <h3>tirocinio : {{ progetto.tirocinio }}</h3>
+            <h3>Relatore : {{ progetto.relatore }}</h3>
+            {% endif %}
+            <h3>tirocinio : {{ progetto.tirocinio }}</h3>
 
-                {% if progetto.tirocinio == 'in azienda' %}
-                <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
-                {% endif %}
+            {% if progetto.tirocinio == 'in azienda' %}
+            <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
+            {% endif %}
 
-                <!-- se è una tesi archiviata -->
-                {% if progetto.data_archiviazione %}
-                <a href="{% url 't_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
-                {% else %}
-                {% if progetto.data_laurea %}
-                <!-- non si devono vedere i dettagli -->
-                {% else %}
-                <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
-                {% endif %}
-                {% endif %}
+            <!-- se è una tesi archiviata -->
+            {% if progetto.data_archiviazione %}
+            <a href="{% url 't_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                Details</a>
+            {% else %}
+            {% if progetto.data_laurea %}
+            <!-- non si devono vedere i dettagli -->
+            {% else %}
+            <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                Details</a>
+            {% endif %}
+            {% endif %}
 
-                <!-- se è una attivita -->
-                {% else %}
-                {% if progetto.data_laurea %}
-                <h3>Proposto da : {{ progetto.tutor }}</h3>
-                <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
-                <h3>Tipologia : {{ progetto.tipologia }}</h3>
-                {% else %}
-                <h3>Tutor : {{ progetto.tutor }}</h3>
-                {% endif %}
+            <!-- se è una attivita -->
+            {% else %}
+            {% if progetto.data_laurea %}
+            <h3>Proposto da : {{ progetto.tutor }}</h3>
+            <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
+            <h3>Tipologia : {{ progetto.tipologia }}</h3>
+            {% else %}
+            <h3>Tutor : {{ progetto.tutor }}</h3>
+            {% endif %}
 
-                <!-- dettagli -->
-                {% if progetto.data_archiviazione %}
-                <h3> archiviata </h3>
+            <!-- dettagli -->
+            {% if progetto.data_archiviazione %}
+            <h3> archiviata </h3>
 
             <a href="{% url 'att_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
+                Details</a>
 
-                {% else %}
-                {% if progetto.data_laurea %}
-                <!-- non si devono vedere i dettagli -->
-                {% else %}
-                <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
-                    Details</a>
-                {% endif %}
+            {% else %}
+            {% if progetto.data_laurea %}
+            <!-- non si devono vedere i dettagli -->
+            {% else %}
+            <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
+                Details</a>
+            {% endif %}
 
-                {% endif %}
-                {% endif %}
-                <div >
-                    <span class="badge badge-light"> Postato {{progetto.date_posted}}</span>
+            {% endif %}
+            {% endif %}
+            <div>
+                <span class="badge badge-light"> Postato {{progetto.date_posted}}</span>
 
-                </div>
-                <div class="pull-right">
+            </div>
+            <div class="pull-right">
 
-                    <!-- padre is {{ padre }}
-                    counter {{ forloop.counter0 }}<br>
-    -->
-                    {% for tag in tag_tot %}
-                    {% ifequal padre forloop.counter0 %}
+                <!-- padre is {{ padre }}
+                counter {{ forloop.counter0 }}<br>
+-->
+                {% for tag in tag_tot %}
+                {% ifequal padre forloop.counter0 %}
 
-                    {% for t in tag %}
-                    <span class="label label-info">{{ t }}</span>
+                {% for t in tag %}
+                <span class="label label-info">{{ t }}</span>
 
 
-                    {% endfor %}
-                    {% endifequal %}
+                {% endfor %}
+                {% endifequal %}
 
-                    {% endfor %}
-                    {% endwith %}
+                {% endfor %}
+                {% endwith %}
 
-                </div>
+            </div>
 
-  </li>
+        </li>
         {% endfor %}
 
-</ul>
+    </ul>
 
     {% else %}
     <h2>{{no_results}}</h2>

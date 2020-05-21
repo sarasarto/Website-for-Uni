@@ -6,7 +6,10 @@
 
     <div class="row">
         <div class="col-7">
-            <h1>Tutte le tue bozze di richieste di tesi</h1>
+             <legend class="border-bottom mb-4">
+                 <h3>Tutte le tue bozze di richieste di tesi</h3>
+             </legend>
+
             <ul class="cards">
                 {% for richieste in all_richiesta_tesi %}
                 <li>
@@ -81,7 +84,10 @@
 
     <div class="row">
         <div class="col-7">
-            <h1>Tutte le tue bozze di richieste di prove finali</h1>
+               <legend class="border-bottom mb-4">
+                 <h3>Tutte le tue bozze di richieste di prove finali</h3>
+             </legend>
+            
             <ul class="cards">
                 {% for richieste in all_richiesta_pfinale %}
                 <li>
