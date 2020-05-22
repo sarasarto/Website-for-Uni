@@ -98,6 +98,9 @@ class Richiesta_tesi(models.Model):
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
 
+
+    stato = models.CharField(max_length=500,  blank=True,null=True, default='da inviare')
+
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
 
@@ -113,7 +116,8 @@ class Richiesta_tesi_bozza(Richiesta_tesi):
 
 
 class Richiesta_tesi_inviata(Richiesta_tesi):
-    pass
+   pass
+
 
 
 class Richiesta_prova_finale(models.Model):
@@ -132,12 +136,16 @@ class Richiesta_prova_finale(models.Model):
     tipologia = models.CharField(max_length=500, choices=scelte, null=True)
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
+    stato = models.CharField(max_length=500, blank=True, null=True, default='da inviare')
 
     def __str__(self):
         return self.autore.nome + ' ' + self.autore.cognome + ' ' + self.argomento
 
     class Meta:
         abstract = True
+
+
+
 
 
 class Richiesta_prova_finale_bozza(Richiesta_prova_finale):

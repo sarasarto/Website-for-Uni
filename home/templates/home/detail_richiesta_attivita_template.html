@@ -1,9 +1,7 @@
 {% include 'attivita/detail_attivita_template.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
-    <h2 class="text-secondary"> titolo elaborato : {{ object.titolo_elaborato }}</h2>
-    <h2 class="text-secondary"> tipologia : {{ object.tipologia }}</h2>
-    <h2 class="text-secondary">laurea: {{ object.data_laurea }}</h2>
+
 
     <form method='get' action='#'>
         <input class="btn btn-info btn-xs" type="submit" value="Send" name="Send"/>

@@ -28,12 +28,13 @@
 
             <h3>Relatore : {{ progetto.relatore }}</h3>
             {% endif %}
-            <h3>tirocinio : {{ progetto.tirocinio }}</h3>
+            <h3>Tirocinio : {{ progetto.tirocinio }}</h3>
 
             {% if progetto.tirocinio == 'in azienda' %}
-            <h3>nome azienda : {{ progetto.nome_azienda }}</h3>
+            <h3>Nome azienda : {{ progetto.nome_azienda }}</h3>
             {% endif %}
 
+            <h3>Stato della richiesta : {{ progetto.stato }}</h3>
             <!-- se è una tesi archiviata -->
             {% if progetto.data_archiviazione %}
             <a href="{% url 't_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
@@ -53,6 +54,7 @@
             <h3>Proposto da : {{ progetto.tutor }}</h3>
             <h3>Data di laurea : {{ progetto.data_laurea }}</h3>
             <h3>Tipologia : {{ progetto.tipologia }}</h3>
+            <h3>Stato della richiesta : {{ progetto.stato }}</h3>
             {% else %}
             <h3>Tutor : {{ progetto.tutor }}</h3>
             {% endif %}

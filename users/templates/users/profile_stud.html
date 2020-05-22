@@ -20,6 +20,7 @@
                     <h5>nome azienda : {{ richieste.nome_azienda }}</h5>
                     {% endif %}
                     <h5>Data laurea: {{ richieste.data_laurea }}</h5>
+                    <h5>Stato della richiesta : {{ richieste.stato }}</h5>
                     <a href="{% url 'richiesta-tesi-detail' richieste.id %}" class="btn btn-info btn-xs" role="button">Detail</a>
                 </li>
                 {% endfor %}
@@ -96,6 +97,7 @@
                     <h5>Titolo elaborato: {{ richieste.titolo_elaborato }}</h5>
                     <h5>Data laurea: {{ richieste.data_laurea }}</h5>
                     <h5>Tipologia: {{ richieste.tipologia }}</h5>
+                    <h5>Stato della richiesta : {{ richieste.stato }}</h5>
 
                     <a href="{% url 'richiesta-prova-finale-detail' richieste.id %}" class="btn btn-info btn-xs"
                        role="button">Detail</a>

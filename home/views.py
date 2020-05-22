@@ -503,15 +503,6 @@ class RTDetailView(DetailView):
         rti = Richiesta_tesi_inviata()
         r = self.get_object()
         from_richiestatesibozza_to_richiestatesiinviata(r, rti)
-        # rti.relatore = r.relatore
-        # rti.correlatore = r.correlatore
-        # rti.argomento = r.argomento
-        # rti.tirocinio = r.tirocinio
-        # rti.nome_azienda = r.nome_azienda
-
-        # rti.autore = r.autore
-        # rti.data_laurea = r.data_laurea
-        # rti.save()
 
         if request.GET.get('Send') == 'Send':
             subject = 'Richiesta Tesi'
@@ -528,6 +519,7 @@ class RTDetailView(DetailView):
                 'mail': author.mail,
                 'laurea': rti.data_laurea,
                 'argomento': rti.argomento,
+                'tirocinio' : rti.tirocinio,
                 'id': rti.id,
             }
 
@@ -564,7 +556,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
         self.object = self.get_object()
         rel_n = self.object.relatore.nome
         rel_c = self.object.relatore.cognome
-        # rt = self.object.banama
+
         if log[0] != rel_n or log[1] != rel_c:
             # messages.error(request, f'Errore! si puo loggare solo il docente tutor')
             return redirect('/login/?next=/' + str(self.get_object().id) + '/accept_tesi')
@@ -572,16 +564,14 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
             self.object = self.get_object()
             autore = self.object.autore
             context_object_name = {
-                'name': self.object.autore,
-                'argomento': self.object.argomento,
-                'mail': self.object.autore.mail,
-                'data': self.object.data_laurea,
+                'object' : self.object,
+
             }
             if request.GET.get('Accetta') == 'Accetta':
+                self.object.stato = 'accettato'
+                self.object.save()
                 rel = self.get_object().relatore
-                # doc = rel.split()
-                # doc_name = doc[0]
-                # doc_mail = doc[1]
+
                 doc_name = rel.nome + ' ' + rel.cognome
                 doc_mail = rel.mail
                 author = self.get_object().autore
@@ -610,10 +600,14 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                 return redirect("/")
             else:
                 if request.GET.get('Rifiuta') == 'Rifiuta':
+                    rt = Richiesta_tesi_bozza()
+                    self.object = self.get_object()
+                    self.object.stato = 'rifiutata'
+                    self.object.save()
+
+                    from_richiestatesiinviata_to_richiestatesibozza(self.object, rt)
+
                     rel = self.get_object().relatore
-                    # doc = rel.split()
-                    # doc_name = doc[0]
-                    # doc_mail = doc[1]
                     doc_name = rel.nome + ' ' + rel.cognome
                     doc_mail = rel.mail
                     author = self.get_object().autore
@@ -645,22 +639,15 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                     # se c'è errore allora
                     # rimette la tesi in richiesta tesi
                     rt = Richiesta_tesi_bozza()
+                    self.object = self.get_object()
+                    self.object.stato = 'con errori'
+                    self.object.save()
                     r = self.get_object()
-                    from_richiestatesiinviata_to_richiestatesibozza(r, rt)
-                    # rt.relatore = r.relatore
-                    # rt.correlatore = r.correlatore
-                    # rt.argomento = r.argomento
-                    # rt.tirocinio = r.tirocinio
-                    # rt.nome_azienda = r.nome_azienda
-                    # rt.data_laurea = r.data_laurea
-                    # rt.autore = r.autore
-                    # rt.save()
+                    from_richiestatesiinviata_to_richiestatesibozza(self.object, rt)
 
                     if request.GET.get('Segnala Errori') == 'Segnala Errori':
                         rel = self.get_object().relatore
-                        # doc = rel.split()
-                        # doc_name = doc[0]
-                        # doc_mail = doc[1]
+
                         doc_mail = rel.mail
                         doc_name = rel.nome + ' ' + rel.cognome
                         author = self.get_object().autore
@@ -694,13 +681,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                         # return super().get(request, pk)
                         rt.delete()
                         return self.render_to_response(context_object_name)
-    # controllare che chi si logga sia il relatore -- non funziona
-    # def test_func(self):
-    #     richiesta = self.get_object()
-    #     nome = richiesta.relatore.split()
-    #     if self.request.user.username == nome[0]:
-    #         return True
-    #     return False
+
 
 
 # RICHIESTA PROVA FINALE
@@ -755,8 +736,7 @@ class RAPDetailView(DetailView):
 
     def get(self, request, pk):
         rel = self.get_object().tutor
-        # doc = rel.split()
-        # doc_mail = doc[1]
+
         doc_mail = rel.mail
         author = self.get_object().autore
         stud_name = author.nome
@@ -765,13 +745,7 @@ class RAPDetailView(DetailView):
         rti = Richiesta_prova_finale_inviata()
         r = self.get_object()
         from_richiestaattivitabozza_to_richiestaattivitainviata(r, rti)
-        # rti.autore = r.autore
-        # rti.tutor = r.tutor
-        # rti.argomento = r.argomento
-        # rti.titolo_elaborato = r.titolo_elaborato
-        # rti.tipologia = r.tipologia
-        # rti.data_laurea = r.data_laurea
-        # rti.save()
+
 
         if request.GET.get('Send') == 'Send':
             subject = 'Richiesta Prova Finale'
@@ -836,10 +810,9 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
                 'titolo': self.object.titolo_elaborato,
             }
             if request.GET.get('Accetta') == 'Accetta':
+                self.object.stato = 'accettato'
+                self.object.save()
                 rel = self.get_object().tutor
-                # doc = rel.split()
-                # doc_name = doc[0]
-                # doc_mail = doc[1]
                 doc_name = rel.nome + ' ' + rel.cognome
                 doc_mail = rel.mail
                 author = self.get_object().autore
@@ -867,6 +840,12 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
                 return redirect("/")
             else:
                 if request.GET.get('Rifiuta') == 'Rifiuta':
+                    rt = Richiesta_prova_finale_bozza()
+                    self.object = self.get_object()
+                    self.object.stato = 'rifiutata'
+                    self.object.save()
+                    from_richiestaattivitainviata_to_richiestaattivitabozza(self.object, rt)
+
                     rel = self.get_object().tutor
                     doc_name = rel.nome + ' ' + rel.cognome
                     doc_mail = rel.mail
@@ -899,22 +878,15 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
                     # se c'è errore allora
                     # rimette la tesi in richiesta tesi
                     rt = Richiesta_prova_finale_bozza()
+                    self.object = self.get_object()
+                    self.object.stato = 'con errori'
+                    self.object.save()
+                    from_richiestaattivitainviata_to_richiestaattivitabozza(self.object, rt)
                     r = self.get_object()
-                    from_richiestaattivitainviata_to_richiestaattivitabozza(r, rt)
-                    # rt.autore = r.autore
-                    # rt.tutor = r.tutor
-                    # rt.argomento = r.argomento
-                    # rt.titolo_elaborato = r.titolo_elaborato
-                    # rt.tipologia = r.tipologia
-                    # rt.data_laurea = r.data_laurea
-
-                    # rt.save()
 
                     if request.GET.get('Segnala Errori') == 'Segnala Errori':
                         rel = self.get_object().tutor
-                        # doc = rel.split()
-                        # doc_name = doc[0]
-                        # doc_mail = doc[1]
+
                         doc_name = rel.nome + ' ' + rel.cognome
                         doc_mail = rel.mail
                         author = self.get_object().autore
@@ -969,6 +941,7 @@ def from_richiestaattivitabozza_to_richiestaattivitainviata(rab, rai):
     rai.titolo_elaborato = rab.titolo_elaborato
     rai.tipologia = rab.tipologia
     rai.data_laurea = rab.data_laurea
+    rai.stato = 'in attesa'
     rai.save()
 
 
@@ -980,6 +953,7 @@ def from_richiestaattivitainviata_to_richiestaattivitabozza(rai, rab):
     rab.tipologia = rai.tipologia
     rab.data_laurea = rai.data_laurea
     rab.modified = True
+    rab.stato = rai.stato
     rab.save()
 
 
@@ -991,6 +965,7 @@ def from_richiestatesiinviata_to_richiestatesibozza(ri, rb):
     rb.nome_azienda = ri.nome_azienda
     rb.data_laurea = ri.data_laurea
     rb.autore = ri.autore
+    rb.stato = ri.stato
     rb.modified = True
     rb.save()
 
@@ -1004,6 +979,7 @@ def from_richiestatesibozza_to_richiestatesiinviata(rb, ri):
 
     ri.autore = rb.autore
     ri.data_laurea = rb.data_laurea
+    ri.stato ='in attesa'
     ri.save()
 
 
