@@ -1,17 +1,19 @@
 {% include 'attivita/detail_attivita_template.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+<h3 class="text-secondary"> titolo elaborato : {{ object.titolo_elaborato }}</h3>
+<h3 class="text-secondary"> tipologia : {{ object.tipologia }}</h3>
+<h3 class="text-secondary">laurea: {{ object.data_laurea }}</h3>
 
-
-    <form method='get' action='#'>
-        <input class="btn btn-info btn-xs" type="submit" value="Send" name="Send"/>
-        {% if object.modified %}
-            <a href="{% url 'richiesta-attivita-update' object.id %}" class="btn btn-info btn-xs" role="button">Update</a>
-        {% else %}
-        {% endif %}
-        <a href="{% url 'richiesta-attivita-delete' object.id %}" class="btn btn-info btn-xs" role="button">Delete</a>
-        <a href="{% url 'profile' %}" class="btn btn-info btn-xs" role="button">Go back</a>
-    </form>
+<form method='get' action='#'>
+    <input class="btn btn-info btn-xs" type="submit" value="Send" name="Send"/>
+    {% if object.modified %}
+    <a href="{% url 'richiesta-attivita-update' object.id %}" class="btn btn-info btn-xs" role="button">Update</a>
+    {% else %}
+    {% endif %}
+    <a href="{% url 'richiesta-attivita-delete' object.id %}" class="btn btn-info btn-xs" role="button">Delete</a>
+    <a href="{% url 'profile' %}" class="btn btn-info btn-xs" role="button">Go back</a>
+</form>
 
 </div>
 {% if messages %}
