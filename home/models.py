@@ -98,7 +98,6 @@ class Richiesta_tesi(models.Model):
     data_laurea = models.ForeignKey(DateLauree, on_delete=models.CASCADE, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
 
-
     stato = models.CharField(max_length=500,  blank=True,null=True, default='da inviare')
 
     def __str__(self):

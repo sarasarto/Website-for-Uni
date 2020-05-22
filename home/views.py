@@ -1,7 +1,6 @@
 import functools
 import itertools
 
-
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotModified
 from django.shortcuts import render, redirect
@@ -95,7 +94,6 @@ class IndexView(ListView):
         a_p = Attivita_progettuale_creata.objects.all()
         tot = list(chain(tesi, a_p))
         return tot
-
 
 
 """class SearchIndexView(ListView):
@@ -259,6 +257,27 @@ def show_tesi_archiviate(request):
         'results': results,
         'title': title,
         'no_results': "Non ci sono tesi archiviate"
+    }
+    return render(request, 'home/index.html', context)
+
+
+def show_tesi_accettate(request):
+    utente = User.objects.get(username=request.user.username)
+    docente_log = Docente.objects.get(user=utente)
+
+    inviate = Richiesta_tesi_inviata.objects.filter(relatore=docente_log)
+    results = []
+    for t_accettat in inviate:
+        if t_accettat.stato == 'accettato':
+            results.append(t_accettat)
+
+    title = "Tutte le tesi accettate:"
+
+    context = {
+        'inviate': inviate,
+        'results': results,
+        'title': title,
+        'no_results': "Non ci sono tesi accettate"
     }
     return render(request, 'home/index.html', context)
 
@@ -519,7 +538,7 @@ class RTDetailView(DetailView):
                 'mail': author.mail,
                 'laurea': rti.data_laurea,
                 'argomento': rti.argomento,
-                'tirocinio' : rti.tirocinio,
+                'tirocinio': rti.tirocinio,
                 'id': rti.id,
             }
 
@@ -564,7 +583,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
             self.object = self.get_object()
             autore = self.object.autore
             context_object_name = {
-                'object' : self.object,
+                'object': self.object,
 
             }
             if request.GET.get('Accetta') == 'Accetta':
@@ -683,7 +702,6 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                         return self.render_to_response(context_object_name)
 
 
-
 # RICHIESTA PROVA FINALE
 
 
@@ -745,7 +763,6 @@ class RAPDetailView(DetailView):
         rti = Richiesta_prova_finale_inviata()
         r = self.get_object()
         from_richiestaattivitabozza_to_richiestaattivitainviata(r, rti)
-
 
         if request.GET.get('Send') == 'Send':
             subject = 'Richiesta Prova Finale'
@@ -979,7 +996,7 @@ def from_richiestatesibozza_to_richiestatesiinviata(rb, ri):
 
     ri.autore = rb.autore
     ri.data_laurea = rb.data_laurea
-    ri.stato ='in attesa'
+    ri.stato = 'in attesa'
     ri.save()
 
 

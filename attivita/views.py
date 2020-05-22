@@ -124,6 +124,26 @@ def show_att_archiviate(request):
     return render(request, 'home/index.html', context)
 
 
+def show_attivita_accettate(request):
+    utente = User.objects.get(username=request.user.username)
+    docente_log = Docente.objects.get(user=utente)
+
+    inviate = Richiesta_prova_finale_inviata.objects.filter(tutor=docente_log)
+    results = []
+    for t_accettat in inviate:
+        if t_accettat.stato == 'accettato':
+            results.append(t_accettat)
+
+    title = "Tutte le tesi accettate:"
+
+    context = {
+        'inviate': inviate,
+        'results': results,
+        'title': title,
+        'no_results': "Non ci sono attività accettate"
+    }
+    return render(request, 'home/index.html', context)
+
 class AttivitaDeleteView(LoginRequiredMixin, DeleteView):
     model = Attivita_progettuale_creata
     success_url = '/profile'

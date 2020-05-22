@@ -71,6 +71,8 @@ urlpatterns = [
     path('attivita/', attivita.views.show_attivita, name='attivita'),
     path('tesi_archiviata/', views.show_tesi_archiviate, name='t_archiviata'),
 
+    path('tesi_accettate/', views.show_tesi_accettate, name='t-accettate'),
+    path('att_accettate/', attivita.views.show_attivita_accettate, name='att-accettate'),
     path('tesi_archiviata/<int:pk>/detail', TesiArchiviataDetailView.as_view(), name='t_archiviata_detail'),
 
 
