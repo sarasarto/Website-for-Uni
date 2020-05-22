@@ -32,17 +32,20 @@
             {% if progetto.tirocinio == 'in azienda' %}
             <h3>Nome azienda : {{ progetto.nome_azienda }}</h3>
             {% endif %}
-            <h3>Stato della richiesta : {{ progetto.stato }}</h3>
+
 
             <!-- se è una tesi archiviata -->
             {% if progetto.data_archiviazione %}
+
             <a href="{% url 't_archiviata_detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
                 Details</a>
             {% else %}
 
             {% if progetto.data_laurea %}
+             <h3>Stato della richiesta : {{ progetto.stato }}</h3>
             <!-- non si devono vedere i dettagli -->
             {% else %}
+
             <a href="{% url 'tesi-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
                 Details</a>
             {% endif %}
@@ -58,7 +61,7 @@
             {% else %}
             <h3>Tutor : {{ progetto.tutor }}</h3>
             {% endif %}
-            <h3>Stato della richiesta : {{ progetto.stato }}</h3>
+
             <!-- dettagli -->
             {% if progetto.data_archiviazione %}
             <h3> archiviata </h3>
@@ -67,8 +70,10 @@
 
             {% else %}
             {% if progetto.data_laurea %}
+             <h3>Stato della richiesta : {{ progetto.stato }}</h3>
             <!-- non si devono vedere i dettagli -->
             {% else %}
+
             <a href="{% url 'attivita-detail' progetto.id %}" class="btn btn-info btn-xs" role="button"> View
                 Details</a>
             {% endif %}

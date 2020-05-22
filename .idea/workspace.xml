@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="- sistemato Update per il profilo Docente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/attivita/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/attivita/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tesi/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/tesi/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_doc.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -404,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590154163485</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="- aggiunti due el in sidebar docenti, ora vede i prog accettati">
+      <created>1590157150703</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1590157150703</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -424,7 +426,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- tolto il modello per il form nel filtraggio" />
     <MESSAGE value="- sistemata visualizzazione tesi inviate e attivita inviate da class listview a def con request&#10;- sistemato reindirizzamento alle mail&#10;-aggiunta condizione di non esistenza di tesi/attivita inviate nel file html" />
     <MESSAGE value="- nella detail view aggiustato: ora i docenti non vedono il bottone Richiedi&#10;- ora uno studente che ha gia fatto richiesta di una tesi o attivita ed è gia presente nelle sue bozze non può richiederla" />
     <MESSAGE value="-aggiunta toDoList" />
@@ -449,17 +450,18 @@
     <MESSAGE value="- sidebar piccolo dettaglio" />
     <MESSAGE value="- titoli con legend e titoletti cambiati" />
     <MESSAGE value="- aggiunto stato di invio richiesta profilo studente" />
-    <option name="LAST_COMMIT_MESSAGE" value="- aggiunto stato di invio richiesta profilo studente" />
+    <MESSAGE value="- aggiunti due el in sidebar docenti, ora vede i prog accettati" />
+    <option name="LAST_COMMIT_MESSAGE" value="- aggiunti due el in sidebar docenti, ora vede i prog accettati" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1590154162321">
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1590157149985">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1590154162321" />
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1590157149985" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -480,10 +482,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587410696211" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590051235046">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590157160931">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590051235046" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590157160931" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584811331973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
