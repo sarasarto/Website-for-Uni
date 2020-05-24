@@ -666,6 +666,7 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
 
                     if request.GET.get('Segnala Errori') == 'Segnala Errori':
                         rel = self.get_object().relatore
+                        err = request.GET.get('errori')
 
                         doc_mail = rel.mail
                         doc_name = rel.nome + ' ' + rel.cognome
@@ -685,8 +686,8 @@ class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
                             'cognome': stud_surname,
                             'prof': doc_name,
                             'argomento': rt.argomento,
-                            'mail': doc_mail
-
+                            'mail': doc_mail,
+                            'errori': err
                         }
                         r.delete()
                         html_template = get_template('home/errore_email.html').render(context)
@@ -799,8 +800,7 @@ class RAPDetailView(DetailView):
 class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
     model = Richiesta_prova_finale_inviata
     template_name = "home/accept_provafinale.html"
-
-    # success_url = '/'
+    success_url = '/'
 
     def get(self, request, pk):
         log = self.request.user.username
@@ -903,6 +903,7 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
 
                     if request.GET.get('Segnala Errori') == 'Segnala Errori':
                         rel = self.get_object().tutor
+                        err = request.GET.get('errori')
 
                         doc_name = rel.nome + ' ' + rel.cognome
                         doc_mail = rel.mail
@@ -922,8 +923,8 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
                             'cognome': stud_surname,
                             'prof': doc_name,
                             'argomento': rt.argomento,
-                            'mail': doc_mail
-
+                            'mail': doc_mail,
+                            'errori': err
                         }
                         r.delete()
                         html_template = get_template('home/errore_email.html').render(context)
