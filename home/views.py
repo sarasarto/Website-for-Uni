@@ -350,20 +350,9 @@ class TesiDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         success_url = self.get_success_url()
 
-        # modo stupido di farlo - ma funziona
         ta = TesiArchiviata()
         from_tesicreata_to_tesiarchiviata(self.object, ta)
-        # ta.author = self.object.author
-        # ta.relatore = self.object.relatore
-        # ta.argomento = self.object.argomento
-        # ta.correlatore = self.object.correlatore
-        # ta.data_fine = self.object.data_fine
-        # ta.data_inizio = self.object.data_inizio
-        # ta.tirocinio = self.object.tirocinio
-        # ta.nome_azienda = self.object.nome_azienda
-        # ta.tag = self.object.tag
-        # ta.save()
-        # self.object.delete()
+
         return redirect('profile')
 
 
@@ -554,14 +543,6 @@ class RTDetailView(DetailView):
             rti.delete()
             return super().get(request, pk)
 
-
-"""@login_required
-def accetta_rifiuta(self, request, pk):
-    context = {
-        'name': request.user.username
-
-    }
-    return render(request, 'home/accept.html', context)"""
 
 
 class AccettaRifiutaTesiDetailView(LoginRequiredMixin, DetailView):
@@ -811,9 +792,7 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
         # rt = self.object.banama
 
         if log[0] != tutor_n or log[1] != tutor_c:
-            # url = '/login/?next=/' + str(self.get_object().id) + '/accept_att'
-            # messages.error(url, f'Errore! si puo loggare solo il docente tutor')
-            # message = messages.error(request, f'Errore! si puo loggare solo il docente tutor')
+
             return redirect('/login/?next=/' + str(self.get_object().id) + '/accept_att')
         else:
             self.object = self.get_object()
