@@ -1,12 +1,12 @@
-{% extends 'home/base.html' %}
+{% include 'attivita/detail_attivita_template.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
 <div class="content-section">
-    <h1>DETTAGLI RICHIESTA DI PROVA FINALE</h1>
-    <h2 class="account-heading"> Argomento: {{ argomento }} data di laurea prevista per il {{ data }}</h2>
-    <h2 class="text-secondary"> proposto da {{ name }}</h2>
-    <h2 class="text-secondary"> mail {{ mail }}</h2>
-     <h2 class="text-secondary"> tipologia {{ tipo }}</h2>
+
+     <h3 class="text-secondary">data di laurea prevista per il {{ object.data_laurea }}</h3>
+
+    <h3 class="text-secondary"> titolo dell'elaborato: {{ object.titolo_elaborato }}</h3>
+     <h3 class="text-secondary"> tipologia: {{ object.tipologia }}</h3>
 
     <div class="form-group">
         <form method='get' action='#'>

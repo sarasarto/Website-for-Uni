@@ -819,12 +819,8 @@ class AccettaRifiutaAttivitaDetailView(LoginRequiredMixin, DetailView):
             self.object = self.get_object()
             autore = self.object.autore
             context_object_name = {
-                'name': self.object.autore,
-                'argomento': self.object.argomento,
-                'mail': self.object.autore.mail,
-                'data': self.object.data_laurea,
-                'tipo': self.object.tipologia,
-                'titolo': self.object.titolo_elaborato,
+                'object': self.object,
+
             }
             if request.GET.get('Accetta') == 'Accetta':
                 self.object.stato = 'accettato'
