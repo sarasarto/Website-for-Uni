@@ -13,8 +13,6 @@
 
 
             <ul class="cards">
-
-
                 {% for tesi in all_tesi %}
 
                 <li>
@@ -107,32 +105,32 @@
                         <ul class="nav">
                             <li class="active">
                                 <a href="{% url 't_archiviata' %}">
-                                    <i class="glyphicon glyphicon-home"></i>
+                                    <i class="glyphicon glyphicon-folder-open"></i>
                                     Tesi Archiviate</a>
                             </li>
                             <li>
                                 <a href="{% url 'att_archiviata' %}">
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="glyphicon glyphicon-folder-open"></i>
                                     Attivita progettuali archiviate</a>
                             </li>
                             <li>
                                 <a href="{% url 'tesi-create' %}">
-                                    <i class="glyphicon glyphicon-ok"></i>
+                                    <i class="glyphicon glyphicon-plus"></i>
                                     Crea Tesi </a>
                             </li>
                             <li>
                                 <a href="{% url 'attivita-create' %}">
-                                    <i class="glyphicon glyphicon-flag"></i>
+                                    <i class="glyphicon glyphicon-plus"></i>
                                     Crea Attività Progettuale </a>
                             </li>
                              <li>
                                 <a href="{% url 't-accettate' %}">
-                                    <i class="glyphicon glyphicon-flag"></i>
+                                    <i class="glyphicon glyphicon-ok"></i>
                                     Proposte Tesi Accettate </a>
                             </li>
                             <li>
                                 <a href="{% url 'att-accettate' %}">
-                                    <i class="glyphicon glyphicon-flag"></i>
+                                    <i class="glyphicon glyphicon-ok"></i>
                                     Proposte Attivita Accettate </a>
                             </li>
                         </ul>

@@ -4,6 +4,12 @@
     <list default="true" id="8446dd44-44b4-41cb-8fa6-d3b6b8fa5e29" name="Default Changelist" comment="- sistemato Update per il profilo Docente">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/cerca.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/cerca.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/richiesta_att_inviata.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/home/templates/home/richiesta_tesi_inviata.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_stud.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_stud.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,13 +67,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1584270166319</updated>
-    </task>
-    <task id="LOCAL-00003" summary="-creato velocemente pagina iniziale&#10;-aggiunto in database due docenti e qualche progetto&#10;-il bottone login funziona e ridirige a /login &#10;-fatta molto velocemente pagina login">
-      <created>1584647792741</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1584647792742</updated>
     </task>
     <task id="LOCAL-00004" summary="- resa più carino il log in">
       <created>1584648975514</created>
@@ -405,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590159108111</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="- hai tutto?">
+      <created>1590389629485</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1590389629486</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -425,7 +431,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-aggiunta toDoList" />
     <MESSAGE value="-aggiunto controllo che solo il docente che riceve la mail deve poter accettare rifiutare una proposta&#10;. MANCA MESSAGGIO DI ERRORE" />
     <MESSAGE value="- aggiustato salvataggio utente in fase di registrazione&#10;- cambiata grafica dei profili" />
     <MESSAGE value="- cambiati modelli con data per mostrare in ordine&#10;- aggiustati bottoni di detail view con crezione due nuovi url" />
@@ -450,17 +455,18 @@
     <MESSAGE value="- aggiunti due el in sidebar docenti, ora vede i prog accettati" />
     <MESSAGE value="- sistemata visualizzazione" />
     <MESSAGE value="- sistemato detail attivita" />
-    <option name="LAST_COMMIT_MESSAGE" value="- sistemato detail attivita" />
+    <MESSAGE value="- hai tutto?" />
+    <option name="LAST_COMMIT_MESSAGE" value="- hai tutto?" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584811327628">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811327628" />
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1590159107420">
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2" timestamp="1590389628566">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1590159107420" />
+    <state x="492" y="14" width="862" height="810" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1590389628566" />
     <state width="354" height="442" key="Diff.GoToChangePopup" timestamp="1584811505188">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -481,18 +487,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587410696211" />
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590159118783">
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590389642028">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590159118783" />
+    <state x="722" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1590389642028" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1584811331973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1584811331973" />
-    <state x="848" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1590387456053">
+    <state x="848" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1590396457743">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="848" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1590387456053" />
+    <state x="848" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1590396457743" />
     <state x="965" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590389349833">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
